@@ -78,6 +78,8 @@ function _Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
       {...mergeProps(buttonProps, hoverProps, focusProps)}
       data-hovered={isHovered || undefined}
       data-pressed={isPressed || undefined}
+      data-disabled={isDisabled || undefined}
+      data-focus-visible={isFocusVisible || undefined}
       className={useButtonStyles()({
         variant,
         color,
@@ -99,13 +101,9 @@ function _Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
         </div>
       )}
 
-      <div>{startContent}</div>
-
-      <div>
-        <Slottable>{children}</Slottable>
-      </div>
-
-      <div>{endContent}</div>
+      {startContent}
+      <Slottable>{children}</Slottable>
+      {endContent}
     </Component>
   );
 }

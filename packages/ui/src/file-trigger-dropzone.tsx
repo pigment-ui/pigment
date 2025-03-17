@@ -2,11 +2,11 @@
 
 import { FieldBaseProps, FieldInput, FieldInputBaseProps, useFieldButtonStyles } from "./field";
 import { useGlobalProps } from "./provider";
-import { radiusVariants } from "./styles";
+import { radiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, StyleProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { useFormValidationState } from "@react-stately/form";
 import React, { ComponentPropsWithoutRef } from "react";
-import { AriaFieldProps, FileDropItem, mergeProps, useField } from "react-aria";
+import { AriaFieldProps, mergeProps, useField } from "react-aria";
 import { Button, DropZone, FieldErrorContext, FileTrigger, Provider, Text, TextContext } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
@@ -15,6 +15,7 @@ import { tv } from "tailwind-variants";
 
 const useFileTriggerBlockStyles = () =>
   tv({
+    extend: useVariantAndColorStyles(),
     slots: {
       base: "",
       zone: "flex w-full flex-col items-center text-center",
@@ -98,7 +99,7 @@ function FileTriggerDropzone(props: FileTriggerDropzoneProps) {
             <DropZone
               onDrop={async (e) => {
                 if (!e) return;
-                let files = await Promise.all(e.items.filter((item) => item.kind === "file").map((item: FileDropItem) => item.getFile()));
+                let files = await Promise.all(e.items.filter((item) => item.kind === "file").map((item: any) => item.getFile()));
                 onChange?.(files);
               }}
               isDisabled={isDisabled}

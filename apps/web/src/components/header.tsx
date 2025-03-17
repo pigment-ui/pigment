@@ -40,7 +40,7 @@ export function Header() {
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
   return (
-    <header className="sticky top-0 z-50 h-16 w-full border-b border-default-1000/20 bg-default-0/75 backdrop-blur-lg">
+    <header className="border-default-1000/20 bg-default-0/75 sticky top-0 z-50 h-16 w-full border-b backdrop-blur-lg">
       <div className="container flex h-full items-center gap-x-8">
         <Button asChild variant={segment === null ? "soft" : "light"} isCompact>
           <NextLink href="/" prefetch>

@@ -40,7 +40,7 @@ const useListBoxStyles = () =>
 const useListBoxItemStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
-    base: "!scale-100 !backdrop-blur-none",
+    base: "!scale-100",
     slots: {
       content: "flex-1",
       icon: "transition-transform duration-300",

@@ -1,4 +1,4 @@
-import { Content, Detail, NavLeft, NavRight } from "#/components";
+import { Content, Detail, NavLeft, NavRight } from "../../../components";
 import { allDocs } from "contentlayer/generated";
 import { capitalize } from "inflection";
 import { Metadata } from "next";
@@ -7,10 +7,7 @@ import { notFound } from "next/navigation";
 export function generateMetadata({ params: { slug } }: { params: { slug: string[] } }): Metadata {
   const doc = allDocsSorted.find((doc) => doc.slug === slug.join("/"));
 
-  return {
-    title: `Pigment UI | Docs - ${capitalize(slug[1])}`,
-    description: doc?.description,
-  };
+  return { title: `Pigment UI | Docs - ${capitalize(slug[1])}`, description: doc?.description || "" };
 }
 
 export async function generateStaticParams() {

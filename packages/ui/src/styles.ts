@@ -1,4 +1,3 @@
-import { useGlobalSlots } from "./provider";
 import { tv } from "tailwind-variants";
 
 export const isDisabledVariants = { true: "opacity-50 cursor-not-allowed" } as const;
@@ -10,11 +9,11 @@ export const radiusVariants = { sm: "rounded-lg", md: "rounded-xl", lg: "rounded
 export const smallRadiusVariants = { sm: "rounded-md", md: "rounded-lg", lg: "rounded-xl", full: "rounded-full", none: "rounded-none" } as const;
 
 export const useVariantAndColorStyles = () => {
-  const { extendVariantAndColorStyles = {} } = useGlobalSlots();
+  // const { extendVariantAndColorStyles = {} } = useGlobalSlots();
 
   return tv({
-    extend: extendVariantAndColorStyles,
-    base: "relative flex items-center justify-center overflow-hidden border bg-clip-padding outline-none backdrop-blur-lg duration-300",
+    // extend: extendVariantAndColorStyles,
+    base: "relative flex items-center justify-center overflow-hidden border outline-none duration-300",
     variants: {
       variant: {
         solid: "",
@@ -28,6 +27,7 @@ export const useVariantAndColorStyles = () => {
       },
       color: {
         default: "",
+        inverted: "",
         primary: "",
         secondary: "",
         info: "",
@@ -44,6 +44,7 @@ export const useVariantAndColorStyles = () => {
       { variant: "solid", className: "border-transparent" },
       { variant: "solid", isHovered: true, className: "bg-opacity-90" },
       { variant: "solid", color: "default", className: "bg-default text-default-foreground" },
+      { variant: "solid", color: "inverted", className: "bg-inverted text-inverted-foreground" },
       { variant: "solid", color: "primary", className: "bg-primary text-primary-foreground" },
       { variant: "solid", color: "secondary", className: "bg-secondary text-secondary-foreground" },
       { variant: "solid", color: "info", className: "bg-info text-info-foreground" },
@@ -54,6 +55,7 @@ export const useVariantAndColorStyles = () => {
       { variant: "soft", className: "border-transparent bg-opacity-10" },
       { variant: "soft", isHovered: true, className: "bg-opacity-20" },
       { variant: "soft", color: "default", className: "bg-default text-default" },
+      { variant: "soft", color: "inverted", className: "bg-inverted text-inverted" },
       { variant: "soft", color: "primary", className: "bg-primary text-primary" },
       { variant: "soft", color: "secondary", className: "bg-secondary text-secondary" },
       { variant: "soft", color: "info", className: "bg-info text-info" },
@@ -64,6 +66,7 @@ export const useVariantAndColorStyles = () => {
       { variant: "light", className: "border-transparent bg-opacity-0" },
       { variant: "light", isHovered: true, className: "bg-opacity-10" },
       { variant: "light", color: "default", className: "bg-default text-default" },
+      { variant: "light", color: "inverted", className: "bg-inverted text-inverted" },
       { variant: "light", color: "primary", className: "bg-primary text-primary" },
       { variant: "light", color: "secondary", className: "bg-secondary text-secondary" },
       { variant: "light", color: "info", className: "bg-info text-info" },
@@ -74,6 +77,7 @@ export const useVariantAndColorStyles = () => {
       { variant: "bordered", className: "border-opacity-50 bg-opacity-10" },
       { variant: "bordered", isHovered: true, className: "bg-opacity-20" },
       { variant: "bordered", color: "default", className: "border-default bg-default text-default" },
+      { variant: "bordered", color: "inverted", className: "border-inverted bg-inverted text-inverted" },
       { variant: "bordered", color: "primary", className: "border-primary bg-primary text-primary" },
       { variant: "bordered", color: "secondary", className: "border-secondary bg-secondary text-secondary" },
       { variant: "bordered", color: "info", className: "border-info bg-info text-info" },
@@ -84,6 +88,7 @@ export const useVariantAndColorStyles = () => {
       { variant: "outlined", className: "border-opacity-50 bg-opacity-0" },
       { variant: "outlined", isHovered: true, className: "bg-opacity-10" },
       { variant: "outlined", color: "default", className: "border-default bg-default text-default" },
+      { variant: "outlined", color: "inverted", className: "border-inverted bg-inverted text-inverted" },
       { variant: "outlined", color: "primary", className: "border-primary bg-primary text-primary" },
       { variant: "outlined", color: "secondary", className: "border-secondary bg-secondary text-secondary" },
       { variant: "outlined", color: "info", className: "border-info bg-info text-info" },
@@ -95,6 +100,8 @@ export const useVariantAndColorStyles = () => {
       { variant: "ghost", isHovered: true, className: "border-transparent bg-opacity-100" },
       { variant: "ghost", color: "default", className: "border-default bg-default text-default" },
       { variant: "ghost", color: "default", isHovered: true, className: "text-default-foreground" },
+      { variant: "ghost", color: "inverted", className: "border-inverted bg-inverted text-inverted" },
+      { variant: "ghost", color: "inverted", isHovered: true, className: "text-inverted-foreground" },
       { variant: "ghost", color: "primary", className: "border-primary bg-primary text-primary" },
       { variant: "ghost", color: "primary", isHovered: true, className: "text-primary-foreground" },
       { variant: "ghost", color: "secondary", className: "border-secondary bg-secondary text-secondary" },
@@ -111,6 +118,8 @@ export const useVariantAndColorStyles = () => {
       { variant: "faded", className: "border-default-300 bg-default-100" },
       { variant: "faded", isHovered: true, className: "bg-default-200" },
       { variant: "faded", color: "default", className: "text-default" },
+      { variant: "faded", color: "inverted", className: "text-inverted border-default-700 bg-default-900" },
+      { variant: "faded", color: "inverted", isHovered: true, className: "bg-default-800" },
       { variant: "faded", color: "primary", className: "text-primary" },
       { variant: "faded", color: "secondary", className: "text-secondary" },
       { variant: "faded", color: "info", className: "text-info" },
@@ -121,6 +130,8 @@ export const useVariantAndColorStyles = () => {
       { variant: "card", className: "border-default-1000/20 bg-default-0" },
       { variant: "card", isHovered: true, className: "bg-default-100" },
       { variant: "card", color: "default", className: "text-default" },
+      { variant: "card", color: "inverted", className: "text-inverted border-default-0/20 bg-default-1000" },
+      { variant: "card", color: "inverted", isHovered: true, className: "bg-default-900" },
       { variant: "card", color: "primary", className: "text-primary" },
       { variant: "card", color: "secondary", className: "text-secondary" },
       { variant: "card", color: "info", className: "text-info" },

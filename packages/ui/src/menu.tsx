@@ -1,12 +1,13 @@
 "use client";
 
+import { useCardStyles } from "./card";
 import { ListBox, ListBoxItem, ListBoxSection, ListBoxSlotsType, useListBoxItemStyles, useListBoxSectionStyles } from "./list-box";
 import { Popover } from "./popover";
 import { useGlobalProps } from "./provider";
 import { ForwardRefType, StyleProps } from "./types";
 import { createSlots } from "./utils";
 import { CheckIcon } from "lucide-react";
-import React, { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from "react";
+import React, { ComponentPropsWithoutRef, ForwardedRef, forwardRef, ReactNode } from "react";
 import { mergeProps } from "react-aria";
 import {
   Collection,
@@ -25,7 +26,10 @@ import { tv } from "tailwind-variants";
 
 // styles
 
-const useMenuStyles = () => tv({ base: "p-2" });
+const useMenuStyles = () =>
+  tv({
+    base: useCardStyles()().base({ className: "p-2" }),
+  });
 
 const useMenuItemStyles = useListBoxItemStyles;
 
@@ -36,7 +40,9 @@ const useMenuSectionStyles = useListBoxSectionStyles;
 interface MenuProps<T extends object>
   extends Omit<AriaMenuProps<T>, keyof StyleProps>,
     Omit<ComponentPropsWithoutRef<typeof ListBox<T>>, keyof AriaMenuProps<T> | "asCard">,
-    Omit<ComponentPropsWithoutRef<typeof Popover>, keyof Omit<AriaMenuProps<T>, keyof StyleProps>> {}
+    Omit<ComponentPropsWithoutRef<typeof Popover>, keyof Omit<AriaMenuProps<T>, keyof StyleProps>> {
+  topContent?: ReactNode;
+}
 
 interface MenuItemProps extends AriaMenuItemProps, Omit<ComponentPropsWithoutRef<typeof ListBoxItem>, keyof AriaMenuItemProps> {}
 

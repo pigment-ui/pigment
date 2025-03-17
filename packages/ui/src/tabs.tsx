@@ -26,8 +26,8 @@ const useTabsStyles = () =>
   tv({
     slots: {
       base: "flex",
-      list: "flex h-fit w-fit backdrop-blur-lg",
-      panel: "h-fit w-full outline-none backdrop-blur-lg",
+      list: "flex h-fit w-fit",
+      panel: "h-fit w-full outline-none",
     },
     variants: {
       orientation: {
@@ -36,6 +36,7 @@ const useTabsStyles = () =>
       },
       color: {
         default: { list: "bg-default/10", panel: "bg-default/10 text-default" },
+        inverted: { list: "bg-inverted/10", panel: "bg-inverted/10 text-default" },
         primary: { list: "bg-primary/10", panel: "bg-primary/10 text-primary" },
         secondary: { list: "bg-secondary/10", panel: "bg-secondary/10 text-secondary" },
         info: { list: "bg-info/10", panel: "bg-info/10 text-info" },
@@ -60,12 +61,12 @@ const useTabsStyles = () =>
     },
   });
 
-type TabsStylesReturnType = ReturnType<typeof useTabsStyles>;
+type TabsStylesReturnType = ReturnType<ReturnType<typeof useTabsStyles>>;
 
 const tabStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
-    base: "cursor-pointer !backdrop-blur-none",
+    base: "cursor-pointer",
     variants: {
       size: {
         sm: "h-8 gap-x-2 px-4 text-xs [&_svg]:size-4",

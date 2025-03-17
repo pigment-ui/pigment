@@ -25,6 +25,7 @@ const useProgressBarStyles = () =>
     variants: {
       color: {
         default: "",
+        inverted: "",
         primary: "",
         secondary: "",
         info: "",
@@ -56,6 +57,7 @@ const useProgressBarStyles = () =>
     },
     compoundVariants: [
       { isCircular: false, color: "default", className: { track: "bg-default/10", filler: "bg-default" } },
+      { isCircular: false, color: "inverted", className: { track: "bg-inverted/10", filler: "bg-inverted" } },
       { isCircular: false, color: "primary", className: { track: "bg-primary/10", filler: "bg-primary" } },
       { isCircular: false, color: "secondary", className: { track: "bg-secondary/10", filler: "bg-secondary" } },
       { isCircular: false, color: "info", className: { track: "bg-info/10", filler: "bg-info" } },
@@ -67,6 +69,7 @@ const useProgressBarStyles = () =>
       { isCircular: true, size: "lg", className: { track: "size-20" } },
 
       { isCircular: true, color: "default", className: { track: "stroke-default/10", filler: "stroke-default" } },
+      { isCircular: true, color: "inverted", className: { track: "stroke-inverted/10", filler: "stroke-inverted" } },
       { isCircular: true, color: "primary", className: { track: "stroke-primary/10", filler: "stroke-primary" } },
       { isCircular: true, color: "secondary", className: { track: "stroke-secondary/10", filler: "stroke-secondary" } },
       { isCircular: true, color: "info", className: { track: "stroke-info/10", filler: "stroke-info" } },
@@ -80,12 +83,12 @@ const useProgressBarStyles = () =>
       {
         isIndeterminate: true,
         isCircular: false,
-        className: { filler: "-left-1/4 ease-linear animate-out slide-out-to-right-[500%] repeat-infinite [animation-duration:2s]" },
+        className: { filler: "animate-out slide-out-to-right-[500%] repeat-infinite -left-1/4 [animation-duration:2s]" },
       },
       {
         isIndeterminate: true,
         isCircular: true,
-        className: { trackWrapper: "animate-spin ease-linear [animation-duration:1s]" },
+        className: { trackWrapper: "animate-spin [animation-duration:1s]" },
       },
     ],
   });

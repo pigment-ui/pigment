@@ -31,7 +31,7 @@ const useRangeCalendarStyles = () =>
     extend: useCalendarStyles(),
     base: "",
     variants: {
-      color: { default: "", primary: "", secondary: "", info: "", success: "", warning: "", error: "" },
+      color: { default: "", inverted: "", primary: "", secondary: "", info: "", success: "", warning: "", error: "" },
       variant: { solid: "", soft: "", light: "", bordered: "", outlined: "", ghost: "", faded: "", card: "" },
       isHovered: { true: "" },
       isPressed: { true: "" },
@@ -51,7 +51,7 @@ const useRangeCalendarStyles = () =>
     ],
   });
 
-type RangeCalendarStylesReturnType = ReturnType<typeof useRangeCalendarStyles>;
+type RangeCalendarStylesReturnType = ReturnType<ReturnType<typeof useRangeCalendarStyles>>;
 
 // props
 

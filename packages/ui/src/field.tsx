@@ -59,16 +59,16 @@ const useFieldInputStyles = () =>
     extend: useVariantAndColorStyles(),
     base: "cursor-text",
     slots: {
-      wrapper: "flex size-full flex-1 flex-col",
-      self: "flex size-full flex-1 items-center bg-transparent outline-none placeholder:text-inherit placeholder:opacity-50 data-[disabled]:pointer-events-none [&[aria-disabled]]:pointer-events-none",
+      wrapper: "flex w-full flex-1 flex-col",
+      self: "flex w-full flex-1 items-center bg-transparent outline-none placeholder:text-inherit placeholder:opacity-50 data-[disabled]:pointer-events-none [&[aria-disabled]]:pointer-events-none",
       content: "pointer-events-none shrink-0",
       button: useFieldButtonStyles()({ className: "px-1.5" }),
     },
     variants: {
       size: {
-        sm: { base: "gap-2 px-2 text-xs [&_svg]:size-4", self: "h-8", button: "h-6 [&_svg]:!size-3" },
-        md: { base: "gap-2.5 px-2.5 text-sm [&_svg]:size-5", self: "h-10", button: "h-7 [&_svg]:!size-4" },
-        lg: { base: "gap-3 px-3 text-base [&_svg]:size-6", self: "h-12", button: "h-8 [&_svg]:!size-5" },
+        sm: { base: "gap-2 p-2 text-xs [&_svg]:size-4", button: "h-6 [&_svg]:!size-3" },
+        md: { base: "gap-2.5 p-2.5 text-sm [&_svg]:size-5", button: "h-7 [&_svg]:!size-4" },
+        lg: { base: "gap-3 p-3 text-base [&_svg]:size-6", button: "h-8 [&_svg]:!size-5" },
       },
       radius: {
         sm: { base: radiusVariants.sm, button: smallRadiusVariants.sm },
@@ -84,10 +84,6 @@ const useFieldInputStyles = () =>
       isDisabled: isDisabledVariants,
     },
     compoundVariants: [
-      { isAutoHeight: true, size: "sm", className: "py-2" },
-      { isAutoHeight: true, size: "md", className: "py-2.5" },
-      { isAutoHeight: true, size: "lg", className: "py-3" },
-
       { color: "default", isFocusWithin: true, className: { base: "ring-default" } },
       { color: "primary", isFocusWithin: true, className: { base: "ring-primary" } },
       { color: "secondary", isFocusWithin: true, className: { base: "ring-secondary" } },
@@ -244,7 +240,7 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
           })}
 
         <div className={styleSlots.wrapper({ className: fieldInputClassNames?.wrapper })} style={fieldInputStyles?.wrapper}>
-          {isLabelInside && (
+          {isLabelInside && globalProps.label && (
             <Label
               className={useFieldStyles()({ size }).label({
                 className: twMerge("pointer-events-none text-inherit", globalProps.fieldClassNames?.label),

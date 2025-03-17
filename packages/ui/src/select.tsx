@@ -44,9 +44,9 @@ function _Select<T extends object>(props: SelectProps<T>, ref: ForwardedRef<HTML
           >
             <Button ref={ref} className="flex items-center">
               <SelectValue className={({ isPlaceholder }) => (isPlaceholder ? "opacity-50" : "")}>
-                {renderValue
-                  ? ({ selectedItem, selectedText }) => (selectedItem ? renderValue({ selectedItem: selectedItem as T, selectedText }) : placeholder)
-                  : undefined}
+                {({ selectedItem, selectedText }) =>
+                  renderValue ? (selectedItem ? renderValue({ selectedItem: selectedItem as T, selectedText }) : placeholder) : selectedText
+                }
               </SelectValue>
             </Button>
           </FieldInput>

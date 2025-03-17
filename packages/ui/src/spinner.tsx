@@ -33,7 +33,7 @@ function _Spinner(props: HTMLAttributes<HTMLDivElement>, ref: ForwardedRef<HTMLD
         <circle cx="12" cy="12" r="9" className="animateCircle" />
       </svg>
 
-      <style jsx>{`
+      <style>{`
         @keyframes circleAnimation {
           0% {
             stroke-dasharray: 0 56.5487;
