@@ -186,7 +186,7 @@ function Provider({ defaultComponentProps = {}, extendVariantAndColorStyles, chi
   --pigment-error-950: 0.258 0.092 26.042;
 }
 
-:root[class="dark"] {
+:root.dark {
   --pigment-default-0: 0 0 0;
   --pigment-default-50: 0.145 0 0;
   --pigment-default-100: 0.205 0 0;
@@ -273,7 +273,7 @@ function Provider({ defaultComponentProps = {}, extendVariantAndColorStyles, chi
   --pigment-error-900: 0.936 0.032 17.717;
   --pigment-error-950: 0.971 0.013 17.38;
 }
-      `}
+        `}
       </style>
     </GlobalSlots>
   );
