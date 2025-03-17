@@ -1,6 +1,6 @@
 <p align="center">
-    <a href="https://pigment-ui.vercel.app">
-        <img src="https://pigment-ui.vercel.app/logo.jpg" alt="Pigment UI Logo" width="100" height="100" />
+    <a href="https://pigment-ui.com">
+        <img src="https://pigment-ui.com/logo.jpg" alt="Pigment UI Logo" width="100" height="100" />
     </a>
 </p>
 
@@ -18,4 +18,4 @@ Pigment UI components were built mainly on top of [React Aria](https://react-spe
 npm install pigment-ui
 ```
 
-See more on [installation](https://pigment-ui.vercel.app/docs/overview/installation) page.
+See more on [installation](https://pigment-ui.com/docs/overview/installation) page.
