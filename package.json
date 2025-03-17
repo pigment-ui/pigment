@@ -1,43 +1,27 @@
 {
-  "name": "website",
-  "version": "0.1.0",
+  "name": "pigment",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "contentlayer": "^0.3.4",
-    "github-slugger": "^2.0.0",
-    "marked": "^15.0.0",
-    "next": "^14",
-    "next-contentlayer": "^0.3.4",
-    "next-themes": "^0.4.3",
-    "pigment-ui": "^1.2.9",
-    "prism-react-renderer": "^2.4.0",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-live": "^4.1.7"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "prettier": "^3.5.3",
+    "turbo": "^2.4.4",
+    "typescript": "5.8.2",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
-    "@types/node": "^22",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "15.0.3",
-    "postcss": "^8",
-    "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
-    "tailwindcss": "^3.4.14",
-    "tsup": "^8.3.5",
-    "typescript": "^5"
+    "tsup": "^8.3.5"
   },
-  "overrides": {
-    "next-contentlayer": {
-      "next": "$next"
-    }
-  }
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "yarn@1.22.22",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

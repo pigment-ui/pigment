@@ -1,3 +1,5 @@
+"use client";
+
 import { useGlobalProps } from "./provider";
 import { radiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, SizeProps, StyleSlotsToStyleProps, VariantProps } from "./types";

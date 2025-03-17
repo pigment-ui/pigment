@@ -22,6 +22,7 @@ const useSwitchStyles = () =>
     variants: {
       color: {
         default: { self: "bg-default", thumb: "bg-default-foreground" },
+        inverted: { self: "bg-inverted", thumb: "bg-inverted-foreground" },
         primary: { self: "bg-primary", thumb: "bg-primary-foreground" },
         secondary: { self: "bg-secondary", thumb: "bg-secondary-foreground" },
         info: { self: "bg-info", thumb: "bg-info-foreground" },

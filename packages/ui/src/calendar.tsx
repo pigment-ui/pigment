@@ -36,7 +36,7 @@ const useCalendarStyles = () =>
       calendarWrapper: "text-default w-fit max-w-full overflow-auto p-4",
       header: "flex items-center justify-between gap-4",
       heading: "font-medium",
-      button: useFieldButtonStyles(),
+      button: useFieldButtonStyles()(),
       gridWrapper: "flex gap-4",
       grid: "size-fit border-separate border-spacing-x-0 border-spacing-y-1 [&_td]:p-0 [&_th]:p-0 [&_th]:font-light",
     },

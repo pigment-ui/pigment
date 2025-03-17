@@ -13,7 +13,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-xl bg-default-300 hover:bg-default-400;
+    @apply bg-default-300 hover:bg-default-400 rounded-xl;
   }
 
   html {
@@ -21,7 +21,7 @@
   }
 
   body {
-    @apply bg-default-0 text-indigo-500;
+    @apply bg-default-0 text-default-1000;
   }
 }
 
@@ -38,7 +38,7 @@
   }
 
   .step:before {
-    @apply absolute right-full grid h-7 w-7 -translate-x-3.5 place-items-center rounded-full bg-default-200 text-base font-medium;
+    @apply bg-default-200 absolute right-full grid h-7 w-7 -translate-x-3.5 place-items-center rounded-full text-base font-medium;
     content: counter(step);
   }
 }

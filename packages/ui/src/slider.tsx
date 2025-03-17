@@ -74,6 +74,12 @@ const useSliderStyles = () =>
           filler: "bg-default",
           step: "bg-default-foreground",
         },
+        inverted: {
+          track: "bg-inverted/20",
+          thumb: "border-inverted bg-inverted-foreground",
+          filler: "bg-inverted",
+          step: "bg-inverted-foreground",
+        },
         primary: {
           track: "bg-primary/20",
           thumb: "border-primary bg-primary-foreground",
@@ -217,7 +223,7 @@ const useSliderStyles = () =>
     ],
   });
 
-type SliderStylesReturnType = ReturnType<typeof useSliderStyles>;
+type SliderStylesReturnType = ReturnType<ReturnType<typeof useSliderStyles>>;
 
 // props
 

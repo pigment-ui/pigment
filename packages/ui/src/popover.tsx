@@ -45,7 +45,7 @@ function _Popover(props: PopoverProps, ref: ForwardedRef<HTMLDivElement>) {
               right: isEntering ? "slide-in-from-left-4" : isExiting ? "slide-out-to-left-4" : "",
               top: isEntering ? "slide-in-from-bottom-4" : isExiting ? "slide-out-to-bottom-4" : "",
               center: "",
-            }[placement ?? "center"],
+            }[placement ?? "bottom"],
             className,
           ),
         }),
@@ -67,7 +67,7 @@ function _Popover(props: PopoverProps, ref: ForwardedRef<HTMLDivElement>) {
                     right: "translate-x-px rotate-90",
                     top: "-translate-y-px",
                     center: "",
-                  }[placement ?? "center"],
+                  }[placement ?? "bottom"],
                 )}
               >
                 <path d="M0 0 L4 4 L8 0" />

@@ -49,7 +49,7 @@ const useTagStyles = () =>
     },
   });
 
-type TagStylesReturnType = ReturnType<typeof useTagStyles>;
+type TagStylesReturnType = ReturnType<ReturnType<typeof useTagStyles>>;
 
 // props
 

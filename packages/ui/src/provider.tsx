@@ -1,3 +1,5 @@
+"use client";
+
 import { Alert } from "./alert";
 import { Badge } from "./badge";
 import { Button } from "./button";
@@ -6,7 +8,6 @@ import { Card } from "./card";
 import { Checkbox, CheckboxGroup } from "./checkbox";
 import { Chip } from "./chip";
 import { ColorField } from "./color-field";
-import "./colors.css";
 import { ComboBox } from "./combo-box";
 import { DateField } from "./date-field";
 import { DatePicker } from "./date-picker";
@@ -43,7 +44,7 @@ import { ComponentPropsWithoutRef, FunctionComponent } from "react";
 type MyProps<T extends FunctionComponent<any>> = (props: ComponentPropsWithoutRef<T>) => ComponentPropsWithoutRef<T>;
 
 type GlobalSlotsType = {
-  defaultComponentProps: Partial<{
+  defaultComponentProps?: Partial<{
     Alert: MyProps<typeof Alert>;
     Badge: MyProps<typeof Badge>;
     Button: MyProps<typeof Button>;
@@ -90,18 +91,21 @@ type GlobalSlotsType = {
 
 const [GlobalSlots, useGlobalSlots] = createSlots<GlobalSlotsType>();
 
-function Provider<V extends string, C extends string>({
-  defaultComponentProps,
-  extendVariantAndColorStyles,
-  children,
-}: GlobalSlotsType & ChildrenProps) {
+function Provider({ defaultComponentProps = {}, extendVariantAndColorStyles, children }: GlobalSlotsType & ChildrenProps) {
   return <GlobalSlots value={{ defaultComponentProps, extendVariantAndColorStyles }}>{children}</GlobalSlots>;
 }
 
-function useGlobalProps<T, D>(componentName: keyof GlobalSlotsType["defaultComponentProps"], props: T, defaultProps?: D) {
-  const newProps = useGlobalSlots()?.defaultComponentProps?.[componentName]?.({ ...defaultProps, ...props } as any);
+function useGlobalProps<T, D>(componentName: string, props: T, defaultProps?: D) {
+  // const newProps = useGlobalSlots()?.defaultComponentProps?.[componentName as keyof GlobalSlotsType["defaultComponentProps"]]?.({
+  //   ...defaultProps,
+  //   ...props,
+  // });
 
-  return { ...defaultProps, ...newProps, ...props } as T & D;
+  return {
+    ...defaultProps,
+    // ...newProps,
+    ...props,
+  } as T & D;
 }
 
 export { Provider, useGlobalProps, useGlobalSlots };

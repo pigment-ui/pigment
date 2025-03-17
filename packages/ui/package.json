@@ -1,40 +1,47 @@
 {
   "name": "pigment-ui",
+  "version": "1.3.0",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Pigment UI components were built mainly on top of React Aria and Tailwind CSS packages.",
   "author": "Rafig Hajili",
-  "homepage": "https://pigment-ui.vercel.app",
+  "homepage": "https://pigment-ui.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/pigment-ui/website"
   },
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
-  "version": "1.2.9",
   "files": [
     "dist"
   ],
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.cjs",
-      "require": "./dist/index.js"
-    },
-    "./colors": "./dist/colors.css"
-  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup"
+    "build": "tsup",
+    "dev": "tsup --watch"
   },
   "dependencies": {
-    "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-slot": "^1.1.0",
     "lucide-react": "^0.456.0",
+    "react": "^18",
     "react-aria": "^3.38.0",
     "react-aria-components": "^1.7.0",
+    "react-dom": "^18",
     "tailwind-merge": "^2.5.4",
     "tailwind-variants": "^0.2.1",
     "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "typescript": "^5"
   }
 }
