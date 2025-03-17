@@ -33,7 +33,7 @@ const useDisclosureGroupStyles = () =>
 const useDisclosureStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
-    base: "flex-col !backdrop-blur-none",
+    base: "flex-col",
     slots: {
       heading: "w-full",
       trigger: "flex w-full items-center outline-none",

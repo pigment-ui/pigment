@@ -43,9 +43,9 @@ function _Chip(props: ChipProps, ref: ForwardedRef<HTMLDivElement>) {
 
   return (
     <div ref={ref} {...restProps} className={useChipStyles()({ variant, color, size, radius, isCompact, className })} style={style}>
-      <div>{startContent}</div>
-      <div>{children}</div>
-      <div>{endContent}</div>
+      {startContent}
+      {children}
+      {endContent}
     </div>
   );
 }

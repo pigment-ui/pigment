@@ -26,8 +26,8 @@ const useTabsStyles = () =>
   tv({
     slots: {
       base: "flex",
-      list: "flex h-fit w-fit backdrop-blur-lg",
-      panel: "h-fit w-full outline-none backdrop-blur-lg",
+      list: "flex h-fit w-fit",
+      panel: "h-fit w-full outline-none",
     },
     variants: {
       orientation: {
@@ -66,7 +66,7 @@ type TabsStylesReturnType = ReturnType<ReturnType<typeof useTabsStyles>>;
 const tabStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
-    base: "cursor-pointer !backdrop-blur-none",
+    base: "cursor-pointer",
     variants: {
       size: {
         sm: "h-8 gap-x-2 px-4 text-xs [&_svg]:size-4",

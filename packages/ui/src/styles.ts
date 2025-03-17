@@ -13,7 +13,7 @@ export const useVariantAndColorStyles = () => {
 
   return tv({
     // extend: extendVariantAndColorStyles,
-    base: "relative flex items-center justify-center overflow-hidden border bg-clip-padding outline-none backdrop-blur-lg duration-300",
+    base: "relative flex items-center justify-center overflow-hidden border outline-none duration-300",
     variants: {
       variant: {
         solid: "",
