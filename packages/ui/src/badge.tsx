@@ -62,9 +62,9 @@ function _Badge(props: BadgeProps, ref: ForwardedRef<HTMLDivElement>) {
   return (
     <div className={styleSlots.wrapper({ className: twMerge(classNames?.wrapper, className) })} style={mergeProps(styles?.wrapper, style)}>
       <div ref={ref} {...restProps} className={styleSlots.base({ className: classNames?.base })} style={styles?.base}>
-        <div>{startContent}</div>
-        <div>{content}</div>
-        <div>{endContent}</div>
+        {startContent}
+        {content}
+        {endContent}
       </div>
       {children}
     </div>

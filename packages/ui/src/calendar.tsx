@@ -30,7 +30,7 @@ import { tv } from "tailwind-variants";
 const useCalendarStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
-    base: "!backdrop-blur-none transition-transform",
+    base: "transition-transform",
     slots: {
       wrapper: "",
       calendarWrapper: "text-default w-fit max-w-full overflow-auto p-4",
