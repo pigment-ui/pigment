@@ -36,7 +36,7 @@ const useFieldButtonStyles = () =>
   tv({
     base: [
       "relative flex min-w-max items-center justify-center overflow-hidden whitespace-nowrap outline-none duration-300",
-      "before:absolute before:inset-0 before:bg-current before:duration-300 data-[pressed]:scale-90",
+      "before:absolute before:inset-0 before:-z-10 before:bg-current before:duration-300 data-[pressed]:scale-90",
       "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[focus-visible]:outline-offset-0 data-[focus-visible]:outline-current",
     ],
     variants: {
