@@ -6,7 +6,7 @@ export type StyleProps = { className?: string; style?: CSSProperties };
 export type StyleSlotsToStyleProps<T> = { classNames?: { [slot in keyof T]?: string }; styles?: { [slot in keyof T]?: CSSProperties } };
 export type StyleSlotsToSlots<T> = { styleSlots: T } & StyleSlotsToStyleProps<T>;
 
-export type Variants = "solid" | "soft" | "light" | "bordered" | "ghost" | "faded" | "card";
+export type Variants = "solid" | "soft" | "light" | "bordered" | "ghost" | "faded" | "card" | "gradient" | "animated";
 export type VariantProps = { variant?: Variants };
 
 export type Colors = "default" | "inverted" | "primary" | "secondary" | "info" | "success" | "warning" | "error";

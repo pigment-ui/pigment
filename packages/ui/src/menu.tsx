@@ -44,6 +44,7 @@ const useMenuSectionStyles = useListBoxSectionStyles;
 interface MenuProps<T extends object>
   extends Omit<AriaMenuProps<T>, keyof StyleProps>,
     Omit<ComponentPropsWithoutRef<typeof ListBox<T>>, keyof AriaMenuProps<T> | "asCard">,
+    ListBoxSlotsType<T>,
     Omit<ComponentPropsWithoutRef<typeof Popover>, keyof Omit<AriaMenuProps<T>, keyof StyleProps>>,
     StyleSlotsToStyleProps<MenuStylesReturnType> {
   topContent?: ReactNode;

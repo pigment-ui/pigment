@@ -13,7 +13,7 @@ export const useVariantAndColorStyles = () => {
 
   return tv({
     // extend: extendVariantAndColorStyles,
-    base: "relative flex items-center justify-center overflow-hidden border duration-300 outline-none",
+    base: "relative z-0 flex items-center justify-center overflow-hidden border bg-clip-padding duration-300 outline-none",
     variants: {
       variant: {
         solid: "",
@@ -23,6 +23,8 @@ export const useVariantAndColorStyles = () => {
         ghost: "",
         faded: "",
         card: "",
+        gradient: "",
+        animated: "",
       },
       color: {
         default: "",
@@ -137,6 +139,40 @@ export const useVariantAndColorStyles = () => {
       { variant: "card", color: "success", className: "text-success" },
       { variant: "card", color: "warning", className: "text-warning" },
       { variant: "card", color: "error", className: "text-error" },
+
+      { variant: "gradient", className: "border-transparent bg-gradient-to-b [background-size:200%_200%;]" },
+      { variant: "gradient", isHovered: true, className: "[background-position:100%_100%;]" },
+      { variant: "gradient", color: "default", className: "from-default via-default/50 to-default text-default-foreground" },
+      { variant: "gradient", color: "inverted", className: "from-inverted via-inverted/50 to-inverted text-inverted-foreground" },
+      { variant: "gradient", color: "primary", className: "from-primary via-primary/50 to-primary text-primary-foreground" },
+      { variant: "gradient", color: "secondary", className: "from-secondary via-secondary/50 to-secondary text-secondary-foreground" },
+      { variant: "gradient", color: "info", className: "from-info via-info/50 to-info text-info-foreground" },
+      { variant: "gradient", color: "success", className: "from-success via-success/50 to-success text-success-foreground" },
+      { variant: "gradient", color: "warning", className: "from-warning via-warning/50 to-warning text-warning-foreground" },
+      { variant: "gradient", color: "error", className: "from-error via-error/50 to-error text-error-foreground" },
+
+      {
+        variant: "animated",
+        className:
+          "border-transparent before:absolute before:inset-x-0 before:-z-10 before:aspect-square before:scale-2 before:animate-spin before:bg-gradient-to-b before:duration-300 before:[animation-duration:5s;]",
+      },
+      { variant: "animated", isHovered: true, className: "beofre:opacity-0" },
+      { variant: "animated", color: "default", className: "before:from-default/20 before:to-default/40 text-default" },
+      { variant: "animated", color: "default", isHovered: true, className: "bg-default text-default-foreground" },
+      { variant: "animated", color: "inverted", className: "before:from-inverted/20 before:to-inverted/40 text-inverted" },
+      { variant: "animated", color: "inverted", isHovered: true, className: "bg-inverted text-inverted-foreground" },
+      { variant: "animated", color: "primary", className: "before:from-primary/20 before:to-primary/40 text-primary" },
+      { variant: "animated", color: "primary", isHovered: true, className: "bg-primary text-primary-foreground" },
+      { variant: "animated", color: "secondary", className: "before:from-secondary/20 before:to-secondary/40 text-secondary" },
+      { variant: "animated", color: "secondary", isHovered: true, className: "bg-secondary text-secondary-foreground" },
+      { variant: "animated", color: "info", className: "before:from-info/20 before:to-info/40 text-info" },
+      { variant: "animated", color: "info", isHovered: true, className: "bg-info text-info-foreground" },
+      { variant: "animated", color: "success", className: "before:from-success/20 before:to-success/40 text-success" },
+      { variant: "animated", color: "success", isHovered: true, className: "bg-success text-success-foreground" },
+      { variant: "animated", color: "warning", className: "before:from-warning/20 before:to-warning/40 text-warning" },
+      { variant: "animated", color: "warning", isHovered: true, className: "bg-warning text-warning-foreground" },
+      { variant: "animated", color: "error", className: "before:from-error/20 before:to-error/40 text-error" },
+      { variant: "animated", color: "error", isHovered: true, className: "bg-error text-error-foreground" },
     ],
   });
 };
@@ -144,8 +180,8 @@ export const useVariantAndColorStyles = () => {
 export const useHelperButtonStyles = () =>
   tv({
     base: [
-      "relative flex min-w-max items-center justify-center overflow-hidden whitespace-nowrap duration-300 outline-none",
-      "before:absolute before:inset-0 before:-z-10 before:bg-current before:duration-300 data-[pressed]:scale-90",
+      "relative z-10 flex min-w-max items-center justify-center overflow-hidden whitespace-nowrap transition-transform duration-300 outline-none",
+      "before:absolute before:inset-0 before:-z-10 before:bg-current data-[pressed]:scale-90",
       "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[focus-visible]:outline-offset-0 data-[focus-visible]:outline-current",
     ],
     variants: {
