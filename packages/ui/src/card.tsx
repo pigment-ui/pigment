@@ -14,8 +14,8 @@ import { tv } from "tailwind-variants";
 const useCardStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
-    base: ["!block", radiusVariants.md],
     slots: {
+      base: ["overflow-hidden border bg-clip-padding duration-300 outline-none", radiusVariants.md],
       header: "",
       body: "",
       footer: "",

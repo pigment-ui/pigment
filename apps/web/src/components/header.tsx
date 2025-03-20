@@ -1,33 +1,35 @@
 "use client";
 
 import { capitalize } from "inflection";
-import { GithubIcon, MenuIcon, MonitorIcon, MoonIcon, SunIcon } from "lucide-react";
+import { GithubIcon, MenuIcon, MonitorIcon, MoonIcon, SparklesIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import NextLink from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { Button, Menu, MenuItem, MenuTrigger, Popover, PopoverTrigger } from "pigment-ui";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function Header() {
   const segment = useSelectedLayoutSegment();
 
-  const routes = [
-    ["/docs/overview/introduction", "Docs"],
-    // ["/examples", "Examples"],
-    ["/themes", "Themes"],
-  ].map(([href, title]) => (
-    <Button
-      key={title}
-      asChild
-      variant={href.split("/")[1] === segment ? "soft" : "light"}
-      className={twMerge(href.split("/")[1] !== segment && "text-default-500", "justify-start")}
-    >
-      <NextLink href={href} prefetch onClick={() => setIsOpened(false)}>
-        {title}
-      </NextLink>
-    </Button>
-  ));
+  const routes = useMemo(
+    () => (
+      <>
+        <Button asChild variant={segment === "docs" ? "soft" : "light"} className={twMerge(segment !== "docs" && "text-default-500")}>
+          <NextLink href="/docs/overview/introduction" prefetch onClick={() => setIsOpened(false)}>
+            Docs
+          </NextLink>
+        </Button>
+
+        <Button asChild variant={segment === "playground" ? "solid" : "animated"} startContent={<SparklesIcon />}>
+          <NextLink href="/playground" prefetch onClick={() => setIsOpened(false)}>
+            Playground
+          </NextLink>
+        </Button>
+      </>
+    ),
+    [segment],
+  );
 
   const { theme, setTheme } = useTheme();
 
@@ -41,16 +43,16 @@ export function Header() {
 
   return (
     <header className="border-default-1000/20 bg-default-0/75 sticky top-0 z-50 h-16 w-full border-b backdrop-blur-lg">
-      <div className="container flex h-full items-center gap-x-8">
+      <div className="container flex h-full items-center">
         <Button asChild variant={segment === null ? "soft" : "light"} isCompact>
           <NextLink href="/" prefetch>
             <img src="/logo.png" alt="logo" className="size-16 invert dark:invert-0" />
           </NextLink>
         </Button>
 
-        <div className="flex gap-x-2 max-lg:hidden">{routes}</div>
+        <div className="flex flex-1 justify-between gap-x-2 pr-2 pl-8 max-sm:hidden">{routes}</div>
 
-        <div className="ml-auto flex gap-x-2">
+        <div className="flex gap-x-2 max-sm:ml-auto">
           <Button aria-label="github repo" asChild isCompact variant="faded">
             <a href="https://github.com/pigment-ui" target="_blank">
               <GithubIcon />
@@ -76,10 +78,10 @@ export function Header() {
           </MenuTrigger>
 
           <PopoverTrigger isOpen={isOpened} onOpenChange={setIsOpened}>
-            <Button aria-label="header menu toggle" isCompact variant="faded" className="lg:hidden">
+            <Button aria-label="header menu toggle" isCompact variant="faded" className="sm:hidden">
               <MenuIcon />
             </Button>
-            <Popover className="flex w-48 flex-col gap-y-2">{routes}</Popover>
+            <Popover className="flex w-48 flex-col gap-2">{routes}</Popover>
           </PopoverTrigger>
         </div>
       </div>
