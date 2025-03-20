@@ -173,6 +173,17 @@ export const useVariantAndColorStyles = () => {
       { variant: "animated", color: "warning", isHovered: true, className: "bg-warning text-warning-foreground" },
       { variant: "animated", color: "error", className: "before:from-error/10 before:to-error/20 text-error" },
       { variant: "animated", color: "error", isHovered: true, className: "bg-error text-error-foreground" },
+
+      { variant: "shadow", className: "border-transparent shadow-[0_2px_8px]" },
+      { variant: "shadow", isHovered: true, className: "shadow-[0_2px_4px]" },
+      { variant: "shadow", color: "default", className: "bg-default shadow-default text-default-foreground" },
+      { variant: "shadow", color: "inverted", className: "bg-inverted shadow-inverted text-inverted-foreground" },
+      { variant: "shadow", color: "primary", className: "bg-primary shadow-primary text-primary-foreground" },
+      { variant: "shadow", color: "secondary", className: "bg-secondary shadow-secondary text-secondary-foreground" },
+      { variant: "shadow", color: "info", className: "bg-info shadow-info text-info-foreground" },
+      { variant: "shadow", color: "success", className: "bg-success shadow-success text-success-foreground" },
+      { variant: "shadow", color: "warning", className: "bg-warning shadow-warning text-warning-foreground" },
+      { variant: "shadow", color: "error", className: "bg-error shadow-error text-error-foreground" },
     ],
   });
 };

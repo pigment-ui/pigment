@@ -21,7 +21,7 @@ export function Header() {
           </NextLink>
         </Button>
 
-        <Button asChild variant={segment === "playground" ? "solid" : "animated"} startContent={<SparklesIcon />}>
+        <Button asChild variant={segment === "playground" ? "shadow" : "animated"} startContent={<SparklesIcon />}>
           <NextLink href="/playground" prefetch onClick={() => setIsOpened(false)}>
             Playground
           </NextLink>
