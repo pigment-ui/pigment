@@ -1,8 +1,8 @@
 "use client";
 
-import { Field, FieldBaseProps, useFieldButtonStyles } from "./field";
+import { Field, FieldBaseProps } from "./field";
 import { useGlobalProps } from "./provider";
-import { radiusVariants, useVariantAndColorStyles } from "./styles";
+import { radiusVariants, useHelperButtonStyles, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, ForwardRefType, RadiusProps, StyleSlotsToStyleProps, VariantProps, Variants } from "./types";
 import { createSlots } from "./utils";
 import { XIcon } from "lucide-react";
@@ -36,7 +36,7 @@ const useTagStyles = () =>
     extend: useVariantAndColorStyles(),
     base: "",
     slots: {
-      removeButton: useFieldButtonStyles()({ variant: "light", className: "rounded-full p-1 transition-transform" }),
+      removeButton: useHelperButtonStyles()({ variant: "light", className: "rounded-full p-1 transition-transform" }),
     },
     variants: {
       size: {

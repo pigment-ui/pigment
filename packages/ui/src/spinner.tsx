@@ -8,7 +8,7 @@ import { tv } from "tailwind-variants";
 
 const useSpinnerStyles = () =>
   tv({
-    base: "inline-block size-fit animate-spin",
+    base: "inline-block animate-spin",
   });
 
 // component
@@ -28,9 +28,10 @@ function _Spinner(props: HTMLAttributes<HTMLDivElement>, ref: ForwardedRef<HTMLD
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="size-full"
+        className="relative size-full"
       >
-        <circle cx="12" cy="12" r="9" className="animateCircle" />
+        <circle cx="12" cy="12" r="9" className="animateCircle absolute inset-0" />
+        <circle cx="12" cy="12" r="9" className="absolute inset-0 opacity-10" />
       </svg>
 
       <style>{`

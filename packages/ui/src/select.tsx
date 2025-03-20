@@ -36,7 +36,6 @@ function _Select<T extends object>(props: SelectProps<T>, ref: ForwardedRef<HTML
       {(renderProps) => (
         <>
           <FieldInput
-            isFocusWithin={renderProps.isOpen}
             endContent={<ChevronDownIcon />}
             {...renderProps}
             {...globalProps}

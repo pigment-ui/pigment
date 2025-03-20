@@ -1,8 +1,8 @@
 "use client";
 
-import { FieldBaseProps, FieldInput, FieldInputBaseProps, useFieldButtonStyles } from "./field";
+import { FieldBaseProps, FieldInput, FieldInputBaseProps } from "./field";
 import { useGlobalProps } from "./provider";
-import { radiusVariants, useVariantAndColorStyles } from "./styles";
+import { radiusVariants, useHelperButtonStyles, useVariantAndColorStyles } from "./styles";
 import { ColorProps, StyleProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { useFormValidationState } from "@react-stately/form";
 import React, { ComponentPropsWithoutRef } from "react";
@@ -19,7 +19,7 @@ const useFileTriggerBlockStyles = () =>
     slots: {
       base: "",
       zone: "flex w-full flex-col items-center text-center",
-      button: useFieldButtonStyles()({ className: "data-[pressed]:scale-95" }),
+      button: useHelperButtonStyles()({ className: "data-[pressed]:scale-95" }),
       text: "",
     },
     variants: {
@@ -92,7 +92,6 @@ function FileTriggerDropzone(props: FileTriggerDropzoneProps) {
         <FieldInput
           {...displayValidation}
           {...globalProps}
-          isAutoHeight
           fieldInputClassNames={{ ...globalProps.fieldInputClassNames, base: twMerge("cursor-default", globalProps.fieldInputClassNames?.base) }}
         >
           <div>

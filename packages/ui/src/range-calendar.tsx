@@ -22,34 +22,10 @@ import {
   TextContext,
 } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
-import { tv } from "tailwind-variants";
 
 // styles
 
-const useRangeCalendarStyles = () =>
-  tv({
-    extend: useCalendarStyles(),
-    base: "",
-    variants: {
-      color: { default: "", inverted: "", primary: "", secondary: "", info: "", success: "", warning: "", error: "" },
-      variant: { solid: "", soft: "", light: "", bordered: "", outlined: "", ghost: "", faded: "", card: "" },
-      isHovered: { true: "" },
-      isPressed: { true: "" },
-      isDisabled: { true: "" },
-      isFocusVisible: { true: "" },
-
-      isSelectedRange: { true: "" },
-      isSelectionStart: { true: "" },
-      isSelectionEnd: { true: "" },
-      isSelectedFirstDay: { true: "!rounded-r-none" },
-      isSelectedLastDay: { true: "!rounded-l-none" },
-    },
-    compoundVariants: [
-      { isSelectionStart: true, isSelectionEnd: false, className: "!rounded-r-none" },
-      { isSelectionStart: false, isSelectionEnd: true, className: "!rounded-l-none" },
-      { isSelectedRange: true, isSelectedFirstDay: false, isSelectedLastDay: false, className: "!rounded-none" },
-    ],
-  });
+const useRangeCalendarStyles = useCalendarStyles;
 
 type RangeCalendarStylesReturnType = ReturnType<ReturnType<typeof useRangeCalendarStyles>>;
 

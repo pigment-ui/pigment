@@ -1,7 +1,7 @@
 "use client";
 
 import { useGlobalProps } from "./provider";
-import { isFocusVisibleVariants, radiusVariants, useVariantAndColorStyles } from "./styles";
+import { radiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, ForwardRefType, RadiusProps, SizeProps, StyleSlotsToSlots, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { createSlots } from "./utils";
 import React, { ForwardedRef, forwardRef } from "react";
@@ -24,27 +24,21 @@ import { tv } from "tailwind-variants";
 
 const useTabsStyles = () =>
   tv({
+    extend: useVariantAndColorStyles(),
+    defaultVariants: { variant: "light" },
     slots: {
       base: "flex",
-      list: "flex h-fit w-fit",
-      panel: "h-fit w-full outline-none",
+      list: ["relative z-0 flex h-fit w-fit overflow-hidden", "before:absolute before:inset-0 before:-z-10 before:bg-current before:opacity-10"],
+      panel: [
+        "relative z-0 h-fit w-full overflow-hidden outline-none",
+        "before:absolute before:inset-0 before:-z-10 before:bg-current before:text-inherit before:opacity-10",
+      ],
     },
     variants: {
       orientation: {
         vertical: { base: "flex-col" },
         horizontal: { list: "flex-col" },
       },
-      color: {
-        default: { list: "bg-default/10", panel: "bg-default/10 text-default" },
-        inverted: { list: "bg-inverted/10", panel: "bg-inverted/10 text-default" },
-        primary: { list: "bg-primary/10", panel: "bg-primary/10 text-primary" },
-        secondary: { list: "bg-secondary/10", panel: "bg-secondary/10 text-secondary" },
-        info: { list: "bg-info/10", panel: "bg-info/10 text-info" },
-        success: { list: "bg-success/10", panel: "bg-success/10 text-success" },
-        warning: { list: "bg-warning/10", panel: "bg-warning/10 text-warning" },
-        error: { list: "bg-error/10", panel: "bg-error/10 text-error" },
-      },
-
       size: {
         sm: { base: "gap-2", list: "gap-2 p-1", panel: ["p-2", radiusVariants.sm] },
         md: { base: "gap-2.5", list: "gap-2.5 p-1.5", panel: ["p-2.5", radiusVariants.md] },
@@ -57,7 +51,6 @@ const useTabsStyles = () =>
         full: { list: radiusVariants.full },
         none: { list: radiusVariants.none },
       },
-      isFocusVisible: { true: { panel: isFocusVisibleVariants.true } },
     },
   });
 
@@ -130,7 +123,7 @@ function _Tab(props: TabProps & ContentProps, ref: ForwardedRef<HTMLDivElement>)
           color,
           size,
           radius,
-          isHovered: !isSelected && isHovered,
+          isHovered,
           isPressed,
           isDisabled,
           isFocusVisible,

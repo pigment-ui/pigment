@@ -2,7 +2,7 @@
 
 import { Field, FieldBaseProps } from "./field";
 import { useGlobalProps } from "./provider";
-import { isDisabledVariants, isFocusVisibleVariants, smallRadiusVariants } from "./styles";
+import { isDisabledVariants, isFocusVisibleVariants, smallRadiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, RadiusProps, SizeProps, StyleSlotsToStyleProps } from "./types";
 import { FormValidationProps, useFormValidationState } from "@react-stately/form";
 import React, { ForwardedRef, forwardRef } from "react";
@@ -25,102 +25,60 @@ import { tv } from "tailwind-variants";
 
 const useSliderStyles = () =>
   tv({
+    extend: useVariantAndColorStyles(),
     slots: {
-      base: "",
-      output: "text-default absolute right-0 top-0",
+      base: "relative flex-1",
+      wrapper: "",
+      output: "absolute top-0 right-0",
       sliderWrapper: "relative size-full",
       contentWrapper: "flex items-center",
-      trackWrapper: "relative flex-1",
-      track: "cursor-pointer duration-300",
+      track: [
+        "relative cursor-pointer duration-300",
+        "before:absolute before:inset-0 before:[border-radius:inherit;] before:bg-current before:opacity-10",
+      ],
       thumbWrapper: "absolute",
-      thumb: "z-20 border-2 outline-none [transition:width_300ms,height_300ms,border-color_300ms;]",
-      filler: "absolute [transition:background-color_300ms;]",
+      thumb: [
+        "relative z-30 outline-none [transition:width_300ms,height_300ms,border-color_300ms;]",
+        "before:absolute before:inset-0 before:-z-10 before:[border-radius:inherit;] before:bg-current",
+      ],
+      filler: [
+        "absolute z-10 [transition:background-color_300ms;]",
+        "before:absolute before:inset-0 before:-z-10 before:[border-radius:inherit;] before:bg-current",
+      ],
       stepsWrapper: "pointer-events-none absolute flex items-center justify-between",
-      step: "z-10 opacity-50",
-      marksWrapper: "absolute",
-      mark: "text-default absolute",
+      step: "bg-inverted z-20 size-0.5 rounded-full opacity-50",
+      marksWrapper: "text-default absolute",
+      mark: "absolute",
     },
     variants: {
       orientation: {
         horizontal: {
-          base: "w-full",
+          wrapper: "w-full",
           track: "w-full",
           thumbWrapper: "inset-y-0",
           thumb: "top-1/2 -translate-y-1/2",
           filler: "inset-y-0",
           contentWrapper: "w-full flex-row",
           stepsWrapper: "inset-y-0 flex-row",
-          step: "w-px",
           marksWrapper: "top-full",
           mark: "-translate-x-1/2",
         },
         vertical: {
-          base: "h-full",
+          wrapper: "h-full",
           track: "h-full",
           thumbWrapper: "inset-x-0",
           thumb: "left-1/2 -translate-x-1/2",
           filler: "inset-x-0",
           contentWrapper: "h-full flex-col",
           stepsWrapper: "inset-x-0 flex-col",
-          step: "h-px",
           marksWrapper: "left-full",
           mark: "translate-y-1/2",
         },
       },
-      color: {
-        default: {
-          track: "bg-default/20",
-          thumb: "border-default bg-default-foreground",
-          filler: "bg-default",
-          step: "bg-default-foreground",
-        },
-        inverted: {
-          track: "bg-inverted/20",
-          thumb: "border-inverted bg-inverted-foreground",
-          filler: "bg-inverted",
-          step: "bg-inverted-foreground",
-        },
-        primary: {
-          track: "bg-primary/20",
-          thumb: "border-primary bg-primary-foreground",
-          filler: "bg-primary",
-          step: "bg-primary-foreground",
-        },
-        secondary: {
-          track: "bg-secondary/20",
-          thumb: "border-secondary bg-secondary-foreground",
-          filler: "bg-secondary",
-          step: "bg-secondary-foreground",
-        },
-        info: {
-          track: "bg-info/20",
-          thumb: "border-info bg-info-foreground",
-          filler: "bg-info",
-          step: "bg-info-foreground",
-        },
-        success: {
-          track: "bg-success/20",
-          thumb: "border-success bg-success-foreground",
-          filler: "bg-success",
-          step: "bg-success-foreground",
-        },
-        warning: {
-          track: "bg-warning/20",
-          thumb: "border-warning bg-warning-foreground",
-          filler: "bg-warning",
-          step: "bg-warning-foreground",
-        },
-        error: {
-          track: "bg-error/20",
-          thumb: "border-error bg-error-foreground",
-          filler: "bg-error",
-          step: "bg-error-foreground",
-        },
-      },
       size: {
-        sm: { output: "text-xs", mark: "text-xs", contentWrapper: "gap-2 [&_svg]:size-4", thumb: "size-4" },
-        md: { output: "text-sm", mark: "text-sm", contentWrapper: "gap-2.5 [&_svg]:size-5", thumb: "size-5" },
-        lg: { output: "text-base", mark: "text-base", contentWrapper: "gap-3 [&_svg]:size-6", thumb: "size-6" },
+        sm: { wrapper: "text-xs", contentWrapper: "gap-2 [&_svg]:size-4", thumb: "size-4" },
+        md: { wrapper: "text-sm", contentWrapper: "gap-2.5 [&_svg]:size-5", thumb: "size-5" },
+        lg: { wrapper: "text-base", contentWrapper: "gap-3 [&_svg]:size-6", thumb: "size-6" },
       },
       radius: {
         sm: { track: smallRadiusVariants.sm, thumb: smallRadiusVariants.sm, filler: smallRadiusVariants.sm },
@@ -129,85 +87,48 @@ const useSliderStyles = () =>
         full: { track: smallRadiusVariants.full, thumb: smallRadiusVariants.full, filler: smallRadiusVariants.full },
         none: { track: smallRadiusVariants.none, thumb: smallRadiusVariants.none, filler: smallRadiusVariants.none },
       },
-      isDisabled: { true: { track: isDisabledVariants.true } },
       isHovered: { true: { thumb: "cursor-grab" } },
       isDragging: { true: { thumb: "cursor-grabbing" } },
-      isFocusVisible: { true: { thumb: isFocusVisibleVariants.true } },
       hideThumb: { true: { track: "overflow-hidden", thumb: "opacity-0", filler: "rounded-none" } },
       hasMarks: { true: "" },
+      isDisabled: { true: { track: isDisabledVariants.true, thumb: "pointer-events-none" } },
     },
     compoundVariants: [
+      { color: "inverted", className: { step: "bg-default" } },
+      { color: "inverted", className: { marksWrapper: "text-inverted" } },
+
+      { isFocusVisible: true, className: { thumb: isFocusVisibleVariants.true } },
+      { color: "inverted", isFocusVisible: true, className: { thumb: "outline-inverted" } },
+
       {
         orientation: "horizontal",
         size: "sm",
-        className: {
-          trackWrapper: "py-2",
-          track: "h-1",
-          step: "h-1",
-          thumbWrapper: "inset-x-2",
-          stepsWrapper: "inset-x-2",
-          marksWrapper: "inset-x-2",
-        },
+        className: { base: "py-2", track: "h-1", thumbWrapper: "inset-x-2", stepsWrapper: "inset-x-2", marksWrapper: "inset-x-2" },
       },
       {
         orientation: "horizontal",
         size: "md",
-        className: {
-          trackWrapper: "py-3",
-          track: "h-2",
-          step: "h-2",
-          thumbWrapper: "inset-x-2.5",
-          stepsWrapper: "inset-x-2.5",
-          marksWrapper: "inset-x-2.5",
-        },
+        className: { base: "py-3", track: "h-2", thumbWrapper: "inset-x-2.5", stepsWrapper: "inset-x-2.5", marksWrapper: "inset-x-2.5" },
       },
       {
         orientation: "horizontal",
         size: "lg",
-        className: {
-          trackWrapper: "py-4",
-          track: "h-3",
-          step: "h-3",
-          thumbWrapper: "inset-x-3",
-          stepsWrapper: "inset-x-3",
-          marksWrapper: "inset-x-3",
-        },
+        className: { base: "py-4", track: "h-3", thumbWrapper: "inset-x-3", stepsWrapper: "inset-x-3", marksWrapper: "inset-x-3" },
       },
       {
         orientation: "vertical",
         size: "sm",
-        className: {
-          trackWrapper: "px-2",
-          track: "w-1",
-          step: "w-1",
-          thumbWrapper: "inset-y-2",
-          stepsWrapper: "inset-y-2",
-          marksWrapper: "inset-y-2",
-        },
+        className: { base: "px-2", track: "w-1", thumbWrapper: "inset-y-2", stepsWrapper: "inset-y-2", marksWrapper: "inset-y-2" },
       },
       {
         orientation: "vertical",
         size: "md",
-        className: {
-          trackWrapper: "px-3",
-          track: "w-2",
-          step: "w-2",
-          thumbWrapper: "inset-y-2.5",
-          stepsWrapper: "inset-y-2.5",
-          marksWrapper: "inset-y-2.5",
-        },
+        className: { base: "px-3", track: "w-2", thumbWrapper: "inset-y-2.5", stepsWrapper: "inset-y-2.5", marksWrapper: "inset-y-2.5" },
       },
       {
         orientation: "vertical",
         size: "lg",
-        className: {
-          trackWrapper: "px-4",
-          track: "w-3",
-          step: "w-3",
-          thumbWrapper: "inset-y-3",
-          stepsWrapper: "inset-y-3",
-          marksWrapper: "inset-y-3",
-        },
+        className: { base: "px-4", track: "w-3", thumbWrapper: "inset-y-3", stepsWrapper: "inset-y-3", marksWrapper: "inset-y-3" },
       },
 
       { orientation: "horizontal", hasMarks: true, size: "sm", className: { sliderWrapper: "pb-4" } },
@@ -253,7 +174,7 @@ function _Slider(props: SliderProps, ref: ForwardedRef<HTMLDivElement>) {
   const { displayValidation } = useFormValidationState({ ...globalProps, value });
   const { fieldProps, descriptionProps, errorMessageProps } = useField({ validationBehavior: "native", ...displayValidation, ...globalProps });
 
-  const styleSlots = useSliderStyles()({ orientation, hideThumb, size, radius, hasMarks: !!marks });
+  const styleSlots = useSliderStyles()({ color, variant: "light", orientation, hideThumb, size, radius, hasMarks: !!marks });
 
   return (
     <Provider
@@ -265,8 +186,10 @@ function _Slider(props: SliderProps, ref: ForwardedRef<HTMLDivElement>) {
       <AriaSlider
         ref={ref}
         {...mergeProps(globalProps, fieldProps)}
-        className={composeRenderProps(globalProps.className, (className) => styleSlots.base({ className: twMerge(classNames?.base, className) }))}
-        style={composeRenderProps(globalProps.style, (style) => mergeProps(styles?.base, style))}
+        className={composeRenderProps(globalProps.className, (className) =>
+          styleSlots.wrapper({ className: twMerge(classNames?.wrapper, className) }),
+        )}
+        style={composeRenderProps(globalProps.style, (style) => mergeProps(styles?.wrapper, style))}
       >
         {({ state }) => (
           <Field {...displayValidation} {...globalProps}>
@@ -280,13 +203,11 @@ function _Slider(props: SliderProps, ref: ForwardedRef<HTMLDivElement>) {
               <div className={styleSlots.contentWrapper({ className: classNames?.contentWrapper })} style={styles?.contentWrapper}>
                 {startContent}
 
-                <div className={styleSlots.trackWrapper({ className: classNames?.trackWrapper })} style={styles?.trackWrapper}>
-                  <SliderTrack
-                    className={({ isDisabled }) =>
-                      styleSlots.track({ color: displayValidation.isInvalid ? "error" : color, isDisabled, className: classNames?.track })
-                    }
-                    style={styles?.track}
-                  >
+                <div
+                  className={styleSlots.base({ color: displayValidation.isInvalid ? "error" : color, className: classNames?.base })}
+                  style={styles?.base}
+                >
+                  <SliderTrack className={({ isDisabled }) => styleSlots.track({ isDisabled, className: classNames?.track })} style={styles?.track}>
                     {({ state }) => (
                       <div className={styleSlots.thumbWrapper({ className: classNames?.thumbWrapper })} style={styles?.thumbWrapper}>
                         {state.values.map((_, i) => (
@@ -294,9 +215,9 @@ function _Slider(props: SliderProps, ref: ForwardedRef<HTMLDivElement>) {
                             key={i}
                             index={i}
                             aria-label={thumbLabels?.[i]}
-                            className={({ isHovered, isDragging, isFocusVisible }) =>
+                            className={({ isHovered, isDragging, isFocusVisible, isDisabled }) =>
                               styleSlots.thumb({
-                                color: displayValidation.isInvalid ? "error" : color,
+                                isDisabled,
                                 isHovered,
                                 isDragging,
                                 isFocusVisible,
@@ -308,7 +229,7 @@ function _Slider(props: SliderProps, ref: ForwardedRef<HTMLDivElement>) {
                         ))}
 
                         <div
-                          className={styleSlots.filler({ color: displayValidation.isInvalid ? "error" : color, className: classNames?.filler })}
+                          className={styleSlots.filler({ className: classNames?.filler })}
                           style={mergeProps(
                             {
                               [orientation === "horizontal" ? "left" : "bottom"]:
@@ -331,11 +252,7 @@ function _Slider(props: SliderProps, ref: ForwardedRef<HTMLDivElement>) {
                             state.step +
                           1,
                       }).map((_, i) => (
-                        <div
-                          key={i}
-                          className={styleSlots.step({ color: displayValidation.isInvalid ? "error" : color, className: classNames?.step })}
-                          style={styles?.step}
-                        />
+                        <div key={i} className={styleSlots.step({ className: classNames?.step })} style={styles?.step} />
                       ))}
                     </div>
                   )}

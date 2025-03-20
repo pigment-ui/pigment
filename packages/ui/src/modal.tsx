@@ -1,8 +1,8 @@
 "use client";
 
 import { useCardStyles } from "./card";
-import { useFieldButtonStyles } from "./field";
 import { useGlobalProps } from "./provider";
+import { useHelperButtonStyles } from "./styles";
 import { SizeProps, StyleSlotsToSlots, StyleSlotsToStyleProps } from "./types";
 import { createSlots } from "./utils";
 import { PlacementAxis } from "@react-types/overlays";
@@ -32,7 +32,7 @@ const useModalStyles = () =>
       body: "",
       dialog: "relative flex flex-col outline-none",
       backdrop: "fixed inset-0 z-[999] grid place-items-center duration-300",
-      closeButton: useFieldButtonStyles()({ variant: "light", className: "absolute right-2 top-2 z-10 rounded-full p-2" }),
+      closeButton: useHelperButtonStyles()({ variant: "light", className: "absolute top-2 right-2 z-10 rounded-full p-2" }),
     },
     variants: {
       placement: {

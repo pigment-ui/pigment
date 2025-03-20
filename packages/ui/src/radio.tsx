@@ -56,7 +56,7 @@ const RadioGroup = forwardRef(_RadioGroup);
 function _Radio(props: RadioProps, ref: ForwardedRef<HTMLLabelElement>) {
   const { variant = "solid", color = "default", size = "md", classNames, itemClassNames, styles, itemStyles } = useCheckboxGroupSlots(props);
 
-  const styleSlots = useRadioStyles()({ size, radius: "full" });
+  const styleSlots = useRadioStyles()({ size, color, radius: "full" });
 
   return (
     <AriaRadio
@@ -71,7 +71,7 @@ function _Radio(props: RadioProps, ref: ForwardedRef<HTMLLabelElement>) {
         <>
           <div
             className={styleSlots.base({
-              variant: isSelected ? variant : "outlined",
+              variant: isSelected ? variant : "bordered",
               color: isInvalid ? "error" : color,
               isHovered,
               isPressed,

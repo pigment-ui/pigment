@@ -13,14 +13,13 @@ export const useVariantAndColorStyles = () => {
 
   return tv({
     // extend: extendVariantAndColorStyles,
-    base: "relative flex items-center justify-center overflow-hidden border outline-none duration-300",
+    base: "relative flex items-center justify-center overflow-hidden border duration-300 outline-none",
     variants: {
       variant: {
         solid: "",
         soft: "",
         light: "",
         bordered: "",
-        outlined: "",
         ghost: "",
         faded: "",
         card: "",
@@ -37,10 +36,22 @@ export const useVariantAndColorStyles = () => {
       },
       isHovered: { true: "" },
       isPressed: { true: "scale-95" },
+      isFocusWithin: { true: "ring-1" },
       isDisabled: isDisabledVariants,
       isFocusVisible: isFocusVisibleVariants,
     },
     compoundVariants: [
+      { color: "inverted", isFocusVisible: true, className: "outline-inverted" },
+
+      { color: "default", isFocusWithin: true, className: { base: "ring-default" } },
+      { color: "inverted", isFocusWithin: true, className: { base: "ring-inverted" } },
+      { color: "primary", isFocusWithin: true, className: { base: "ring-primary" } },
+      { color: "secondary", isFocusWithin: true, className: { base: "ring-secondary" } },
+      { color: "info", isFocusWithin: true, className: { base: "ring-info" } },
+      { color: "success", isFocusWithin: true, className: { base: "ring-success" } },
+      { color: "warning", isFocusWithin: true, className: { base: "ring-warning" } },
+      { color: "error", isFocusWithin: true, className: { base: "ring-error" } },
+
       { variant: "solid", className: "border-transparent" },
       { variant: "solid", isHovered: true, className: "bg-opacity-90" },
       { variant: "solid", color: "default", className: "bg-default text-default-foreground" },
@@ -52,7 +63,7 @@ export const useVariantAndColorStyles = () => {
       { variant: "solid", color: "warning", className: "bg-warning text-warning-foreground" },
       { variant: "solid", color: "error", className: "bg-error text-error-foreground" },
 
-      { variant: "soft", className: "border-transparent bg-opacity-10" },
+      { variant: "soft", className: "bg-opacity-10 border-transparent" },
       { variant: "soft", isHovered: true, className: "bg-opacity-20" },
       { variant: "soft", color: "default", className: "bg-default text-default" },
       { variant: "soft", color: "inverted", className: "bg-inverted text-inverted" },
@@ -63,7 +74,7 @@ export const useVariantAndColorStyles = () => {
       { variant: "soft", color: "warning", className: "bg-warning text-warning" },
       { variant: "soft", color: "error", className: "bg-error text-error" },
 
-      { variant: "light", className: "border-transparent bg-opacity-0" },
+      { variant: "light", className: "bg-opacity-0 border-transparent" },
       { variant: "light", isHovered: true, className: "bg-opacity-10" },
       { variant: "light", color: "default", className: "bg-default text-default" },
       { variant: "light", color: "inverted", className: "bg-inverted text-inverted" },
@@ -74,8 +85,8 @@ export const useVariantAndColorStyles = () => {
       { variant: "light", color: "warning", className: "bg-warning text-warning" },
       { variant: "light", color: "error", className: "bg-error text-error" },
 
-      { variant: "bordered", className: "border-opacity-50 bg-opacity-10" },
-      { variant: "bordered", isHovered: true, className: "bg-opacity-20" },
+      { variant: "bordered", className: "border-opacity-50 bg-opacity-0" },
+      { variant: "bordered", isHovered: true, className: "bg-opacity-10" },
       { variant: "bordered", color: "default", className: "border-default bg-default text-default" },
       { variant: "bordered", color: "inverted", className: "border-inverted bg-inverted text-inverted" },
       { variant: "bordered", color: "primary", className: "border-primary bg-primary text-primary" },
@@ -85,19 +96,8 @@ export const useVariantAndColorStyles = () => {
       { variant: "bordered", color: "warning", className: "border-warning bg-warning text-warning" },
       { variant: "bordered", color: "error", className: "border-error bg-error text-error" },
 
-      { variant: "outlined", className: "border-opacity-50 bg-opacity-0" },
-      { variant: "outlined", isHovered: true, className: "bg-opacity-10" },
-      { variant: "outlined", color: "default", className: "border-default bg-default text-default" },
-      { variant: "outlined", color: "inverted", className: "border-inverted bg-inverted text-inverted" },
-      { variant: "outlined", color: "primary", className: "border-primary bg-primary text-primary" },
-      { variant: "outlined", color: "secondary", className: "border-secondary bg-secondary text-secondary" },
-      { variant: "outlined", color: "info", className: "border-info bg-info text-info" },
-      { variant: "outlined", color: "success", className: "border-success bg-success text-success" },
-      { variant: "outlined", color: "warning", className: "border-warning bg-warning text-warning" },
-      { variant: "outlined", color: "error", className: "border-error bg-error text-error" },
-
       { variant: "ghost", className: "border-opacity-50 bg-opacity-0" },
-      { variant: "ghost", isHovered: true, className: "border-transparent bg-opacity-100" },
+      { variant: "ghost", isHovered: true, className: "bg-opacity-100 border-transparent" },
       { variant: "ghost", color: "default", className: "border-default bg-default text-default" },
       { variant: "ghost", color: "default", isHovered: true, className: "text-default-foreground" },
       { variant: "ghost", color: "inverted", className: "border-inverted bg-inverted text-inverted" },
@@ -115,17 +115,16 @@ export const useVariantAndColorStyles = () => {
       { variant: "ghost", color: "error", className: "border-error bg-error text-error" },
       { variant: "ghost", color: "error", isHovered: true, className: "text-error-foreground" },
 
-      { variant: "faded", className: "border-default-300 bg-default-100" },
-      { variant: "faded", isHovered: true, className: "bg-default-200" },
-      { variant: "faded", color: "default", className: "text-default" },
-      { variant: "faded", color: "inverted", className: "text-inverted border-default-700 bg-default-900" },
-      { variant: "faded", color: "inverted", isHovered: true, className: "bg-default-800" },
-      { variant: "faded", color: "primary", className: "text-primary" },
-      { variant: "faded", color: "secondary", className: "text-secondary" },
-      { variant: "faded", color: "info", className: "text-info" },
-      { variant: "faded", color: "success", className: "text-success" },
-      { variant: "faded", color: "warning", className: "text-warning" },
-      { variant: "faded", color: "error", className: "text-error" },
+      { variant: "faded", className: "border-opacity-50 bg-opacity-10" },
+      { variant: "faded", isHovered: true, className: "bg-opacity-20" },
+      { variant: "faded", color: "default", className: "border-default bg-default text-default" },
+      { variant: "faded", color: "inverted", className: "border-inverted bg-inverted text-inverted" },
+      { variant: "faded", color: "primary", className: "border-primary bg-primary text-primary" },
+      { variant: "faded", color: "secondary", className: "border-secondary bg-secondary text-secondary" },
+      { variant: "faded", color: "info", className: "border-info bg-info text-info" },
+      { variant: "faded", color: "success", className: "border-success bg-success text-success" },
+      { variant: "faded", color: "warning", className: "border-warning bg-warning text-warning" },
+      { variant: "faded", color: "error", className: "border-error bg-error text-error" },
 
       { variant: "card", className: "border-default-1000/20 bg-default-0" },
       { variant: "card", isHovered: true, className: "bg-default-100" },
@@ -141,3 +140,19 @@ export const useVariantAndColorStyles = () => {
     ],
   });
 };
+
+export const useHelperButtonStyles = () =>
+  tv({
+    base: [
+      "relative flex min-w-max items-center justify-center overflow-hidden whitespace-nowrap duration-300 outline-none",
+      "before:absolute before:inset-0 before:-z-10 before:bg-current before:duration-300 data-[pressed]:scale-90",
+      "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[focus-visible]:outline-offset-0 data-[focus-visible]:outline-current",
+    ],
+    variants: {
+      variant: {
+        soft: "before:opacity-10 data-[hovered]:before:opacity-20",
+        light: "before:opacity-0 data-[hovered]:before:opacity-10",
+      },
+    },
+    defaultVariants: { variant: "soft" },
+  });

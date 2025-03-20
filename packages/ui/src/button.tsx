@@ -6,7 +6,7 @@ import { radiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, RadiusProps, SizeProps, StyleProps, VariantProps } from "./types";
 import { Slot, Slottable } from "@radix-ui/react-slot";
 import { useObjectRef } from "@react-aria/utils";
-import React, { ForwardedRef, forwardRef } from "react";
+import React, { ForwardedRef, forwardRef, ReactNode } from "react";
 import { AriaButtonProps, HoverProps, mergeProps, useButton, useFocusRing, useHover } from "react-aria";
 import { tv } from "tailwind-variants";
 
@@ -39,6 +39,8 @@ interface ButtonProps extends AriaButtonProps, HoverProps, VariantProps, ColorPr
   isCompact?: boolean;
   isLoading?: boolean;
   asChild?: boolean;
+  spinnerPlacement?: "start" | "end" | "center";
+  spinner?: ReactNode;
 }
 
 // component
@@ -56,6 +58,8 @@ function _Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
     isLoading,
     isDisabled: disabled,
     isCompact,
+    spinnerPlacement = "center",
+    spinner = <Spinner />,
     asChild,
     children,
     className,
@@ -86,7 +90,7 @@ function _Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
         size,
         radius,
         isCompact,
-        isLoading,
+        isLoading: isLoading && spinnerPlacement === "center",
         isHovered,
         isPressed,
         isDisabled,
@@ -95,15 +99,15 @@ function _Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
       })}
       style={style}
     >
-      {isLoading && (
-        <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2">
-          <Spinner />
-        </div>
+      {isLoading && spinnerPlacement === "center" && (
+        <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2">{spinner}</div>
       )}
 
+      {isLoading && spinnerPlacement === "start" && spinner}
       {startContent}
-      <Slottable>{children}</Slottable>
+      {children && <Slottable>{children}</Slottable>}
       {endContent}
+      {isLoading && spinnerPlacement === "end" && spinner}
     </Component>
   );
 }

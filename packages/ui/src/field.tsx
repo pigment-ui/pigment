@@ -1,7 +1,7 @@
 "use client";
 
 import { useGlobalProps } from "./provider";
-import { isDisabledVariants, isFocusVisibleVariants, radiusVariants, smallRadiusVariants, useVariantAndColorStyles } from "./styles";
+import { radiusVariants, smallRadiusVariants, useHelperButtonStyles, useVariantAndColorStyles } from "./styles";
 import { ChildrenProps, ColorProps, RadiusProps, SizeProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { useObjectRef } from "@react-aria/utils";
 import { ValidationResult } from "@react-types/shared";
@@ -16,41 +16,33 @@ import { tv } from "tailwind-variants";
 const useFieldStyles = () =>
   tv({
     slots: {
-      base: "relative flex size-full flex-col",
-      label: "text-default cursor-default",
-      description: "text-default",
+      base: "text-default relative flex size-full",
+      label: "cursor-default",
+      description: "",
       errorMessage: "text-error",
+      wrapperWithMessage: "",
     },
     variants: {
       size: {
-        sm: { label: "pb-0.5 text-xs", description: "pt-0.5 text-xs", errorMessage: "pt-0.5 text-xs" },
-        md: { label: "pb-1 text-sm", description: "pt-1 text-sm", errorMessage: "pt-1 text-sm" },
-        lg: { label: "pb-1.5 text-base", description: "pt-1.5 text-base", errorMessage: "pt-1.5 text-base" },
+        sm: { label: "pr-0.5 pb-0.5 text-xs", description: "pt-0.5 text-xs", errorMessage: "pt-0.5 text-xs" },
+        md: { label: "pr-1 pb-1 text-sm", description: "pt-1 text-sm", errorMessage: "pt-1 text-sm" },
+        lg: { label: "pr-1.5 pb-1.5 text-base", description: "pt-1.5 text-base", errorMessage: "pt-1.5 text-base" },
+      },
+      isHorizontal: {
+        true: { base: "items-center", wrapperWithMessage: "flex-1" },
+        false: "flex-col",
+      },
+      isInverted: {
+        true: "text-inverted",
       },
     },
   });
 
 type FieldStylesReturnType = ReturnType<ReturnType<typeof useFieldStyles>>;
 
-const useFieldButtonStyles = () =>
-  tv({
-    base: [
-      "relative flex min-w-max items-center justify-center overflow-hidden whitespace-nowrap outline-none duration-300",
-      "before:absolute before:inset-0 before:-z-10 before:bg-current before:duration-300 data-[pressed]:scale-90",
-      "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50 data-[focus-visible]:outline-offset-0 data-[focus-visible]:outline-current",
-    ],
-    variants: {
-      variant: {
-        soft: "before:opacity-10 data-[hovered]:before:opacity-20",
-        light: "before:opacity-0 data-[hovered]:before:opacity-10",
-      },
-    },
-    defaultVariants: { variant: "soft" },
-  });
-
 export const useFieldSegmentStyles = () =>
   tv({
-    base: useFieldButtonStyles()({ variant: "light", className: ["p-1", smallRadiusVariants.md] }),
+    base: useHelperButtonStyles()({ variant: "light", className: ["p-1", smallRadiusVariants.md] }),
     variants: { isPlaceholder: { true: "opacity-50 data-[focused]:opacity-100 data-[focused]:before:opacity-20" } },
   });
 
@@ -62,7 +54,7 @@ const useFieldInputStyles = () =>
       wrapper: "flex w-full flex-1 flex-col",
       self: "flex w-full flex-1 items-center bg-transparent outline-none placeholder:text-inherit placeholder:opacity-50 data-[disabled]:pointer-events-none [&[aria-disabled]]:pointer-events-none",
       content: "pointer-events-none shrink-0",
-      button: useFieldButtonStyles()({ className: "px-1.5" }),
+      button: useHelperButtonStyles()({ className: "px-1.5" }),
     },
     variants: {
       size: {
@@ -77,21 +69,7 @@ const useFieldInputStyles = () =>
         full: { base: radiusVariants.full, button: smallRadiusVariants.full },
         none: { base: radiusVariants.none, button: smallRadiusVariants.none },
       },
-      isAutoHeight: { true: { self: "h-auto" } },
-      isHovered: { true: "" },
-      isFocusWithin: { true: "ring-2" },
-      isFocusVisible: isFocusVisibleVariants,
-      isDisabled: isDisabledVariants,
     },
-    compoundVariants: [
-      { color: "default", isFocusWithin: true, className: { base: "ring-default" } },
-      { color: "primary", isFocusWithin: true, className: { base: "ring-primary" } },
-      { color: "secondary", isFocusWithin: true, className: { base: "ring-secondary" } },
-      { color: "info", isFocusWithin: true, className: { base: "ring-info" } },
-      { color: "success", isFocusWithin: true, className: { base: "ring-success" } },
-      { color: "warning", isFocusWithin: true, className: { base: "ring-warning" } },
-      { color: "error", isFocusWithin: true, className: { base: "ring-error" } },
-    ],
   });
 
 type FieldInputStylesReturnType = ReturnType<ReturnType<typeof useFieldInputStyles>>;
@@ -104,11 +82,12 @@ interface FieldBaseProps extends SizeProps {
   errorMessage?: ReactNode | ((validationResult: ValidationResult) => ReactNode);
   isRequired?: boolean;
   isInvalid?: boolean;
+  isHorizontal?: boolean;
   fieldClassNames?: StyleSlotsToStyleProps<FieldStylesReturnType>["classNames"];
   fieldStyles?: StyleSlotsToStyleProps<FieldStylesReturnType>["styles"];
 }
 
-interface FieldProps extends FieldBaseProps, ChildrenProps {}
+interface FieldProps extends FieldBaseProps, ChildrenProps, ColorProps {}
 
 interface FieldInputBaseProps extends VariantProps, ColorProps, SizeProps, RadiusProps, FieldBaseProps {
   isLabelInside?: boolean;
@@ -119,7 +98,6 @@ interface FieldInputBaseProps extends VariantProps, ColorProps, SizeProps, Radiu
 }
 
 interface FieldInputProps extends FieldInputBaseProps {
-  isAutoHeight?: boolean;
   isFocusWithin?: boolean;
   isInvalid?: boolean;
   isDisabled?: boolean;
@@ -133,9 +111,20 @@ interface FieldInputProps extends FieldInputBaseProps {
 function _Field(props: FieldProps, ref: ForwardedRef<HTMLDivElement>) {
   const globalProps = useGlobalProps("Field", props, { size: "md" });
 
-  const { label, description, errorMessage, isRequired, size, children, fieldClassNames, fieldStyles: fieldStylesFromProps } = globalProps;
+  const {
+    label,
+    description,
+    errorMessage,
+    isHorizontal = false,
+    isRequired,
+    size,
+    color,
+    children,
+    fieldClassNames,
+    fieldStyles: fieldStylesFromProps,
+  } = globalProps;
 
-  const styleSlots = useFieldStyles()({ size });
+  const styleSlots = useFieldStyles()({ size, isInverted: color === "inverted", isHorizontal });
 
   return (
     <div ref={ref} className={styleSlots.base({ className: fieldClassNames?.base })} style={fieldStylesFromProps?.base}>
@@ -146,21 +135,26 @@ function _Field(props: FieldProps, ref: ForwardedRef<HTMLDivElement>) {
         </Label>
       )}
 
-      {children}
+      <div
+        className={styleSlots.wrapperWithMessage({ className: fieldClassNames?.wrapperWithMessage })}
+        style={fieldStylesFromProps?.wrapperWithMessage}
+      >
+        {children}
 
-      {description && (
-        <Text
-          slot="description"
-          className={styleSlots.description({ className: fieldClassNames?.description })}
-          style={fieldStylesFromProps?.description}
-        >
-          {description}
-        </Text>
-      )}
+        {description && (
+          <Text
+            slot="description"
+            className={styleSlots.description({ className: fieldClassNames?.description })}
+            style={fieldStylesFromProps?.description}
+          >
+            {description}
+          </Text>
+        )}
 
-      <FieldError className={styleSlots.errorMessage({ className: fieldClassNames?.errorMessage })} style={fieldStylesFromProps?.errorMessage}>
-        {errorMessage}
-      </FieldError>
+        <FieldError className={styleSlots.errorMessage({ className: fieldClassNames?.errorMessage })} style={fieldStylesFromProps?.errorMessage}>
+          {errorMessage}
+        </FieldError>
+      </div>
     </div>
   );
 }
@@ -174,6 +168,7 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
     size: "md",
     radius: props.size || "md",
     isLabelInside: true,
+    isHorizontal: false,
   });
 
   const {
@@ -183,9 +178,8 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
     radius,
     isInvalid,
     isDisabled,
-    isAutoHeight,
-    isFocusWithin: isFocusWithinProps,
     isLabelInside,
+    isHorizontal,
     startContent,
     endContent,
     startButton,
@@ -195,13 +189,7 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
     fieldInputStyles,
   } = globalProps;
 
-  const styleSlots = useFieldInputStyles()({
-    variant,
-    color: isInvalid ? "error" : color,
-    size,
-    radius,
-    isAutoHeight: isAutoHeight || isLabelInside,
-  });
+  const styleSlots = useFieldInputStyles()({ variant, color: isInvalid ? "error" : color, size, radius });
 
   // @ts-ignore
   const selfRef = useObjectRef<HTMLElement>(children?.ref);
@@ -214,8 +202,8 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
         isDisabled={isDisabled}
         className={({ isHovered, isDisabled, isFocusVisible, isFocusWithin }) =>
           styleSlots.base({
-            isHovered: isHovered || isFocusWithin || isFocusWithinProps,
-            isFocusWithin: isFocusWithin || isFocusWithinProps,
+            isHovered: isHovered || isFocusWithin,
+            isFocusWithin,
             isDisabled,
             isFocusVisible,
             className: fieldInputClassNames?.base,
@@ -242,7 +230,7 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
         <div className={styleSlots.wrapper({ className: fieldInputClassNames?.wrapper })} style={fieldInputStyles?.wrapper}>
           {isLabelInside && globalProps.label && (
             <Label
-              className={useFieldStyles()({ size }).label({
+              className={useFieldStyles()({ size, isHorizontal }).label({
                 className: twMerge("pointer-events-none text-inherit", globalProps.fieldClassNames?.label),
               })}
               style={globalProps.fieldStyles?.label}
@@ -279,5 +267,5 @@ const FieldInput = forwardRef(_FieldInput);
 
 // exports
 
-export { Field, FieldInput, useFieldStyles, useFieldInputStyles, useFieldButtonStyles };
+export { Field, FieldInput, useFieldStyles, useFieldInputStyles };
 export type { FieldBaseProps, FieldInputBaseProps };

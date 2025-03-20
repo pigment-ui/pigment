@@ -1,8 +1,7 @@
 "use client";
 
-import { useFieldButtonStyles } from "./field";
 import { useGlobalProps } from "./provider";
-import { radiusVariants, useVariantAndColorStyles } from "./styles";
+import { radiusVariants, useHelperButtonStyles, useVariantAndColorStyles } from "./styles";
 import { ColorProps, SizeProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { CircleAlertIcon, CircleCheckIcon, CircleXIcon, InfoIcon, XIcon } from "lucide-react";
 import React, { ForwardedRef, forwardRef, HTMLAttributes, ReactNode } from "react";
@@ -22,7 +21,7 @@ const useAlertStyles = () =>
       title: "font-bold",
       description: "",
       icon: "",
-      closeButton: useFieldButtonStyles()({ variant: "light", className: "absolute right-2 top-2 z-10 rounded-full p-2" }),
+      closeButton: useHelperButtonStyles()({ variant: "light", className: "absolute top-2 right-2 z-10 rounded-full p-2" }),
     },
     variants: {
       size: {

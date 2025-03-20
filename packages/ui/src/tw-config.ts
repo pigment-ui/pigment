@@ -1,8 +1,7 @@
-import type { Config } from "tailwindcss";
 import twAnimation from "tailwindcss-animate";
 
 // We want each package to be responsible for its own content.
-export const twConfig: Config = {
+export const twConfig: any = {
   content: [],
   theme: {
     extend: {

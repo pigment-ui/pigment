@@ -1,7 +1,7 @@
 "use client";
 
 import { useGlobalProps } from "./provider";
-import { isDisabledVariants, isFocusVisibleVariants } from "./styles";
+import { useVariantAndColorStyles } from "./styles";
 import { ColorProps, SizeProps, StyleSlotsToStyleProps } from "./types";
 import React, { ForwardedRef, forwardRef } from "react";
 import { mergeProps } from "react-aria";
@@ -13,35 +13,28 @@ import { tv } from "tailwind-variants";
 
 const useSwitchStyles = () =>
   tv({
+    extend: useVariantAndColorStyles(),
     slots: {
-      base: "text-default flex cursor-pointer items-center",
-      self: "relative flex items-center rounded-full outline-none duration-300",
-      thumb: "absolute left-1 rounded-full duration-300",
-      content: "",
+      base: "relative flex items-center rounded-full transition duration-300 outline-none",
+      wrapper: "flex cursor-pointer items-center",
+      thumb: "absolute left-1 rounded-full bg-current duration-300",
+      content: "text-default",
     },
     variants: {
-      color: {
-        default: { self: "bg-default", thumb: "bg-default-foreground" },
-        inverted: { self: "bg-inverted", thumb: "bg-inverted-foreground" },
-        primary: { self: "bg-primary", thumb: "bg-primary-foreground" },
-        secondary: { self: "bg-secondary", thumb: "bg-secondary-foreground" },
-        info: { self: "bg-info", thumb: "bg-info-foreground" },
-        success: { self: "bg-success", thumb: "bg-success-foreground" },
-        warning: { self: "bg-warning", thumb: "bg-warning-foreground" },
-        error: { self: "bg-error", thumb: "bg-error-foreground" },
-      },
       size: {
-        sm: { base: "gap-x-2", self: "h-6 w-10", thumb: "size-4", content: "text-sm" },
-        md: { base: "gap-x-2.5", self: "h-8 w-16", thumb: "size-6", content: "text-base" },
-        lg: { base: "gap-x-3", self: "h-10 w-20", thumb: "size-8", content: "text-lg" },
+        sm: { wrapper: "gap-x-2", base: "h-6 w-10", thumb: "size-4", content: "text-sm" },
+        md: { wrapper: "gap-x-2.5", base: "h-8 w-16", thumb: "size-6", content: "text-base" },
+        lg: { wrapper: "gap-x-3", base: "h-10 w-20", thumb: "size-8", content: "text-lg" },
       },
+      isSelected: { true: "" },
       isHovered: { true: "" },
-      isPressed: { true: { self: "scale-95" } },
-      isSelected: { false: { self: "bg-default bg-opacity-40", thumb: "bg-default-foreground" }, true: { self: "bg-opacity-100" } },
-      isFocusVisible: { true: { self: isFocusVisibleVariants.true } },
-      isDisabled: isDisabledVariants,
     },
     compoundVariants: [
+      { color: "inverted", className: { content: "text-inverted" } },
+
+      { isSelected: false, isHovered: false, className: { base: "bg-opacity-40" } },
+      { isSelected: false, isHovered: true, className: { base: "bg-opacity-50" } },
+
       { isSelected: true, size: "sm", className: { thumb: "translate-x-4" } },
       { isSelected: true, size: "md", className: { thumb: "translate-x-8" } },
       { isSelected: true, size: "lg", className: { thumb: "translate-x-10" } },
@@ -51,8 +44,6 @@ const useSwitchStyles = () =>
       { isPressed: true, size: "sm", className: { thumb: "w-5" } },
       { isPressed: true, size: "md", className: { thumb: "w-7" } },
       { isPressed: true, size: "lg", className: { thumb: "w-9" } },
-      { isSelected: false, isHovered: true, className: { self: "bg-opacity-50" } },
-      { isSelected: true, isHovered: true, className: { self: "bg-opacity-90" } },
     ],
   });
 
@@ -69,20 +60,30 @@ function _Switch(props: SwitchProps, ref: ForwardedRef<HTMLLabelElement>) {
 
   const { color, size, classNames, styles } = globalProps;
 
-  const styleSlots = useSwitchStyles()({ color, size });
+  const styleSlots = useSwitchStyles()({ color, size, variant: "solid" });
 
   return (
     <AriaSwitch
       ref={ref}
       {...globalProps}
       className={composeRenderProps(globalProps.className, (className, { isDisabled }) =>
-        styleSlots.base({ isDisabled, className: twMerge(classNames?.base, className) }),
+        styleSlots.wrapper({ isDisabled, className: twMerge(classNames?.wrapper, className) }),
       )}
-      style={composeRenderProps(globalProps.style, (style) => mergeProps(styles?.base, style))}
+      style={composeRenderProps(globalProps.style, (style) => mergeProps(styles?.wrapper, style))}
     >
       {composeRenderProps(globalProps.children, (children, { isHovered, isPressed, isSelected, isFocusVisible }) => (
         <>
-          <div className={styleSlots.self({ isHovered, isPressed, isSelected, isFocusVisible, className: classNames?.self })} style={styles?.self}>
+          <div
+            className={styleSlots.base({
+              color: isSelected ? color : color === "inverted" ? "inverted" : "default",
+              isHovered,
+              isPressed,
+              isSelected,
+              isFocusVisible,
+              className: classNames?.base,
+            })}
+            style={styles?.base}
+          >
             <div className={styleSlots.thumb({ isSelected, isPressed, className: classNames?.thumb })} style={styles?.thumb} />
           </div>
           <div className={styleSlots.content({ className: classNames?.content })} style={styles?.content}>

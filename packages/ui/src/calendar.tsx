@@ -1,9 +1,9 @@
 "use client";
 
 import { useCardStyles } from "./card";
-import { Field, FieldBaseProps, useFieldButtonStyles } from "./field";
+import { Field, FieldBaseProps } from "./field";
 import { useGlobalProps } from "./provider";
-import { smallRadiusVariants, useVariantAndColorStyles } from "./styles";
+import { smallRadiusVariants, useHelperButtonStyles, useVariantAndColorStyles } from "./styles";
 import { ColorProps, RadiusProps, StyleSlotsToStyleProps } from "./types";
 import { FormValidationProps, useFormValidationState } from "@react-stately/form";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
@@ -36,7 +36,7 @@ const useCalendarStyles = () =>
       calendarWrapper: "text-default w-fit max-w-full overflow-auto p-4",
       header: "flex items-center justify-between gap-4",
       heading: "font-medium",
-      button: useFieldButtonStyles()(),
+      button: useHelperButtonStyles()(),
       gridWrapper: "flex gap-4",
       grid: "size-fit border-separate border-spacing-x-0 border-spacing-y-1 [&_td]:p-0 [&_th]:p-0 [&_th]:font-light",
     },
@@ -65,7 +65,17 @@ const useCalendarStyles = () =>
       asCard: { true: { calendarWrapper: useCardStyles()().base() } },
       isUnavailable: { true: { base: "line-through" } },
       isOutsideMonth: { true: { base: "hidden" } },
+      isSelectedRange: { true: "" },
+      isSelectionStart: { true: "" },
+      isSelectionEnd: { true: "" },
+      isSelectedFirstDay: { true: "!rounded-r-none" },
+      isSelectedLastDay: { true: "!rounded-l-none" },
     },
+    compoundVariants: [
+      { isSelectionStart: true, isSelectionEnd: false, className: "!rounded-r-none" },
+      { isSelectionStart: false, isSelectionEnd: true, className: "!rounded-l-none" },
+      { isSelectedRange: true, isSelectedFirstDay: false, isSelectedLastDay: false, className: "!rounded-none" },
+    ],
   });
 
 type CalendarStylesReturnType = ReturnType<ReturnType<typeof useCalendarStyles>>;

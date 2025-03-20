@@ -2,7 +2,7 @@
 
 import { Field, FieldBaseProps } from "./field";
 import { useGlobalProps } from "./provider";
-import { isDisabledVariants, isFocusVisibleVariants, smallRadiusVariants, useVariantAndColorStyles } from "./styles";
+import { isDisabledVariants, smallRadiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, RadiusProps, SizeProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { createSlots } from "./utils";
 import { CheckIcon, MinusIcon } from "lucide-react";
@@ -55,6 +55,7 @@ const useCheckboxStyles = () =>
       isPressed: { true: "scale-90" },
       radius: smallRadiusVariants,
     },
+    compoundVariants: [{ color: "inverted", className: { wrapper: "text-inverted" } }],
   });
 
 type CheckboxStylesReturnType = ReturnType<ReturnType<typeof useCheckboxStyles>>;
@@ -119,7 +120,7 @@ function _Checkbox(props: CheckboxProps, ref: ForwardedRef<HTMLLabelElement>) {
 
   const { variant, color, size, radius, classNames, itemClassNames, styles, itemStyles } = globalProps;
 
-  const styleSlots = useCheckboxStyles()({ size, radius });
+  const styleSlots = useCheckboxStyles()({ size, color, radius });
 
   return (
     <AriaCheckbox
@@ -134,7 +135,7 @@ function _Checkbox(props: CheckboxProps, ref: ForwardedRef<HTMLLabelElement>) {
         <>
           <div
             className={styleSlots.base({
-              variant: isSelected || isIndeterminate ? variant : "outlined",
+              variant: isSelected || isIndeterminate ? variant : "bordered",
               color: isInvalid ? "error" : color,
               isHovered,
               isPressed,
@@ -162,7 +163,7 @@ function _CheckboxLink(props: ComponentPropsWithoutRef<typeof Link>, ref: Forwar
       target="_blank"
       {...props}
       className={composeRenderProps(props.className, (className, { isHovered, isFocusVisible }) =>
-        twMerge("underline outline-none", isHovered && "decoration-double", isFocusVisible && isFocusVisibleVariants.true, className),
+        twMerge("underline outline-none focus-visible:outline focus-visible:outline-inherit", isHovered && "decoration-double", className),
       )}
     />
   );

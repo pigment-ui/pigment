@@ -7,7 +7,7 @@ import { useGlobalProps } from "./provider";
 import { ForwardRefType, StyleProps } from "./types";
 import { createSlots } from "./utils";
 import { CheckIcon } from "lucide-react";
-import React, { ComponentPropsWithoutRef, ForwardedRef, forwardRef, ReactNode } from "react";
+import React, { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from "react";
 import { mergeProps } from "react-aria";
 import {
   Collection,
@@ -40,9 +40,7 @@ const useMenuSectionStyles = useListBoxSectionStyles;
 interface MenuProps<T extends object>
   extends Omit<AriaMenuProps<T>, keyof StyleProps>,
     Omit<ComponentPropsWithoutRef<typeof ListBox<T>>, keyof AriaMenuProps<T> | "asCard">,
-    Omit<ComponentPropsWithoutRef<typeof Popover>, keyof Omit<AriaMenuProps<T>, keyof StyleProps>> {
-  topContent?: ReactNode;
-}
+    Omit<ComponentPropsWithoutRef<typeof Popover>, keyof Omit<AriaMenuProps<T>, keyof StyleProps>> {}
 
 interface MenuItemProps extends AriaMenuItemProps, Omit<ComponentPropsWithoutRef<typeof ListBoxItem>, keyof AriaMenuItemProps> {}
 

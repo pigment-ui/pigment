@@ -22,7 +22,7 @@ function _TextArea(props: TextAreaProps, ref: ForwardedRef<HTMLTextAreaElement>)
   return (
     <TextField {...globalProps}>
       {(renderProps) => (
-        <FieldInput {...renderProps} {...globalProps} isAutoHeight>
+        <FieldInput {...renderProps} {...globalProps}>
           <AriaTextArea ref={ref} rows={rows} className={!isResizable ? "[resize:none;]" : undefined} />
         </FieldInput>
       )}
