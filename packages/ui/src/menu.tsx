@@ -4,10 +4,11 @@ import { useCardStyles } from "./card";
 import { ListBox, ListBoxItem, ListBoxSection, ListBoxSlotsType, useListBoxItemStyles, useListBoxSectionStyles } from "./list-box";
 import { Popover } from "./popover";
 import { useGlobalProps } from "./provider";
-import { ForwardRefType, StyleProps } from "./types";
+import { useSelectStyles } from "./select";
+import { ForwardRefType, StyleProps, StyleSlotsToStyleProps } from "./types";
 import { createSlots } from "./utils";
 import { CheckIcon } from "lucide-react";
-import React, { ComponentPropsWithoutRef, ForwardedRef, forwardRef } from "react";
+import React, { ComponentPropsWithoutRef, ForwardedRef, forwardRef, ReactNode } from "react";
 import { mergeProps } from "react-aria";
 import {
   Collection,
@@ -28,8 +29,11 @@ import { tv } from "tailwind-variants";
 
 const useMenuStyles = () =>
   tv({
+    extend: useSelectStyles(),
     base: useCardStyles()().base({ className: "p-2" }),
   });
+
+type MenuStylesReturnType = ReturnType<ReturnType<typeof useMenuStyles>>;
 
 const useMenuItemStyles = useListBoxItemStyles;
 
@@ -40,7 +44,10 @@ const useMenuSectionStyles = useListBoxSectionStyles;
 interface MenuProps<T extends object>
   extends Omit<AriaMenuProps<T>, keyof StyleProps>,
     Omit<ComponentPropsWithoutRef<typeof ListBox<T>>, keyof AriaMenuProps<T> | "asCard">,
-    Omit<ComponentPropsWithoutRef<typeof Popover>, keyof Omit<AriaMenuProps<T>, keyof StyleProps>> {}
+    Omit<ComponentPropsWithoutRef<typeof Popover>, keyof Omit<AriaMenuProps<T>, keyof StyleProps>>,
+    StyleSlotsToStyleProps<MenuStylesReturnType> {
+  topContent?: ReactNode;
+}
 
 interface MenuItemProps extends AriaMenuItemProps, Omit<ComponentPropsWithoutRef<typeof ListBoxItem>, keyof AriaMenuItemProps> {}
 
@@ -57,7 +64,9 @@ const [MenuSlotsProvider, useMenuSlots] = createSlots<ListBoxSlotsType<object>>(
 function _Menu<T extends object>(props: MenuProps<T>, ref: ForwardedRef<HTMLDivElement>) {
   const globalProps = useGlobalProps("Menu", props, { variant: "soft", color: "default", size: "md" });
 
-  const { variant, color, size, itemClassNames, itemStyles, sectionClassNames, sectionStyles } = globalProps;
+  const { variant, color, size, itemClassNames, itemStyles, sectionClassNames, sectionStyles, topContent, classNames, styles } = globalProps;
+
+  const styleSlots = useMenuStyles()({ hasTopContent: !!topContent });
 
   return (
     <MenuSlotsProvider value={{ variant, color, size, itemClassNames, itemStyles, sectionClassNames, sectionStyles }}>
@@ -65,9 +74,17 @@ function _Menu<T extends object>(props: MenuProps<T>, ref: ForwardedRef<HTMLDivE
         maxHeight={300}
         hideArrow
         {...globalProps}
-        className={composeRenderProps(globalProps.className, (className) => useMenuStyles()({ className }))}
+        className={composeRenderProps(globalProps.className, (className) =>
+          styleSlots.popover({ className: twMerge(classNames?.popover, className) }),
+        )}
+        style={composeRenderProps(globalProps.style, (style) => mergeProps(styles?.popover, style))}
       >
-        <AriaMenu ref={ref} {...globalProps} className="outline-none" style={{}} />
+        {topContent && (
+          <div className={styleSlots.topContent({ className: classNames?.topContent })} style={styles?.topContent}>
+            {topContent}
+          </div>
+        )}
+        <AriaMenu ref={ref} {...globalProps} className={styleSlots.list({ className: classNames?.list })} style={styles?.list} />
       </Popover>
     </MenuSlotsProvider>
   );
