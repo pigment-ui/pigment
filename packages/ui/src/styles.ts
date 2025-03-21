@@ -1,3 +1,4 @@
+import { useGlobalSlots } from "./provider";
 import { tv } from "tailwind-variants";
 
 export const isDisabledVariants = { true: "opacity-50 cursor-not-allowed" } as const;
@@ -9,10 +10,10 @@ export const radiusVariants = { sm: "rounded-lg", md: "rounded-xl", lg: "rounded
 export const smallRadiusVariants = { sm: "rounded-md", md: "rounded-lg", lg: "rounded-xl", full: "rounded-full", none: "rounded-none" } as const;
 
 export const useVariantAndColorStyles = () => {
-  // const { extendVariantAndColorStyles = {} } = useGlobalSlots();
+  const { extendVariantAndColorStyles = {} } = useGlobalSlots();
 
   return tv({
-    // extend: extendVariantAndColorStyles,
+    extend: extendVariantAndColorStyles,
     base: "relative z-0 flex items-center justify-center overflow-hidden border bg-clip-padding duration-300 outline-none",
     variants: {
       variant: {
@@ -25,6 +26,7 @@ export const useVariantAndColorStyles = () => {
         card: "",
         gradient: "",
         animated: "",
+        shadow: "",
       },
       color: {
         default: "",
@@ -154,7 +156,7 @@ export const useVariantAndColorStyles = () => {
       {
         variant: "animated",
         className:
-          "border-transparent before:absolute before:inset-x-0 before:-z-10 before:aspect-square before:scale-2 before:animate-spin before:bg-gradient-to-b before:duration-300 before:[animation-duration:5s;]",
+          "border-transparent before:absolute before:inset-x-0 before:-z-10 before:aspect-square before:animate-spin before:bg-gradient-to-b before:duration-300 before:[animation-duration:5s;]",
       },
       { variant: "animated", isHovered: true, className: "beofre:opacity-0" },
       { variant: "animated", color: "default", className: "before:from-default/10 before:to-default/20 text-default" },

@@ -6,7 +6,7 @@ import * as ui from "pigment-ui";
 import { useState } from "react";
 import { LiveError, LivePreview, LiveProvider } from "react-live";
 
-function filterPreviewCode(code: string) {
+export function filterPreviewCode(code: string) {
   return code
     .split("\n")
     .filter((line) => !line.includes("import"))
@@ -25,11 +25,11 @@ export function ComponentPreview({ slug }: { slug: string }) {
     <div>
       <div>
         <LiveProvider code={previewCode} scope={{ ...ui, ...scope }}>
-          <div className="[&>div]:grid [&>div]:min-h-64 [&>div]:place-items-center [&>div]:overflow-auto [&>div]:rounded-t-xl [&>div]:border [&>div]:border-b-0 [&>div]:border-default-1000/20 [&>div]:bg-default-0/50 [&>div]:p-8 [&>div]:backdrop-blur-xl">
+          <div className="[&>div]:border-default-1000/20 [&>div]:bg-default-0/50 [&>div]:grid [&>div]:min-h-64 [&>div]:place-items-center [&>div]:overflow-auto [&>div]:rounded-t-xl [&>div]:border [&>div]:border-b-0 [&>div]:p-8 [&>div]:backdrop-blur-xl">
             <LivePreview />
           </div>
           <div>
-            <LiveError className="overflow-auto border border-b-0 border-error-700/20 bg-error-100/50 p-4 text-sm text-error-500 backdrop-blur-xl" />
+            <LiveError className="border-error-700/20 bg-error-100/50 text-error-500 overflow-auto border border-b-0 p-4 text-sm backdrop-blur-xl" />
           </div>
           <CodeBlock code={code} setCode={(value) => setPreviewCode(filterPreviewCode(value))} language="tsx" canEdit className="rounded-t-none" />
         </LiveProvider>

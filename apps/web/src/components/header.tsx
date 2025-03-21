@@ -44,13 +44,13 @@ export function Header() {
   return (
     <header className="border-default-1000/20 bg-default-0/75 sticky top-0 z-50 h-16 w-full border-b backdrop-blur-lg">
       <div className="container flex h-full items-center">
-        <Button asChild variant={segment === null ? "soft" : "light"} isCompact>
+        <Button asChild variant={segment === null ? "soft" : "light"} className="px-0">
           <NextLink href="/" prefetch>
             <img src="/logo.png" alt="logo" className="size-16 invert dark:invert-0" />
           </NextLink>
         </Button>
 
-        <div className="flex flex-1 justify-between gap-x-2 pr-2 pl-8 max-sm:hidden">{routes}</div>
+        <div className="flex flex-1 justify-end gap-x-2 pr-2 pl-8 max-sm:hidden">{routes}</div>
 
         <div className="flex gap-x-2 max-sm:ml-auto">
           <Button aria-label="github repo" asChild isCompact variant="faded">

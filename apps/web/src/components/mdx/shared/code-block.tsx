@@ -1,12 +1,66 @@
 "use client";
 
 import { CopyCheckIcon, CopyIcon } from "lucide-react";
-import { useTheme } from "next-themes";
-import { Button } from "pigment-ui";
-import { themes } from "prism-react-renderer";
+import { Button, Spinner } from "pigment-ui";
 import { useEffect, useState } from "react";
 import { LiveEditor } from "react-live";
 import { twMerge } from "tailwind-merge";
+
+const customTheme = {
+  plain: {
+    color: "oklch(var(--pigment-default-1000))",
+    backgroundColor: "oklch(var(--pigment-default-0))",
+  },
+  styles: [
+    // Keywords, control flow, and operators (Darker shade)
+    {
+      types: ["keyword", "control-flow", "operator"],
+      style: { color: "oklch(var(--pigment-default-900))" }, // Darker for structure
+    },
+
+    // Functions and methods (Medium shade)
+    {
+      types: ["function", "function-call", "method"],
+      style: { color: "oklch(var(--pigment-default-700))" }, // Medium for functions
+    },
+
+    // Classes and types (Darker shade)
+    {
+      types: ["class-name", "type"],
+      style: { color: "oklch(var(--pigment-default-900))" }, // Darker for classes/types
+    },
+
+    // Variables and properties (Medium shade)
+    {
+      types: ["variable", "property"],
+      style: { color: "oklch(var(--pigment-default-600))" }, // Medium for variables
+    },
+
+    // Imports, exports, and modules (Lighter shade)
+    {
+      types: ["import", "export", "module"],
+      style: { color: "oklch(var(--pigment-default-400))" }, // Lighter for imports/exports
+    },
+
+    // Comments (Lightest shade with italics)
+    {
+      types: ["comment"],
+      style: { color: "oklch(var(--pigment-default-300))" }, // Lightest for comments
+    },
+
+    // Strings, numbers, and literals (Medium shade)
+    {
+      types: ["string", "number", "boolean", "null", "undefined"],
+      style: { color: "oklch(var(--pigment-default-500))" }, // Medium for literals
+    },
+
+    // Punctuation and special syntax (Darker shade)
+    {
+      types: ["punctuation", "regex", "selector", "at-rule", "important"],
+      style: { color: "oklch(var(--pigment-default-800))" }, // Darker for special syntax
+    },
+  ],
+};
 
 export function CodeBlock({
   code: propsCode,
@@ -23,6 +77,10 @@ export function CodeBlock({
 }) {
   const [code, setCode] = useState<string>(propsCode.trim());
 
+  useEffect(() => {
+    setCode(propsCode.trim());
+  }, [propsCode]);
+
   const [copyTrigger, setCopyTrigger] = useState<number>(0);
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
@@ -30,8 +88,6 @@ export function CodeBlock({
     const clickTimeout = setTimeout(() => setIsCopied(false), 1000);
     return () => clearTimeout(clickTimeout);
   }, [copyTrigger]);
-
-  const { resolvedTheme } = useTheme();
 
   const [mounted, setMounted] = useState(false);
 
@@ -41,9 +97,15 @@ export function CodeBlock({
 
   return (
     <div className="group relative">
+      {!mounted && (
+        <div className="absolute top-1/2 left-1/2 -translate-x-8 -translate-y-8">
+          <Spinner className="size-16" />
+        </div>
+      )}
+
       <div
         className={twMerge(
-          "scrollbar-show-on-hover max-h-96 w-full overflow-auto rounded-xl border border-default-1000/20 bg-default-0 font-mono text-sm focus-within:ring-2 focus-within:ring-default-1000",
+          "scrollbar-show-on-hover border-default-1000/20 bg-default-0 focus-within:ring-default-1000 max-h-96 w-full overflow-auto rounded-xl border font-mono text-sm duration-300 focus-within:ring-2",
           className,
         )}
       >
@@ -56,10 +118,10 @@ export function CodeBlock({
           language={language ?? ""}
           disabled={!canEdit}
           tabMode="focus"
-          theme={mounted ? (resolvedTheme === "light" ? themes.oneLight : themes.oneDark) : undefined}
+          theme={mounted ? customTheme : undefined}
           className={twMerge(
-            "w-fit min-w-full [&>pre]:!bg-transparent [&>pre]:!p-4",
-            mounted ? canEdit && "[&_pre]:!whitespace-nowrap" : "[&_*]:!text-transparent",
+            "w-fit min-w-full duration-300 [&>pre]:!bg-transparent [&>pre]:!p-4",
+            mounted ? canEdit && "[&_pre]:!whitespace-nowrap" : "blur-lg [&_*]:!text-transparent",
           )}
         />
       </div>
@@ -68,7 +130,7 @@ export function CodeBlock({
         isCompact
         variant="light"
         size="sm"
-        className="absolute right-2.5 top-2.5 hidden backdrop-blur-lg group-hover:block"
+        className="absolute top-2.5 right-2.5 hidden backdrop-blur-lg group-hover:block"
         onPress={() =>
           navigator.clipboard
             .writeText(code)
