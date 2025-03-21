@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { smallRadiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, RadiusProps, SizeProps, VariantProps } from "./types";
 import React, { ForwardedRef, forwardRef, HTMLAttributes } from "react";
@@ -8,9 +8,9 @@ import { tv } from "tailwind-variants";
 
 // styles
 
-const useChipStyles = () =>
+const useChipStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     base: "min-w-max whitespace-nowrap",
     variants: {
       size: {
@@ -41,8 +41,10 @@ function _Chip(props: ChipProps, ref: ForwardedRef<HTMLDivElement>) {
 
   const { variant, color, size, radius, isCompact, startContent, endContent, className, style, children, ...restProps } = globalProps;
 
+  const globalStyles = useGlobalStyles();
+
   return (
-    <div ref={ref} {...restProps} className={useChipStyles()({ variant, color, size, radius, isCompact, className })} style={style}>
+    <div ref={ref} {...restProps} className={useChipStyles(globalStyles)({ variant, color, size, radius, isCompact, className })} style={style}>
       {startContent}
       {children}
       {endContent}

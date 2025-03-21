@@ -1,7 +1,7 @@
 "use client";
 
 import { Field, FieldBaseProps } from "./field";
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { radiusVariants, useHelperButtonStyles, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, ForwardRefType, RadiusProps, StyleSlotsToStyleProps, VariantProps, Variants } from "./types";
 import { createSlots } from "./utils";
@@ -31,9 +31,9 @@ const useTagGroupStyles = () =>
     },
   });
 
-const useTagStyles = () =>
+const useTagStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     base: "",
     slots: {
       removeButton: useHelperButtonStyles()({ variant: "light", className: "rounded-full p-1 transition-transform" }),
@@ -108,7 +108,9 @@ function _Tag(props: TagProps, ref: ForwardedRef<HTMLDivElement>) {
   const { variant, variantActive, color, size, radius, startContent, endContent, classNames, itemClassNames, styles, itemStyles } =
     useTagGroupSlots(props);
 
-  const styleSlots = useTagStyles()({ variant, color, size, radius });
+  const globalStyles = useGlobalStyles();
+
+  const styleSlots = useTagStyles(globalStyles)({ variant, color, size, radius });
 
   return (
     <AriaTag

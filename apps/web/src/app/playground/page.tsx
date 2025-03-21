@@ -3,54 +3,13 @@
 import { useAppSlots } from "#/app/providers";
 import { CodeBlock } from "#/components/mdx/shared";
 import { capitalize } from "inflection";
-import { Button, TextField } from "pigment-ui";
-import { useEffect, useMemo } from "react";
+import { Button, Tab, TabList, Tabs, TextField } from "pigment-ui";
+import { useEffect, useState } from "react";
+import type { Key } from "react-aria";
 import { twMerge } from "tailwind-merge";
 
 export default function Page() {
   const { newVariant, setNewVariant, extendedVariantsAndColors, setExtendedVariantsAndColors } = useAppSlots();
-
-  const getCode = () =>
-    useMemo(() => {
-      let asd;
-
-      try {
-        asd = JSON.stringify(
-          extendedVariantsAndColors.map((item: any) => ({ ...item, variant: newVariant })),
-          null,
-          2,
-        );
-      } catch (error) {
-        asd = JSON.stringify(extendedVariantsAndColors, null, 2);
-      }
-
-      return `// providers.tsx
-
-"use client";
-
-import { Provider } from "pigment-ui";
-import { ReactNode } from "react";
-
-export function Providers({ children }: { children: ReactNode }) {
-  return (
-    // other providers
-    <>
-      <Provider
-        extendVariantAndColorStyles={{
-          variants: {
-            variant: "${newVariant}",
-          },
-          compoundVariants: ${asd},
-        }}
-      >
-        {/* other providers */}
-        <>{children}</>
-      </Provider>
-    </>
-  );
-}
-`;
-    }, [newVariant, extendedVariantsAndColors]);
 
   useEffect(() => {
     setExtendedVariantsAndColors((prev: any) => {
@@ -61,6 +20,13 @@ export function Providers({ children }: { children: ReactNode }) {
       }
     });
   }, [newVariant]);
+
+  const [selectedCode, setSelectedCode] = useState<Key>("provider");
+  const [code, setCode] = useState(getCode(extendedVariantsAndColors, newVariant));
+
+  useEffect(() => {
+    setCode(selectedCode === "provider" ? getCode(extendedVariantsAndColors, newVariant) : glassCode);
+  }, [selectedCode]);
 
   return (
     <main>
@@ -123,22 +89,35 @@ export function Providers({ children }: { children: ReactNode }) {
           ))}
         </div>
 
-        <CodeBlock
-          code={getCode()}
-          setCode={(v) =>
-            setExtendedVariantsAndColors((prev: any) => {
-              try {
-                return JSON.parse(v);
-              } catch (error) {
-                return prev;
-              }
-            })
-          }
-          language="tsx"
-          className="max-h-[auto] rounded-none"
-        />
+        <div className="relative">
+          <CodeBlock
+            code={code}
+            // setCode={(v) =>
+            //   setExtendedVariantsAndColors((prev: any) => {
+            //     try {
+            //       return JSON.parse(v);
+            //     } catch (error) {
+            //       return prev;
+            //     }
+            //   })
+            // }
+            language="tsx"
+            className="max-h-[auto] rounded-none pt-14"
+          />
 
-        <CodeBlock code={glassCode} language="tsx" className="max-h-[auto] rounded-none" />
+          <Tabs
+            selectedKey={selectedCode}
+            onSelectionChange={setSelectedCode}
+            variant={newVariant as any}
+            size="sm"
+            className="absolute top-4 left-4"
+          >
+            <TabList aria-label="code tabs" className="font-mono">
+              <Tab id="provider">{"<Providers />"}</Tab>
+              <Tab id="glass">{"<GlassVariant />"}</Tab>
+            </TabList>
+          </Tabs>
+        </div>
       </div>
     </main>
   );
@@ -183,3 +162,44 @@ function GlassVariant() {
   );
 }
 `;
+
+const getCode = (arr: any[], newVar: string) => {
+  let asd;
+
+  try {
+    asd = JSON.stringify(
+      arr.map((item: any) => ({ ...item, variant: newVar })),
+      null,
+      2,
+    );
+  } catch (error) {
+    asd = JSON.stringify(arr, null, 2);
+  }
+
+  return `
+
+"use client";
+
+import { Provider } from "pigment-ui";
+import { ReactNode } from "react";
+
+export function Providers({ children }: { children: ReactNode }) {
+  return (
+    // other providers
+    <>
+      <Provider
+        extendVariantAndColorStyles={{
+          variants: {
+            variant: "${newVar}",
+          },
+          compoundVariants: ${asd},
+        }}
+      >
+        {/* other providers */}
+        <>{children}</>
+      </Provider>
+    </>
+  );
+}
+`;
+};

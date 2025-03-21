@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { radiusVariants, useHelperButtonStyles, useVariantAndColorStyles } from "./styles";
 import { ColorProps, SizeProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { CircleAlertIcon, CircleCheckIcon, CircleXIcon, InfoIcon, XIcon } from "lucide-react";
@@ -12,9 +12,9 @@ import { tv } from "tailwind-variants";
 
 // styles
 
-const useAlertStyles = () =>
+const useAlertStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     base: "!items-start",
     slots: {
       contentWrapper: "flex-1",
@@ -75,7 +75,9 @@ function _Alert(props: AlertProps, ref: ForwardedRef<HTMLDivElement>) {
   const { title, description, variant, color, size, icon, hideIcon, onClose, className, classNames, style, styles, children, ...restProps } =
     globalProps;
 
-  const styleSlots = useAlertStyles()({ variant, color, size });
+  const globalStyles = useGlobalStyles();
+
+  const styleSlots = useAlertStyles(globalStyles)({ variant, color, size });
 
   return (
     <div

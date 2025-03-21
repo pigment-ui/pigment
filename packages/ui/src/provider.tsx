@@ -91,7 +91,7 @@ type GlobalSlotsType = {
 
 const [GlobalSlots, useGlobalSlots] = createSlots<GlobalSlotsType>();
 
-function Provider({ defaultComponentProps = {}, extendVariantAndColorStyles, children }: GlobalSlotsType & ChildrenProps) {
+function Provider({ defaultComponentProps = {}, extendVariantAndColorStyles = {}, children }: GlobalSlotsType & ChildrenProps) {
   return (
     <GlobalSlots value={{ defaultComponentProps, extendVariantAndColorStyles }}>
       {children}
@@ -292,4 +292,8 @@ function useGlobalProps<T, D>(componentName: string, props: T, defaultProps?: D)
   } as T & D;
 }
 
-export { Provider, useGlobalProps, useGlobalSlots };
+function useGlobalStyles() {
+  return useGlobalSlots()?.extendVariantAndColorStyles;
+}
+
+export { Provider, useGlobalProps, useGlobalSlots, useGlobalStyles };

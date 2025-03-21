@@ -1,7 +1,7 @@
 "use client";
 
 import { Field, FieldBaseProps } from "./field";
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { isDisabledVariants, smallRadiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, RadiusProps, SizeProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { createSlots } from "./utils";
@@ -37,9 +37,9 @@ const useCheckboxGroupStyles = () =>
     },
   });
 
-const useCheckboxStyles = () =>
+const useCheckboxStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     base: "[&>svg]:absolute [&>svg]:transition-transform [&>svg]:duration-150",
     slots: {
       wrapper: "text-default grid cursor-pointer grid-cols-[auto_1fr] items-start duration-300",
@@ -120,7 +120,9 @@ function _Checkbox(props: CheckboxProps, ref: ForwardedRef<HTMLLabelElement>) {
 
   const { variant, color, size, radius, classNames, itemClassNames, styles, itemStyles } = globalProps;
 
-  const styleSlots = useCheckboxStyles()({ size, color, radius });
+  const globalStyles = useGlobalStyles();
+
+  const styleSlots = useCheckboxStyles(globalStyles)({ size, color, radius });
 
   return (
     <AriaCheckbox

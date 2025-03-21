@@ -1,4 +1,3 @@
-import { useGlobalSlots } from "./provider";
 import { tv } from "tailwind-variants";
 
 export const isDisabledVariants = { true: "opacity-50 cursor-not-allowed" } as const;
@@ -9,11 +8,9 @@ export const radiusVariants = { sm: "rounded-lg", md: "rounded-xl", lg: "rounded
 
 export const smallRadiusVariants = { sm: "rounded-md", md: "rounded-lg", lg: "rounded-xl", full: "rounded-full", none: "rounded-none" } as const;
 
-export const useVariantAndColorStyles = () => {
-  const { extendVariantAndColorStyles = {} } = useGlobalSlots();
-
+export const useVariantAndColorStyles = (extend?: any) => {
   return tv({
-    extend: extendVariantAndColorStyles,
+    extend: tv(extend || {}),
     base: "relative z-0 flex items-center justify-center overflow-hidden border bg-clip-padding duration-300 outline-none",
     variants: {
       variant: {

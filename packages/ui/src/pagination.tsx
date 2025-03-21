@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { radiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, RadiusProps, SizeProps, StyleProps, StyleSlotsToStyleProps, VariantProps, Variants } from "./types";
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon, EllipsisIcon } from "lucide-react";
@@ -12,9 +12,9 @@ import { tv } from "tailwind-variants";
 
 // styles
 
-const usePaginationStyles = () =>
+const usePaginationStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     slots: {
       base: "grid place-items-center duration-300",
       wrapper: "flex overflow-auto p-1 [&::-webkit-scrollbar]:hidden",
@@ -58,7 +58,9 @@ function _Pagination(props: PaginationProps, ref: ForwardedRef<HTMLUListElement>
   const { variant, variantActive, color, size, radius, total, page, onChange, siblingCount, dotsJump, className, classNames, style, styles } =
     globalProps;
 
-  const styleSlots = usePaginationStyles()({ variant, color, size, radius });
+  const globalStyles = useGlobalStyles();
+
+  const styleSlots = usePaginationStyles(globalStyles)({ variant, color, size, radius });
 
   const paginationRange = usePagination({ total, page, siblingCount });
 

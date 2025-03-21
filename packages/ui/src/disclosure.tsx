@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { radiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, SizeProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { createSlots } from "./utils";
@@ -30,9 +30,9 @@ const useDisclosureGroupStyles = () =>
     },
   });
 
-const useDisclosureStyles = () =>
+const useDisclosureStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     base: "flex-col",
     slots: {
       heading: "w-full",
@@ -109,7 +109,9 @@ function _Disclosure(props: DisclosureProps, ref: ForwardedRef<HTMLDivElement>) 
 
   const { variant, color, size, title, description, startContent, endContent, classNames, styles, icon } = globalProps;
 
-  const styleSlots = useDisclosureStyles()({ size, color });
+  const globalStyles = useGlobalStyles();
+
+  const styleSlots = useDisclosureStyles(globalStyles)({ size, color });
 
   const [isHovered, setIsHovered] = useState<boolean>(false);
 

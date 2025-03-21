@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { Spinner } from "./spinner";
 import { radiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, RadiusProps, SizeProps, StyleProps, VariantProps } from "./types";
@@ -12,9 +12,9 @@ import { tv } from "tailwind-variants";
 
 // styles
 
-const useButtonStyles = () =>
+const useButtonStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     base: "min-w-max whitespace-nowrap",
     variants: {
       size: {
@@ -67,6 +67,8 @@ function _Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
     ...restProps
   } = globalProps;
 
+  const globalStyles = useGlobalStyles();
+
   const isDisabled = disabled || isLoading;
 
   const objRef = useObjectRef(ref);
@@ -84,7 +86,7 @@ function _Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
       data-pressed={isPressed || undefined}
       data-disabled={isDisabled || undefined}
       data-focus-visible={isFocusVisible || undefined}
-      className={useButtonStyles()({
+      className={useButtonStyles(globalStyles)({
         variant,
         color,
         size,

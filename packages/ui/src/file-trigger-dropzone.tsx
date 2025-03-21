@@ -1,7 +1,7 @@
 "use client";
 
 import { FieldBaseProps, FieldInput, FieldInputBaseProps } from "./field";
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { radiusVariants, useHelperButtonStyles, useVariantAndColorStyles } from "./styles";
 import { ColorProps, StyleProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { useFormValidationState } from "@react-stately/form";
@@ -13,9 +13,9 @@ import { tv } from "tailwind-variants";
 
 // styles
 
-const useFileTriggerBlockStyles = () =>
+const useFileTriggerBlockStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     slots: {
       base: "",
       zone: "flex w-full flex-col items-center text-center",
@@ -79,7 +79,14 @@ function FileTriggerDropzone(props: FileTriggerDropzoneProps) {
   const { displayValidation } = useFormValidationState({ ...globalProps, value });
   const { fieldProps, descriptionProps, errorMessageProps } = useField({ validationBehavior: "native", ...displayValidation, ...globalProps });
 
-  const styleSlots = useFileTriggerBlockStyles()({ variant, color: isInvalid || displayValidation.isInvalid ? "error" : color, size, isDisabled });
+  const globalStyles = useGlobalStyles();
+
+  const styleSlots = useFileTriggerBlockStyles(globalStyles)({
+    variant,
+    color: isInvalid || displayValidation.isInvalid ? "error" : color,
+    size,
+    isDisabled,
+  });
 
   return (
     <Provider

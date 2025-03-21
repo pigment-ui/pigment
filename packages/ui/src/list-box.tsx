@@ -1,7 +1,7 @@
 "use client";
 
 import { useCardStyles } from "./card";
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { isFocusVisibleVariants, smallRadiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, ForwardRefType, SizeProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { createSlots } from "./utils";
@@ -33,9 +33,9 @@ const useListBoxStyles = () =>
     },
   });
 
-const useListBoxItemStyles = () =>
+const useListBoxItemStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     base: "!scale-100",
     slots: {
       content: "flex-1",
@@ -136,8 +136,9 @@ const ListBox = (forwardRef as ForwardRefType)(_ListBox);
 
 function _ListBoxItem(props: ListBoxItemProps, ref: ForwardedRef<HTMLDivElement>) {
   const { variant, color, size, startContent, endContent, icon, classNames, itemClassNames, styles, itemStyles } = useListBoxSlots(props);
+  const globalStyles = useGlobalStyles();
 
-  const styleSlots = useListBoxItemStyles()({ color, size });
+  const styleSlots = useListBoxItemStyles(globalStyles)({ color, size });
 
   return (
     <AriaListBoxItem

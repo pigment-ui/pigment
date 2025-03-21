@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { radiusVariants, useVariantAndColorStyles } from "./styles";
 import { ColorProps, ContentProps, ForwardRefType, RadiusProps, SizeProps, StyleSlotsToSlots, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { createSlots } from "./utils";
@@ -25,7 +25,6 @@ import { tv } from "tailwind-variants";
 const useTabsStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
-    defaultVariants: { variant: "light" },
     slots: {
       base: "flex",
       list: ["relative z-0 flex h-fit w-fit overflow-hidden", "before:absolute before:inset-0 before:-z-10 before:bg-current before:opacity-10"],
@@ -56,9 +55,9 @@ const useTabsStyles = () =>
 
 type TabsStylesReturnType = ReturnType<ReturnType<typeof useTabsStyles>>;
 
-const tabStyles = () =>
+const useTabStyles = (extend: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     base: "cursor-pointer",
     variants: {
       size: {
@@ -93,7 +92,7 @@ function _Tabs(props: TabsProps, ref: ForwardedRef<HTMLDivElement>) {
 
   const { orientation, variant, color, size, radius, classNames, styles } = globalProps;
 
-  const styleSlots = useTabsStyles()({ orientation, color, size, radius });
+  const styleSlots = useTabsStyles()({ variant: "light", orientation, color, size, radius });
 
   return (
     <TabsSlotsProvider value={{ variant, color, size, radius, styleSlots, classNames, styles }}>
@@ -112,13 +111,15 @@ const Tabs = forwardRef(_Tabs);
 function _Tab(props: TabProps & ContentProps, ref: ForwardedRef<HTMLDivElement>) {
   const { variant, color, size, radius, startContent, endContent } = useTabsSlots(props);
 
+  const globalStyles = useGlobalStyles();
+
   return (
     <AriaTab
       ref={ref}
       id={typeof props.children === "string" ? props.children : undefined}
       {...props}
       className={composeRenderProps(props.className, (className, { isSelected, isHovered, isPressed, isDisabled, isFocusVisible }) =>
-        tabStyles()({
+        useTabStyles(globalStyles)({
           variant: isSelected ? variant : "light",
           color,
           size,

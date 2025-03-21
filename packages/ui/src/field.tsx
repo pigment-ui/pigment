@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalProps } from "./provider";
+import { useGlobalProps, useGlobalStyles } from "./provider";
 import { radiusVariants, smallRadiusVariants, useHelperButtonStyles, useVariantAndColorStyles } from "./styles";
 import { ChildrenProps, ColorProps, RadiusProps, SizeProps, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { useObjectRef } from "@react-aria/utils";
@@ -46,9 +46,9 @@ export const useFieldSegmentStyles = () =>
     variants: { isPlaceholder: { true: "opacity-50 data-[focused]:opacity-100 data-[focused]:before:opacity-20" } },
   });
 
-const useFieldInputStyles = () =>
+const useFieldInputStyles = (extend?: any) =>
   tv({
-    extend: useVariantAndColorStyles(),
+    extend: useVariantAndColorStyles(extend),
     base: "cursor-text",
     slots: {
       wrapper: "flex w-full flex-1 flex-col",
@@ -189,7 +189,9 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
     fieldInputStyles,
   } = globalProps;
 
-  const styleSlots = useFieldInputStyles()({ variant, color: isInvalid ? "error" : color, size, radius });
+  const globalStyles = useGlobalStyles();
+
+  const styleSlots = useFieldInputStyles(globalStyles)({ variant, color: isInvalid ? "error" : color, size, radius });
 
   // @ts-ignore
   const selfRef = useObjectRef<HTMLElement>(children?.ref);
