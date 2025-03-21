@@ -13,9 +13,9 @@ export function NavLeft({ doc: docProps, allDocs }: { doc: Doc; allDocs: Doc[] }
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <nav className="sticky top-16 z-10 max-lg:-mx-4 lg:col-span-2 lg:h-[calc(100vh-64px)]">
+    <nav className="border-default/20 bg-default-50 sticky top-[88px] z-10 border max-lg:top-[80px] max-lg:-mx-4 max-lg:-mt-2 max-lg:mb-4 lg:col-span-2 lg:h-[calc(100vh-96px)]">
       <button
-        className="flex w-full items-center gap-2 border-b border-b-default-1000/20 bg-default-0/75 p-4 text-start backdrop-blur-lg hover:bg-default-1000/10 active:bg-default-1000/20 lg:hidden [&>svg]:size-4"
+        className="border-b-default-1000/20 bg-default-0/75 hover:bg-default-1000/10 active:bg-default-1000/20 flex w-full items-center gap-2 border-b p-4 text-start backdrop-blur-lg lg:hidden [&>svg]:size-4"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {isOpen ? <ChevronDownIcon /> : <ChevronRightIcon />}
@@ -24,9 +24,8 @@ export function NavLeft({ doc: docProps, allDocs }: { doc: Doc; allDocs: Doc[] }
 
       <div
         className={twMerge([
-          "scrollbar-show-on-hover h-full overflow-y-auto pr-4",
-          "max-lg:pb-32 max-lg:pl-4 max-lg:pt-8 lg:py-16",
-          "max-lg:absolute max-lg:inset-x-0 max-lg:top-full max-lg:h-[calc(100vh-120px)]",
+          "scrollbar-show-on-hover h-full overflow-y-auto p-4",
+          "max-lg:absolute max-lg:inset-x-0 max-lg:top-full max-lg:h-[calc(100vh-140px)]",
           "max-lg:bg-default-0/75 max-lg:backdrop-blur-lg",
           !isOpen && "max-lg:hidden",
         ])}

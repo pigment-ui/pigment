@@ -12,7 +12,7 @@ export function Content({ doc, allDocs }: { doc: Doc; allDocs: Doc[] }) {
   const nextDoc = docIndex !== allDocs.length - 1 ? allDocs[docIndex + 1] : undefined;
 
   return (
-    <article className="col-span-10 space-y-16 py-16 lg:px-16 xl:col-span-8">
+    <article className="border-default/20 col-span-10 space-y-8 border p-8 max-lg:space-y-4 max-lg:p-4 xl:col-span-8">
       <div className="space-y-4">
         <h1 className="text-5xl font-bold max-lg:text-4xl">{doc.title}</h1>
         <p className="text-default-700 max-lg:text-sm">{doc.description}</p>

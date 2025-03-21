@@ -12,15 +12,15 @@ export function ComponentBox({ children, id }: { children: ReactNode; id: string
   const { focusProps, isFocusVisible } = useFocusRing({});
 
   return (
-    <div className="relative flex h-[250px] items-center justify-center rounded-3xl border border-default-200 bg-default-50">
+    <div className="border-default/20 odd:bg-default-50 relative flex h-[250px] items-center justify-center border">
       <Link
         href={"/docs/components/" + id}
         {...mergeProps(hoverProps, pressProps, focusProps)}
         className={twMerge([
-          "absolute left-8 top-4 rounded-lg bg-default-1000/10 px-2 py-1 font-mono text-sm font-medium duration-300",
+          "bg-default-1000/10 absolute top-4 left-8 rounded-lg px-2 py-1 font-mono text-sm font-medium duration-300",
           isHovered && "bg-default-1000/20",
           isPressed && "scale-95",
-          isFocusVisible ? "outline outline-1 outline-offset-1 outline-default-1000" : "outline-none",
+          isFocusVisible ? "outline-default-1000 outline outline-1 outline-offset-1" : "outline-none",
         ])}
       >
         {"<"}

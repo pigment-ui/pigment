@@ -34,8 +34,8 @@ export function NavRight({ doc }: { doc: Doc }) {
   }, [docHeadings]);
 
   return docHeadings.length > 0 ? (
-    <nav className="scrollbar-show-on-hover sticky top-16 col-span-2 h-[calc(100vh-64px)] overflow-y-auto max-xl:hidden">
-      <div className="py-16 pr-4">
+    <nav className="scrollbar-show-on-hover sticky top-[88px] col-span-2 h-[calc(100vh-96px)] overflow-y-auto max-xl:hidden">
+      <div className="border-default/20 bg-default-50 border p-4">
         <h3 className="text-sm font-medium uppercase">On this page</h3>
         <ul className="mt-2 space-y-1">
           {docHeadings.map((heading) => (

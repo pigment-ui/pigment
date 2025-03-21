@@ -39,9 +39,9 @@ export default function Page() {
   const [page, setPage] = useState(2);
 
   return (
-    <main className="py-32 max-lg:py-24">
+    <main>
       <div className="container">
-        <div className="grid grid-cols-3 gap-8 max-lg:mx-auto max-lg:max-w-[600px] max-lg:grid-cols-1">
+        <div className="grid grid-cols-3 max-lg:mx-auto max-lg:max-w-[600px] max-lg:grid-cols-1">
           <ComponentBox id="badge">
             <Badge content="99+">
               <BellIcon className="size-8" />
