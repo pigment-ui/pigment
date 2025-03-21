@@ -30,16 +30,16 @@ export default function Page() {
 
   return (
     <main>
-      <div className="container">
+      <div className="container space-y-4">
         <div className="grid grid-cols-4 max-md:grid-cols-2">
-          <div className="border-default/20 col-span-2 space-y-4 border p-16 max-sm:p-8">
+          <div className="border-default/20 bg-default-0 col-span-2 space-y-4 border p-16 max-sm:p-8">
             <h1 className="text-5xl font-bold max-lg:text-4xl">Playground</h1>
             <p className="text-default-700 max-lg:text-sm">
               This is a playground for extending your variants. You can add new variants and see how it looks together with the colors.
             </p>
           </div>
 
-          <div className="border-default/20 col-span-2 flex flex-wrap place-content-center items-center justify-center gap-2 border p-16 font-mono text-4xl font-bold max-lg:text-3xl max-sm:p-8">
+          <div className="border-default/20 bg-default-50 col-span-2 flex flex-wrap place-content-center items-center justify-center gap-2 border p-16 font-mono text-4xl font-bold max-lg:text-3xl max-sm:p-8">
             <span className="whitespace-nowrap">
               {"{ "}
               variant:
@@ -52,11 +52,11 @@ export default function Page() {
         </div>
 
         <div className="grid grid-cols-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
-          {(["default", "inverted", "primary", "secondary", "info", "success", "warning", "error"] as const).map((color) => (
+          {(["default", "inverted", "primary", "secondary", "info", "success", "warning", "error"] as const).map((color, index) => (
             <div
               key={color}
               className={twMerge(
-                color === "inverted" && "bg-default",
+                color === "inverted" ? "bg-default-1000" : [1, 3, 4, 6].includes(index) ? "bg-default-50" : "bg-default-0",
                 "border-default/20 grid aspect-square place-items-center border max-lg:aspect-[3/2]",
               )}
             >
@@ -68,11 +68,11 @@ export default function Page() {
         </div>
 
         <div className="grid grid-cols-4 max-lg:grid-cols-2 max-sm:grid-cols-1">
-          {(["default", "inverted", "primary", "secondary", "info", "success", "warning", "error"] as const).map((color) => (
+          {(["default", "inverted", "primary", "secondary", "info", "success", "warning", "error"] as const).map((color, index) => (
             <div
               key={color}
               className={twMerge(
-                color === "inverted" && "bg-default",
+                color === "inverted" ? "bg-default-1000" : [1, 3, 4, 6].includes(index) ? "bg-default-50" : "bg-default-0",
                 "border-default/20 grid aspect-square place-items-center border p-8 max-lg:aspect-[3/2]",
               )}
             >

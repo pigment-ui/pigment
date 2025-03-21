@@ -7,10 +7,6 @@ import { LiveEditor } from "react-live";
 import { twMerge } from "tailwind-merge";
 
 const customTheme = {
-  plain: {
-    color: "oklch(var(--pigment-default-1000))",
-    backgroundColor: "oklch(var(--pigment-default-0))",
-  },
   styles: [
     // Keywords, control flow, and operators (Darker shade)
     {
@@ -105,7 +101,7 @@ export function CodeBlock({
 
       <div
         className={twMerge(
-          "scrollbar-show-on-hover border-default-1000/20 bg-default-0 focus-within:ring-default-1000 max-h-96 w-full overflow-auto rounded-xl border font-mono text-sm duration-300 focus-within:ring-2",
+          "scrollbar-show-on-hover border-default/20 bg-default-50 text-default focus-within:ring-default-1000 max-h-96 w-full overflow-auto rounded-xl border font-mono text-sm duration-300 focus-within:ring-2",
           className,
         )}
       >
