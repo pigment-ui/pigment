@@ -7,6 +7,7 @@ import { LiveEditor } from "react-live";
 import { twMerge } from "tailwind-merge";
 
 const customTheme = {
+  plain: {},
   styles: [
     // Keywords, control flow, and operators (Darker shade)
     {

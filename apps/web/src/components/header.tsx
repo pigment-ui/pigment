@@ -49,7 +49,7 @@ export function Header() {
           href="/"
           prefetch
           className={twMerge(
-            "border-default/20 hover:bg-default/10 h-full overflow-hidden rounded-full border duration-300",
+            "border-default/20 focus-visible:outline-focus hover:bg-default/10 h-full overflow-hidden rounded-full border duration-300 outline-none active:scale-95",
             segment === null && "bg-default/10",
           )}
         >
@@ -77,7 +77,7 @@ export function Header() {
                 onSelectionChange={(key) => setTheme((Array.from(key)[0] as string).toLowerCase())}
                 className="w-32"
                 disallowEmptySelection
-                offset={24}
+                offset={8}
                 crossOffset={16}
                 placement="bottom end"
               >
@@ -91,7 +91,7 @@ export function Header() {
               <Button aria-label="header menu toggle" isCompact variant="faded" className="sm:hidden" radius="full">
                 <MenuIcon />
               </Button>
-              <Popover offset={24} crossOffset={16} hideArrow placement="bottom end" className="flex w-48 flex-col gap-2">
+              <Popover offset={8} crossOffset={16} hideArrow placement="bottom end" className="flex w-48 flex-col gap-2">
                 {routes}
               </Popover>
             </PopoverTrigger>
