@@ -38,5 +38,3 @@ export { Tooltip, TooltipTrigger, TriggerWrapperWithoutDiv } from "./tooltip";
 export { createSlots, useObserveElementWidth } from "./utils";
 
 export { twConfig } from "./tw-config";
-
-export type * from "./types";
