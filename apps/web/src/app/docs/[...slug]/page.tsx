@@ -4,7 +4,13 @@ import { capitalize } from "inflection";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export function generateMetadata({ params: { slug } }: { params: { slug: string[] } }): Metadata {
+export async function generateMetadata(props: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
+  const params = await props.params;
+
+  const {
+    slug
+  } = params;
+
   const doc = allDocsSorted.find((doc) => doc.slug === slug.join("/"));
 
   return { title: `Pigment UI | Docs - ${capitalize(slug[1])}`, description: doc?.description || "" };
@@ -16,7 +22,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Page({ params: { slug } }: { params: { slug: string[] } }) {
+export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
+  const params = await props.params;
+
+  const {
+    slug
+  } = params;
+
   const doc = allDocsSorted.find((doc) => doc.slug === slug.join("/"));
   if (!doc) notFound();
 
