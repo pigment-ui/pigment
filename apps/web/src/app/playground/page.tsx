@@ -15,8 +15,8 @@ export default function Page() {
   const [code, setCode] = useState(getCode(extendedVariantsAndColors, newVariant, newColor));
 
   useEffect(() => {
-    selectedCode &&
-      setCode({ provider: getCode(extendedVariantsAndColors, newVariant, newColor), newVariantColor: newVariantColorCode, twCode }[selectedCode]);
+    // @ts-ignore
+    setCode({ provider: getCode(extendedVariantsAndColors, newVariant, newColor), newVariantColor: newVariantColorCode, twCode }[selectedCode]);
   }, [selectedCode]);
 
   return (
