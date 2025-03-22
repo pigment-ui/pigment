@@ -6,6 +6,6 @@
   "bundle": true,
   "skipNodeModulesBundle": true,
   "target": "es2020",
-  "format": ["cjs", "esm"],
+  "format": ["esm"],
   "entry": ["./src/index.ts"]
 }
