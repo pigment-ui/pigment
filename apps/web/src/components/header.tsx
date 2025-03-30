@@ -49,7 +49,7 @@ export function Header() {
           href="/"
           prefetch
           className={twMerge(
-            "border-default/20 focus-visible:outline-focus hover:bg-default/10 h-full overflow-hidden rounded-full border duration-300 outline-none active:scale-95",
+            "border-default/20 focus-visible:outline-focus hover:bg-default/10 h-full overflow-hidden rounded-full border outline-hidden duration-300 active:scale-95",
             segment === null && "bg-default/10",
           )}
         >
@@ -74,7 +74,7 @@ export function Header() {
               <Menu
                 selectionMode="single"
                 selectedKeys={new Set([capitalize(theme ?? "system")])}
-                onSelectionChange={(key) => setTheme((Array.from(key)[0] as string).toLowerCase())}
+                onSelectionChange={(key: any) => setTheme((Array.from(key)[0] as string).toLowerCase())}
                 className="w-32"
                 disallowEmptySelection
                 offset={8}

@@ -30,7 +30,7 @@ import { tv } from "tailwind-variants";
 const useCalendarStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
-    base: "transition-transform",
+    base: "cursor-pointer transition-transform",
     slots: {
       wrapper: "",
       calendarWrapper: "text-default w-fit max-w-full overflow-auto p-4",
@@ -68,13 +68,13 @@ const useCalendarStyles = () =>
       isSelectedRange: { true: "" },
       isSelectionStart: { true: "" },
       isSelectionEnd: { true: "" },
-      isSelectedFirstDay: { true: "!rounded-r-none" },
-      isSelectedLastDay: { true: "!rounded-l-none" },
+      isSelectedFirstDay: { true: "rounded-r-none!" },
+      isSelectedLastDay: { true: "rounded-l-none!" },
     },
     compoundVariants: [
-      { isSelectionStart: true, isSelectionEnd: false, className: "!rounded-r-none" },
-      { isSelectionStart: false, isSelectionEnd: true, className: "!rounded-l-none" },
-      { isSelectedRange: true, isSelectedFirstDay: false, isSelectedLastDay: false, className: "!rounded-none" },
+      { isSelectionStart: true, isSelectionEnd: false, className: "rounded-r-none!" },
+      { isSelectionStart: false, isSelectionEnd: true, className: "rounded-l-none!" },
+      { isSelectedRange: true, isSelectedFirstDay: false, isSelectedLastDay: false, className: "rounded-none!" },
     ],
   });
 
@@ -129,7 +129,7 @@ function _Calendar<T extends DateValue>(props: CalendarProps<T>, ref: ForwardedR
       >
         <Field {...displayValidation} {...globalProps}>
           <CalendarWrapper styleSlots={styleSlots} classNames={classNames} styles={styles}>
-            {Array.from({ length: visibleMonthCount as number }).map((_, index) => (
+            {Array.from({ length: visibleMonthCount }).map((_, index) => (
               <CalendarGrid key={index} offset={{ months: index }} className={styleSlots.grid({ className: classNames?.grid })} style={styles?.grid}>
                 {(date) => (
                   <CalendarCell

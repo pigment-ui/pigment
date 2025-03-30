@@ -15,8 +15,8 @@ import { tv } from "tailwind-variants";
 const usePaginationStyles = (extend?: any) =>
   tv({
     extend: useVariantAndColorStyles(extend),
+    base: "min-w-max cursor-pointer whitespace-nowrap",
     slots: {
-      base: "grid place-items-center duration-300",
       wrapper: "flex overflow-auto p-1 [&::-webkit-scrollbar]:hidden",
     },
     variants: {

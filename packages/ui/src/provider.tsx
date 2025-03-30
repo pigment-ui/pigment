@@ -136,23 +136,32 @@ function Provider({ defaultComponentProps = {}, extendVariantAndColorStyles = {}
   --pigment-default-950: 0.985 0 0;
   --pigment-default-1000: 100 0 0;
 }
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
         `}
       </style>
     </GlobalSlots>
   );
 }
 
-function useGlobalProps<T, D>(componentName: string, props: T, defaultProps?: D) {
-  // const newProps = useGlobalSlots()?.defaultComponentProps?.[componentName as keyof GlobalSlotsType["defaultComponentProps"]]?.({
-  //   ...defaultProps,
-  //   ...props,
-  // });
-
-  return {
-    ...defaultProps,
-    // ...newProps,
-    ...props,
-  } as T & D;
+function useGlobalProps<T, D>(componentName: string, props: T, defaultProps?: D): T & D {
+  if (defaultProps) {
+    const mergedProps: any = { ...defaultProps };
+    if (props) {
+      // Check if props is not null or undefined
+      for (const key in props) {
+        if (Object.prototype.hasOwnProperty.call(props, key) && props[key] !== undefined) {
+          mergedProps[key] = props[key];
+        }
+      }
+    }
+    return mergedProps as T & D;
+  } else {
+    return props as T & D;
+  }
 }
 
 function useGlobalStyles() {

@@ -30,7 +30,7 @@ import { tv } from "tailwind-variants";
 const useMenuStyles = () =>
   tv({
     extend: useSelectStyles(),
-    base: useCardStyles()().base({ className: "p-2" }),
+    base: useCardStyles()().base({ className: "p-8" }),
   });
 
 type MenuStylesReturnType = ReturnType<ReturnType<typeof useMenuStyles>>;

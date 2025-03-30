@@ -29,7 +29,7 @@ const useTabsStyles = () =>
       base: "flex",
       list: ["relative z-0 flex h-fit w-fit overflow-hidden", "before:absolute before:inset-0 before:-z-10 before:bg-current before:opacity-10"],
       panel: [
-        "relative z-0 h-fit w-full overflow-hidden outline-none",
+        "relative z-0 h-fit w-full overflow-hidden outline-hidden",
         "before:absolute before:inset-0 before:-z-10 before:bg-current before:text-inherit before:opacity-10",
       ],
     },

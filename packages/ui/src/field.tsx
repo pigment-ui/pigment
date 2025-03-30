@@ -20,7 +20,7 @@ const useFieldStyles = () =>
       label: "cursor-default",
       description: "",
       errorMessage: "text-error",
-      wrapperWithMessage: "",
+      wrapperWithMessage: "flex flex-col",
     },
     variants: {
       size: {
@@ -43,7 +43,7 @@ type FieldStylesReturnType = ReturnType<ReturnType<typeof useFieldStyles>>;
 export const useFieldSegmentStyles = () =>
   tv({
     base: useHelperButtonStyles()({ variant: "light", className: ["p-1", smallRadiusVariants.md] }),
-    variants: { isPlaceholder: { true: "opacity-50 data-[focused]:opacity-100 data-[focused]:before:opacity-20" } },
+    variants: { isPlaceholder: { true: "opacity-50 data-focused:opacity-100 data-focused:before:opacity-20" } },
   });
 
 const useFieldInputStyles = (extend?: any) =>
@@ -52,15 +52,15 @@ const useFieldInputStyles = (extend?: any) =>
     base: "cursor-text",
     slots: {
       wrapper: "flex w-full flex-1 flex-col",
-      self: "flex w-full flex-1 items-center bg-transparent outline-none placeholder:text-inherit placeholder:opacity-50 data-[disabled]:pointer-events-none [&[aria-disabled]]:pointer-events-none",
+      self: "flex w-full flex-1 items-center bg-transparent outline-hidden placeholder:text-inherit placeholder:opacity-50 aria-[disabled]:pointer-events-none data-disabled:pointer-events-none",
       content: "pointer-events-none shrink-0",
       button: useHelperButtonStyles()({ className: "px-1.5" }),
     },
     variants: {
       size: {
-        sm: { base: "gap-2 p-2 text-xs [&_svg]:size-4", button: "h-6 [&_svg]:!size-3" },
-        md: { base: "gap-2.5 p-2.5 text-sm [&_svg]:size-5", button: "h-7 [&_svg]:!size-4" },
-        lg: { base: "gap-3 p-3 text-base [&_svg]:size-6", button: "h-8 [&_svg]:!size-5" },
+        sm: { base: "gap-2 p-2 text-xs [&_svg]:size-4", button: "h-6 [&_svg]:size-3!" },
+        md: { base: "gap-2.5 p-2.5 text-sm [&_svg]:size-5", button: "h-7 [&_svg]:size-4!" },
+        lg: { base: "gap-3 p-3 text-base [&_svg]:size-6", button: "h-8 [&_svg]:size-5!" },
       },
       radius: {
         sm: { base: radiusVariants.sm, button: smallRadiusVariants.sm },
@@ -91,8 +91,8 @@ interface FieldProps extends FieldBaseProps, ChildrenProps, ColorProps {}
 
 interface FieldInputBaseProps extends VariantProps, ColorProps, SizeProps, RadiusProps, FieldBaseProps {
   isLabelInside?: boolean;
-  startContent?: ReactElement;
-  endContent?: ReactElement;
+  startContent?: ReactElement<HTMLElement>;
+  endContent?: ReactElement<HTMLElement>;
   fieldInputClassNames?: StyleSlotsToStyleProps<FieldInputStylesReturnType>["classNames"];
   fieldInputStyles?: StyleSlotsToStyleProps<FieldInputStylesReturnType>["styles"];
 }
@@ -101,9 +101,9 @@ interface FieldInputProps extends FieldInputBaseProps {
   isFocusWithin?: boolean;
   isInvalid?: boolean;
   isDisabled?: boolean;
-  children?: ReactElement;
-  startButton?: ReactElement;
-  endButton?: ReactElement;
+  children?: ReactElement<HTMLElement>;
+  startButton?: ReactElement<HTMLElement>;
+  endButton?: ReactElement<HTMLElement>;
 }
 
 // component
@@ -243,6 +243,7 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
           )}
           {children &&
             cloneElement(children, {
+              // @ts-ignore
               ref: selfRef,
               className: styleSlots.self({ className: twMerge(children.props?.className, fieldInputClassNames?.self) }),
               style: mergeProps(children.props?.style, fieldInputStyles?.self),

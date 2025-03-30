@@ -22,7 +22,7 @@ const useProgressBarStyles = () =>
       valueText: "text-default",
       trackWrapper: "relative",
       track: "",
-      filler: "",
+      filler: "overflow-hidden rounded-full",
     },
     variants: {
       size: {
@@ -36,7 +36,7 @@ const useProgressBarStyles = () =>
           labelWrapper: "flex justify-between",
           valueText: "",
           track: ["relative z-0 overflow-hidden rounded-full", "before:absolute before:inset-0 before:-z-10 before:bg-current before:opacity-10"],
-          filler: ["absolute inset-y-0 left-0 z-0 rounded-full", "before:absolute before:inset-0 before:-z-10 before:bg-current"],
+          filler: ["absolute inset-y-0 left-0 z-0", "before:absolute before:inset-0 before:-z-10 before:bg-current"],
         },
         true: {
           base: "inline-block",

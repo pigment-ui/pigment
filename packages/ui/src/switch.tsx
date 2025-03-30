@@ -15,7 +15,7 @@ const useSwitchStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
     slots: {
-      base: "relative flex items-center rounded-full transition duration-300 outline-none",
+      base: "relative flex items-center rounded-full outline-hidden transition duration-300",
       wrapper: "flex cursor-pointer items-center",
       thumb: "absolute left-1 rounded-full bg-current duration-300",
       content: "text-default",
@@ -32,8 +32,8 @@ const useSwitchStyles = () =>
     compoundVariants: [
       { color: "inverted", className: { content: "text-inverted" } },
 
-      { isSelected: false, isHovered: false, className: { base: "bg-opacity-40" } },
-      { isSelected: false, isHovered: true, className: { base: "bg-opacity-50" } },
+      { isSelected: false, isHovered: false, className: { base: "bg-default/40" } },
+      { isSelected: false, isHovered: true, className: { base: "bg-default/50" } },
 
       { isSelected: true, size: "sm", className: { thumb: "translate-x-4" } },
       { isSelected: true, size: "md", className: { thumb: "translate-x-8" } },

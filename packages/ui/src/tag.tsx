@@ -25,7 +25,7 @@ import { tv } from "tailwind-variants";
 
 const useTagGroupStyles = () =>
   tv({
-    base: "flex flex-wrap outline-none",
+    base: "flex flex-wrap outline-hidden",
     variants: {
       size: { sm: "gap-2 text-xs", md: "gap-2.5 text-sm", lg: "gap-3 text-base" },
     },

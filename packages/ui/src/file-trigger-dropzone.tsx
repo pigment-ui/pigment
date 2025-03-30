@@ -19,7 +19,7 @@ const useFileTriggerBlockStyles = (extend?: any) =>
     slots: {
       base: "",
       zone: "flex w-full flex-col items-center text-center",
-      button: useHelperButtonStyles()({ className: "data-[pressed]:scale-95" }),
+      button: useHelperButtonStyles()({ className: "data-pressed:scale-95" }),
       text: "",
     },
     variants: {

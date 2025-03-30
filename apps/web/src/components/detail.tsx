@@ -6,7 +6,7 @@ export function Detail() {
       <div
         className={twMerge(
           "absolute left-1/2 top-1/2 grid h-[700px] w-[700px] -translate-x-1/2 -translate-y-1/2 scale-75 grid-cols-7 grid-rows-7 opacity-50 max-sm:scale-50",
-          "after:absolute after:inset-[-50px] after:z-10 after:rounded-full after:shadow-[inset_0_0_100px_100px_white] after:dark:shadow-[inset_0_0_100px_100px_black]",
+          "after:absolute after:inset-[-50px] after:z-10 after:rounded-full after:shadow-[inset_0_0_100px_100px_white] dark:after:shadow-[inset_0_0_100px_100px_black]",
           "before:absolute before:inset-1/4 before:z-20 before:rounded-full before:bg-default-1000 before:blur-[200px]",
         )}
       >

@@ -165,7 +165,7 @@ function _CheckboxLink(props: ComponentPropsWithoutRef<typeof Link>, ref: Forwar
       target="_blank"
       {...props}
       className={composeRenderProps(props.className, (className, { isHovered, isFocusVisible }) =>
-        twMerge("underline outline-none focus-visible:outline focus-visible:outline-inherit", isHovered && "decoration-double", className),
+        twMerge("underline outline-hidden focus-visible:outline focus-visible:outline-inherit", isHovered && "decoration-double", className),
       )}
     />
   );

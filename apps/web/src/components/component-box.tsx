@@ -20,7 +20,7 @@ export function ComponentBox({ children, id }: { children: ReactNode; id: string
           "bg-default-1000/10 absolute top-4 left-8 rounded-lg px-2 py-1 font-mono text-sm font-medium duration-300",
           isHovered && "bg-default-1000/20",
           isPressed && "scale-95",
-          isFocusVisible ? "outline-default-1000 outline outline-1 outline-offset-1" : "outline-none",
+          isFocusVisible ? "outline-default-1000 outline outline-1 outline-offset-1" : "outline-hidden",
         ])}
       >
         {"<"}

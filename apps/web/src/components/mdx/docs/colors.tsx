@@ -7,7 +7,7 @@ export function Colors() {
   const { resolvedTheme } = useTheme();
 
   return (
-    <div className="!my-16 space-y-8">
+    <div className="my-16! space-y-8">
       {resolvedTheme &&
         colorValues[resolvedTheme as "light" | "dark"]?.map((color, index) => (
           <div key={index} className="space-y-4">

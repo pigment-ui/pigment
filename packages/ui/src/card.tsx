@@ -2,8 +2,9 @@
 
 import { useGlobalProps } from "./provider";
 import { radiusVariants, useVariantAndColorStyles } from "./styles";
-import { ChildrenProps, SizeProps, StyleProps, StyleSlotsToSlots, StyleSlotsToStyleProps } from "./types";
+import { ChildrenProps, ColorProps, SizeProps, StyleProps, StyleSlotsToSlots, StyleSlotsToStyleProps, VariantProps } from "./types";
 import { createSlots } from "./utils";
+import { Slot } from "@radix-ui/react-slot";
 import React, { ForwardedRef, forwardRef, HTMLAttributes } from "react";
 import { mergeProps } from "react-aria";
 import { twMerge } from "tailwind-merge";
@@ -15,7 +16,7 @@ const useCardStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
     slots: {
-      base: ["overflow-hidden border bg-clip-padding duration-300 outline-none", radiusVariants.md],
+      base: ["overflow-hidden border backdrop-blur-lg duration-300", radiusVariants.md],
       header: "",
       body: "",
       footer: "",
@@ -30,14 +31,23 @@ const useCardStyles = () =>
         lg: { header: "p-8", body: "p-8", footer: "p-8", title: "text-2xl", description: "text-base", buttons: "gap-8" },
       },
     },
-    defaultVariants: { color: "default", variant: "card" },
+    defaultVariants: { variant: "card", color: "default" },
   });
 
 type CardStylesReturnType = ReturnType<ReturnType<typeof useCardStyles>>;
 
 // props
 
-interface CardProps extends HTMLAttributes<HTMLDivElement>, ChildrenProps, SizeProps, StyleProps, StyleSlotsToStyleProps<CardStylesReturnType> {}
+interface CardProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, "color">,
+    ChildrenProps,
+    VariantProps,
+    ColorProps,
+    SizeProps,
+    StyleProps,
+    StyleSlotsToStyleProps<CardStylesReturnType> {
+  asChild?: boolean;
+}
 
 // slots
 
@@ -48,17 +58,19 @@ const [CardSlotsProvider, useCardSlots] = createSlots<CardSlotsType>();
 // component
 
 function _Card(props: CardProps, ref: ForwardedRef<HTMLDivElement>) {
-  const globalProps = useGlobalProps("Card", props, { size: "md" });
+  const globalProps = useGlobalProps("Card", props, { size: "md", variant: "card", color: "default", asChild: false });
 
-  const { size, children, className, classNames, style, styles } = globalProps;
+  const { size, variant, color, children, className, classNames, style, styles, asChild } = globalProps;
 
-  const styleSlots = useCardStyles()({ size });
+  const styleSlots = useCardStyles()({ size, variant, color });
+
+  const Component = asChild ? Slot : "div";
 
   return (
     <CardSlotsProvider value={{ styleSlots, classNames, styles }}>
-      <div ref={ref} className={styleSlots.base({ className: twMerge(classNames?.base, className) })} style={mergeProps(styles?.base, style)}>
+      <Component ref={ref} className={styleSlots.base({ className: twMerge(classNames?.base, className) })} style={mergeProps(styles?.base, style)}>
         {children}
-      </div>
+      </Component>
     </CardSlotsProvider>
   );
 }

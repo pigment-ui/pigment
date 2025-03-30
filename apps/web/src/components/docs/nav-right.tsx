@@ -27,7 +27,7 @@ export function NavRight({ doc }: { doc: Doc }) {
       });
     };
 
-    docHeadings.length > 0 && setActiveSlug(docHeadings[0].id);
+    docHeadings.length > 0 && setActiveSlug(docHeadings[0]?.id || null);
     onScroll();
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);

@@ -15,7 +15,7 @@ import { tv } from "tailwind-variants";
 const useButtonStyles = (extend?: any) =>
   tv({
     extend: useVariantAndColorStyles(extend),
-    base: "min-w-max whitespace-nowrap",
+    base: "min-w-max cursor-pointer whitespace-nowrap",
     variants: {
       size: {
         sm: "h-8 gap-x-2 px-4 text-xs [&_svg]:size-4",
@@ -23,7 +23,7 @@ const useButtonStyles = (extend?: any) =>
         lg: "h-12 gap-x-3 px-6 text-base [&_svg]:size-6",
       },
       isCompact: { true: "" },
-      isLoading: { true: "[&>*:not(:first-child)]:!text-transparent" },
+      isLoading: { true: "[&>*:not(:first-child)]:text-transparent!" },
       radius: radiusVariants,
     },
     compoundVariants: [

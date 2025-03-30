@@ -117,8 +117,8 @@ export function CodeBlock({
           tabMode="focus"
           theme={mounted ? customTheme : undefined}
           className={twMerge(
-            "w-fit min-w-full duration-300 [&>pre]:!bg-transparent [&>pre]:!p-4",
-            mounted ? canEdit && "[&_pre]:!whitespace-nowrap" : "blur-lg [&_*]:!text-transparent",
+            "w-fit min-w-full duration-300 [&>pre]:bg-transparent! [&>pre]:p-4!",
+            mounted ? canEdit && "[&_pre]:whitespace-nowrap!" : "blur-lg **:text-transparent!",
           )}
         />
       </div>

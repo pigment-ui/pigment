@@ -11,7 +11,7 @@ import { tv } from "tailwind-variants";
 
 const usePopoverStyles = () =>
   tv({
-    base: useCardStyles()().base({ className: "p-4" }),
+    base: useCardStyles()().base({ className: "overflow-visible p-4" }),
   });
 
 // props
@@ -60,7 +60,7 @@ function _Popover(props: PopoverProps, ref: ForwardedRef<HTMLDivElement>) {
                 width={arrowSize}
                 height={arrowSize}
                 className={twMerge(
-                  "fill-inverted stroke-default stroke-[.25px]",
+                  "fill-inverted stroke-default/25 stroke-[.25px]",
                   {
                     bottom: "translate-y-px rotate-180",
                     left: "-translate-x-px -rotate-90",

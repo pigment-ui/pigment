@@ -16,11 +16,11 @@ export function createSlots<SlotsType extends object>(): CreateSlotsReturn<Slots
   return [Slots.Provider, useSlots];
 }
 
-export function useObserveElementWidth<T extends HTMLElement>(forwardedRef?: ForwardedRef<T>): [number, RefObject<T>] {
+export function useObserveElementWidth<T extends HTMLElement>(forwardedRef?: ForwardedRef<T>) {
   const ref = useObjectRef(forwardedRef);
   const [width, setWidth] = useState(0);
 
   useResizeObserver({ ref, onResize: () => (ref.current ? setWidth(ref.current.clientWidth) : undefined) });
 
-  return [width, ref];
+  return [width, ref] as [number, RefObject<T>];
 }

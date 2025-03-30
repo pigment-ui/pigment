@@ -31,7 +31,7 @@ export default function Page() {
             </p>
           </div>
 
-          <div className="border-default/20 col-span-2 grid place-items-center border bg-gradient-to-br from-[oklch(0.585_0.233_277.117/0.1)] via-[oklch(0.585_0.233_277.117/0.5)] to-[oklch(0.585_0.233_277.117/0.1)] [background-size:200%_200%;] p-16 font-mono text-4xl font-bold text-[oklch(0.585_0.233_277.117)] duration-300 hover:[background-position:100%_100%;] max-lg:text-3xl max-sm:p-8">
+          <div className="border-default/20 col-span-2 grid place-items-center border bg-linear-to-br from-[oklch(0.585_0.233_277.117/0.1)] via-[oklch(0.585_0.233_277.117/0.5)] to-[oklch(0.585_0.233_277.117/0.1)] [background-size:200%_200%;] p-16 font-mono text-4xl font-bold text-[oklch(0.585_0.233_277.117)] duration-300 hover:[background-position:100%_100%;] max-lg:text-3xl max-sm:p-8">
             <div className="whitespace-pre-wrap">
               {`{ variant: "${newVariant}",
   color: "${newColor}" }`}
@@ -45,7 +45,7 @@ export default function Page() {
               key={color}
               className={twMerge(
                 color === "inverted" ? "bg-default-1000" : "odd:bg-default-50",
-                "border-default/20 grid aspect-[3/2] place-items-center border",
+                "border-default/20 grid aspect-3/2 place-items-center border",
               )}
             >
               <Button color={color as any} variant={newVariant as any} size="lg">
@@ -61,7 +61,7 @@ export default function Page() {
               key={color}
               className={twMerge(
                 color === "inverted" ? "bg-default-1000" : "odd:bg-default-50",
-                "border-default/20 grid aspect-[3/2] place-items-center border p-8",
+                "border-default/20 grid aspect-3/2 place-items-center border p-8",
               )}
             >
               <TextField
@@ -103,7 +103,7 @@ function NewVariantColor() {
           {(["default", "primary", "secondary", "tertiary", "info", "success", "warning", "error", "inverted"]).map((color, index) => (
             <div
               key={color}
-              className={twMerge(color === "inverted" ? "bg-default-1000" : "odd:bg-default-50", "border-default/20 grid aspect-[3/2] place-items-center border" )}
+              className={twMerge(color === "inverted" ? "bg-default-1000" : "odd:bg-default-50", "border-default/20 grid aspect-3/2 place-items-center border" )}
             >
               <Button color={color as any} variant={newVariant as any} size="lg">{capitalize("glass")} / {capitalize(color)}</Button>
             </div>
@@ -114,7 +114,7 @@ function NewVariantColor() {
           {(["default", "primary", "secondary", "tertiary", "info", "success", "warning", "error", "inverted"]).map((color, index) => (
             <div
               key={color}
-              className={twMerge(color === "inverted" ? "bg-default-1000" : "odd:bg-default-50", "border-default/20 grid aspect-[3/2] place-items-center border p-8" )}
+              className={twMerge(color === "inverted" ? "bg-default-1000" : "odd:bg-default-50", "border-default/20 grid aspect-3/2 place-items-center border p-8" )}
             >
               <TextField label="New variant" isReadOnly color={color as any} className="w-full" size="lg" variant={"glass" as any} defaultValue={\` \${capitalize("glass)} / \${capitalize(color)}\`}
               />

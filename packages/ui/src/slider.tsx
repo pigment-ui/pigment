@@ -38,7 +38,7 @@ const useSliderStyles = () =>
       ],
       thumbWrapper: "absolute",
       thumb: [
-        "relative z-30 outline-none [transition:width_300ms,height_300ms,border-color_300ms;]",
+        "relative z-30 outline-hidden [transition:width_300ms,height_300ms,border-color_300ms;]",
         "before:absolute before:inset-0 before:-z-10 before:[border-radius:inherit;] before:bg-current",
       ],
       filler: [
@@ -56,7 +56,7 @@ const useSliderStyles = () =>
           wrapper: "w-full",
           track: "w-full",
           thumbWrapper: "inset-y-0",
-          thumb: "top-1/2 -translate-y-1/2",
+          thumb: "top-1/2",
           filler: "inset-y-0",
           contentWrapper: "w-full flex-row",
           stepsWrapper: "inset-y-0 flex-row",

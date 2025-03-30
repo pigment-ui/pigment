@@ -1,6 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@config '../../tailwind.config.ts';
+
+@utility scrollbar-show-on-hover {
+  &:not(:hover)::-webkit-scrollbar-thumb {
+    @apply bg-transparent;
+  }
+}
+
+@utility step {
+  counter-increment: step;
+
+  &:before {
+    @apply bg-default-200 absolute right-full grid h-7 w-7 -translate-x-3.5 place-items-center rounded-full text-base font-medium;
+    content: counter(step);
+  }
+}
 
 @layer base {
   ::-webkit-scrollbar {
@@ -16,34 +31,7 @@
     @apply bg-default-300 hover:bg-default-400 rounded-xl;
   }
 
-  html {
-    @apply overflow-y-scroll;
-  }
-
   body {
     @apply bg-default-0 text-default;
   }
-}
-
-@layer components {
-}
-
-@layer utilities {
-  .scrollbar-show-on-hover:not(:hover)::-webkit-scrollbar-thumb {
-    @apply bg-transparent;
-  }
-
-  .step {
-    counter-increment: step;
-  }
-
-  .step:before {
-    @apply bg-default-200 absolute right-full grid h-7 w-7 -translate-x-3.5 place-items-center rounded-full text-base font-medium;
-    content: counter(step);
-  }
-}
-
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
 }

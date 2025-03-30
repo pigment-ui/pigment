@@ -17,7 +17,7 @@ export function Providers({ children }: { children: ReactNode }) {
   const [newVariant, setNewVariant] = useState("glass");
   const [newColor, setNewColor] = useState("tertiary");
   const [extendedVariantsAndColors, setExtendedVariantsAndColors] = useState<object>([
-    { variant: "glass", className: "border-transparent bg-gradient-to-br [background-size:200%_200%;]" },
+    { variant: "glass", className: "border-transparent bg-linear-to-br [background-size:200%_200%;]" },
     { variant: "glass", isHovered: true, className: "[background-position:100%_100%;]" },
     { variant: "glass", color: "default", className: "from-default/10 via-default/50 to-default/10 text-default" },
     { variant: "glass", color: "inverted", className: "from-inverted/10 via-inverted/50 to-inverted/10 text-inverted" },

@@ -30,8 +30,8 @@ const useModalStyles = () =>
       base: "relative duration-300",
       header: "",
       body: "",
-      dialog: "relative flex flex-col outline-none",
-      backdrop: "fixed inset-0 z-[999] grid place-items-center duration-300",
+      dialog: "relative flex flex-col outline-hidden",
+      backdrop: "fixed inset-0 z-999 grid place-items-center duration-300",
       closeButton: useHelperButtonStyles()({ variant: "light", className: "absolute top-2 right-2 z-10 rounded-full p-2" }),
     },
     variants: {
@@ -90,7 +90,7 @@ const [ModalSlotsProvider, useModalSlots] = createSlots<Record<"headerId" | "bod
 // component
 
 function _Modal(props: ModalProps, ref: ForwardedRef<HTMLDivElement>) {
-  const globalProps = useGlobalProps("Modal", props, { placement: "center", size: "md", backdrop: "blur", insideScroll: true });
+  const globalProps = useGlobalProps("Modal", props, { placement: "center", size: "md", backdrop: "blur-sm", insideScroll: true });
 
   const { placement, size, backdrop, insideScroll, hideCloseButton, children, classNames, styles, ...restProps } = globalProps;
 

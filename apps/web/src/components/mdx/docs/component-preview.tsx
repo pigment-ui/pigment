@@ -14,8 +14,8 @@ export function filterPreviewCode(code: string) {
 }
 
 export function ComponentPreview({ slug }: { slug: string }) {
-  const name = slug.split("/")[0];
-  const section = slug.split("/")[1];
+  const name = slug.split("/")[0] || "";
+  const section = slug.split("/")[1] || "";
   const code = preview?.[name]?.[section]?.code ?? "";
   const scope = preview?.[name]?.[section]?.scope ?? {};
 

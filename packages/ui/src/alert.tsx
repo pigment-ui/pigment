@@ -15,7 +15,7 @@ import { tv } from "tailwind-variants";
 const useAlertStyles = (extend?: any) =>
   tv({
     extend: useVariantAndColorStyles(extend),
-    base: "!items-start",
+    base: "items-start!",
     slots: {
       contentWrapper: "flex-1",
       title: "font-bold",

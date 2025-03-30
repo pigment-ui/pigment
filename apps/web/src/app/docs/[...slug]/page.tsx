@@ -7,13 +7,11 @@ import { notFound } from "next/navigation";
 export async function generateMetadata(props: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
   const params = await props.params;
 
-  const {
-    slug
-  } = params;
+  const { slug } = params;
 
   const doc = allDocsSorted.find((doc) => doc.slug === slug.join("/"));
 
-  return { title: `Pigment UI | Docs - ${capitalize(slug[1])}`, description: doc?.description || "" };
+  return { title: slug[1] ? `Pigment UI | Docs - ${capitalize(slug[1])}` : "", description: doc?.description || "" };
 }
 
 export async function generateStaticParams() {
@@ -25,16 +23,14 @@ export async function generateStaticParams() {
 export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
   const params = await props.params;
 
-  const {
-    slug
-  } = params;
+  const { slug } = params;
 
   const doc = allDocsSorted.find((doc) => doc.slug === slug.join("/"));
   if (!doc) notFound();
 
   return (
     <>
-      <main className="container relative max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-12">
+      <main className="relative container max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-12">
         <NavLeft doc={doc} allDocs={allDocsSorted} />
         <Content doc={doc} allDocs={allDocsSorted} />
         <NavRight doc={doc} />

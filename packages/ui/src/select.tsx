@@ -28,7 +28,7 @@ const useSelectStyles = () =>
       base: "",
       popover: "flex flex-col p-0",
       topContent: "sticky top-0 z-10 min-h-fit overflow-auto [border-radius:inherit;] bg-inherit p-4",
-      list: "max-h-full flex-1 overflow-auto p-4 outline-none",
+      list: "max-h-full flex-1 overflow-auto p-4 outline-hidden",
     },
     variants: {
       hasTopContent: { true: { list: "pt-0" } },

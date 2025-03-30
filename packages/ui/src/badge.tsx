@@ -13,7 +13,7 @@ import { tv } from "tailwind-variants";
 const useBadgeStyles = (extend?: any) =>
   tv({
     extend: useVariantAndColorStyles(extend),
-    base: "!absolute min-w-max p-1 whitespace-nowrap",
+    base: "absolute! min-w-max p-1 whitespace-nowrap",
     slots: {
       wrapper: "relative inline-block",
     },

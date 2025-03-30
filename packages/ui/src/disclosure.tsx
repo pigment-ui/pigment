@@ -36,11 +36,11 @@ const useDisclosureStyles = (extend?: any) =>
     base: "flex-col",
     slots: {
       heading: "w-full",
-      trigger: "flex w-full items-center outline-none",
+      trigger: "flex w-full items-center outline-hidden",
       textWrapper: "flex-1 text-start",
       title: "font-bold",
       description: "",
-      panel: "w-full !pt-0",
+      panel: "w-full pt-0!",
       icon: "transition-transform duration-300",
     },
     variants: {

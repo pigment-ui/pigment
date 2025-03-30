@@ -12,7 +12,7 @@ import { tv } from "tailwind-variants";
 
 const useTooltipStyles = () =>
   tv({
-    base: useCardStyles()().base({ className: "p-2" }),
+    base: useCardStyles()().base({ className: "overflow-visible p-2" }),
   });
 
 // props
@@ -61,7 +61,7 @@ function _Tooltip(props: TooltipProps, ref: ForwardedRef<HTMLDivElement>) {
                 width={arrowSize}
                 height={arrowSize}
                 className={twMerge(
-                  "fill-default-0 stroke-default-1000/20 stroke-[.25px]",
+                  "fill-inverted stroke-default/25 stroke-[.25px]",
                   {
                     bottom: "translate-y-px rotate-180",
                     left: "-translate-x-px -rotate-90",
@@ -88,7 +88,7 @@ function TriggerWrapperWithoutDiv({ children }: { children: ReactElement }) {
   const triggerRef = useRef(null);
   const { buttonProps } = useButton({}, triggerRef);
 
-  return cloneElement(children, mergeProps(buttonProps, children.props, { ref: triggerRef }));
+  return cloneElement(children, mergeProps(buttonProps, children.props as any, { ref: triggerRef }));
 }
 
 // exports
