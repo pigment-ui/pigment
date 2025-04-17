@@ -4,11 +4,11 @@ import { Button } from "pigment-ui";
 function ButtonVariant() {
   return (
     <div className="flex flex-wrap gap-4">
-      <Button variant="solid">Click me</Button>
-      <Button variant="soft">Click me</Button>
-      <Button variant="light">Click me</Button>
-      <Button variant="bordered">Click me</Button>
-      <Button variant="faded">Click me</Button>
+      <Button variant="solid">Solid</Button>
+      <Button variant="soft">Soft</Button>
+      <Button variant="light">Light</Button>
+      <Button variant="bordered">Bordered</Button>
+      <Button variant="faded">Faded</Button>
     </div>
   );
 }

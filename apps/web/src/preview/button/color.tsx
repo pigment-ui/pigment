@@ -6,109 +6,109 @@ function ButtonColor() {
     <div className="space-y-4">
       <div className="flex flex-wrap gap-4">
         <Button color="default" variant="solid">
-          Click me
+          Default
         </Button>
         <Button color="default" variant="soft">
-          Click me
+          Default
         </Button>
         <Button color="default" variant="light">
-          Click me
+          Default
         </Button>
         <Button color="default" variant="bordered">
-          Click me
+          Default
         </Button>
         <Button color="default" variant="faded">
-          Click me
+          Default
         </Button>
       </div>
 
       <div className="flex flex-wrap gap-4">
         <Button color="primary" variant="solid">
-          Click me
+          Primary
         </Button>
         <Button color="primary" variant="soft">
-          Click me
+          Primary
         </Button>
         <Button color="primary" variant="light">
-          Click me
+          Primary
         </Button>
         <Button color="primary" variant="bordered">
-          Click me
+          Primary
         </Button>
         <Button color="primary" variant="faded">
-          Click me
+          Primary
         </Button>
       </div>
 
       <div className="flex flex-wrap gap-4">
         <Button color="info" variant="solid">
-          Click me
+          Info
         </Button>
         <Button color="info" variant="soft">
-          Click me
+          Info
         </Button>
         <Button color="info" variant="light">
-          Click me
+          Info
         </Button>
         <Button color="info" variant="bordered">
-          Click me
+          Info
         </Button>
         <Button color="info" variant="faded">
-          Click me
+          Info
         </Button>
       </div>
 
       <div className="flex flex-wrap gap-4">
         <Button color="success" variant="solid">
-          Click me
+          Success
         </Button>
         <Button color="success" variant="soft">
-          Click me
+          Success
         </Button>
         <Button color="success" variant="light">
-          Click me
+          Success
         </Button>
         <Button color="success" variant="bordered">
-          Click me
+          Success
         </Button>
         <Button color="success" variant="faded">
-          Click me
+          Success
         </Button>
       </div>
 
       <div className="flex flex-wrap gap-4">
         <Button color="warning" variant="solid">
-          Click me
+          Warning
         </Button>
         <Button color="warning" variant="soft">
-          Click me
+          Warning
         </Button>
         <Button color="warning" variant="light">
-          Click me
+          Warning
         </Button>
         <Button color="warning" variant="bordered">
-          Click me
+          Warning
         </Button>
         <Button color="warning" variant="faded">
-          Click me
+          Warning
         </Button>
       </div>
 
       <div className="flex flex-wrap gap-4">
         <Button color="error" variant="solid">
-          Click me
+          Error
         </Button>
         <Button color="error" variant="soft">
-          Click me
+          Error
         </Button>
         <Button color="error" variant="light">
-          Click me
+          Error
         </Button>
         <Button color="error" variant="bordered">
-          Click me
+          Error
         </Button>
         <Button color="error" variant="faded">
-          Click me
+          Error
         </Button>
       </div>
     </div>

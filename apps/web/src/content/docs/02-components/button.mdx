@@ -4,7 +4,13 @@ description: "Buttons allow users to perform an action or to navigate to another
 referenceUrl: "https://react-spectrum.adobe.com/react-aria/useButton.html"
 ---
 
-## Usage
+### Import
+
+```tsx
+import { Button } from "pigment-ui";
+```
+
+## Examples
 
 ### Demo
 
@@ -12,36 +18,54 @@ referenceUrl: "https://react-spectrum.adobe.com/react-aria/useButton.html"
 
 ### Variant
 
+The `variant` prop can be set to `solid`, `soft`, `light`, `bordered`, or `faded`, depending on the style you need.
+
 <ComponentPreview slug="button/variant" />
 
 ### Color
+
+The `color` prop can be set to `default`, `primary`, `info`, `success`, `warning`, or `error`, depending on the intent or context of the action.
 
 <ComponentPreview slug="button/color" />
 
 ### Size
 
+The `size` prop can be set to `sm`, `md`, or `lg` to adjust the button’s dimensions for different layouts or emphasis.
+
 <ComponentPreview slug="button/size" />
 
 ### Radius
+
+The `radius` prop can be set to `none`, `sm`, `md`, `lg`, or `full` to control the button’s corner roundness.
 
 <ComponentPreview slug="button/radius" />
 
 ### Start and end content
 
+Use `startContent` and `endContent` to add icons or elements before or after the button label.
+
 <ComponentPreview slug="button/content" />
 
 ### Disabled
+
+The `isDisabled` prop disables the button, preventing user interaction and applying a dimmed visual style.
 
 <ComponentPreview slug="button/disabled" />
 
 ### Loading
 
+The `isLoading` prop shows a loading indicator and disables the button while an action is in progress.
+
 <ComponentPreview slug="button/loading" />
 
 ### Icon only
 
+The `isCompact` prop reduces the button’s padding, making it suitable for icon-only usage.
+
 <ComponentPreview slug="button/iconOnly" />
 
 ### As child
+
+The `asChild` prop lets you render the button as a different element or component, like a link, while preserving its styles and behavior.
 
 <ComponentPreview slug="button/asChild" />
