@@ -1,4 +1,4 @@
-import { Colors, ComponentPreview } from "./docs";
+import { Colors, ComponentCard, ComponentPreview, LiveComponent } from "./docs";
 import { CodeBlock, Heading } from "./shared";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
@@ -43,4 +43,6 @@ const mdxComponents = {
   ),
   Colors,
   ComponentPreview,
+  ComponentCard,
+  LiveComponent,
 };

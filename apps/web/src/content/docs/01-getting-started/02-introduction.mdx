@@ -1,0 +1,123 @@
+---
+title: "Introduction"
+description: "Welcome to Pigment UI!"
+---
+
+<Image src="/pigment-3d/pigment-logo-3d.png" alt="Pigment UI Logo" width={1536} height={1024} className="aspect-video w-[700px] bg-black grayscale object-cover" />
+
+Pigment UI components were built mainly on top of [React Aria](https://react-spectrum.adobe.com/react-aria/) and [Tailwind CSS](https://tailwindcss.com/) packages.
+
+Welcome to Pigment UI — a modern and flexible UI library for React, crafted to help you build accessible and interactive components with ease. Built on top of React Aria and Tailwind CSS, Pigment UI offers a polished set of prebuilt components that look great, behave intuitively, and are easy to customize.
+
+### What is Pigment UI?
+
+Pigment UI is your go-to set of interactive React components, designed to make your UI development faster, more consistent, and more accessible. Whether you need a modal, dropdown, popover, or any other interactive element, Pigment UI has you covered with components that are behavior-rich and visually balanced.
+
+It’s built to solve two common challenges:
+
+* **Accessibility & behavior**: Thanks to React Aria, all components come with built-in keyboard interactions, focus management, and ARIA roles — no extra setup needed.
+
+* **Styling & design**: With Tailwind CSS under the hood, components come with consistent, elegant styles that can be easily themed and customized.
+
+In short, Pigment UI lets you focus more on your product and less on repetitive UI boilerplate.
+
+### Who is it for?
+
+Pigment UI is built for:
+
+* **React developers using Tailwind CSS**, who want a seamless set of pre-designed, accessible components.
+
+* **Design system teams**, looking for consistency and flexibility in how components look and behave.
+
+* **Anyone building interactive UIs** who wants reliable components that just work.
+
+Whether you're prototyping quickly or crafting a full-featured app, Pigment UI helps you get there faster.
+
+### How does it work?
+
+Pigment UI is powered by two strong foundations:
+
+**React Aria**
+
+React Aria provides the logic and accessibility behaviors without enforcing any styles. Pigment UI uses it to ensure every component is:
+
+* Fully keyboard navigable
+
+* Screen reader friendly
+
+* ARIA-compliant
+
+Focus traps, accessibility announcements, and roles — it’s all handled behind the scenes.
+
+**Tailwind CSS**
+
+Styling is done using Tailwind utility classes, which means:
+
+* You don’t need to write custom CSS
+
+* You get full support for theming and variants
+
+* Switching between light and dark mode is simple
+
+### Design Philosophy
+
+Pigment UI components are designed with a set of core principles in mind to ensure great user experience and consistent visual language across your entire application. These principles are baked into every component to make your interface feel intuitive and cohesive.
+
+* **Consistency**:
+All components follow a unified design language. Things like color palettes, typography, spacing, and sizing are consistent throughout the library. This means that no matter where or how you use Pigment UI components, they’ll look like they belong together — helping your app maintain visual harmony.
+
+* **Simplicity**:
+Simplicity is at the heart of Pigment UI’s design philosophy. Components are clean and straightforward, avoiding unnecessary decorative elements. This makes them easy to read, understand, and use — keeping the focus on functionality while still looking good.
+
+* **Modularity**:
+Each component is designed to work well on its own, but also to compose naturally with others. For example, you can easily place a Button or Badge inside a Card, and they’ll look and feel cohesive. This modular approach makes building complex interfaces much easier.
+
+* **Responsiveness**:
+Modern web apps run on many screen sizes, and Pigment UI is built with that in mind. Components use Tailwind’s responsive utilities to adapt smoothly from small mobile screens to large desktops. For example, a navigation menu component could automatically switch to a hamburger menu on smaller devices — if such a pattern is used.
+
+* **Accessibility and user-centered design**:
+Visual polish is important, but so is usability. Each component considers accessibility factors like color contrast and font sizes to ensure they work well for a wide range of users. Combined with React Aria’s robust accessibility layer, this results in components that are both beautifully designed and usable by everyone.
+
+
+
+### Accessibility (a11y)
+
+Accessibility is a first-class priority in Pigment UI. Every component is built with keyboard navigation, screen reader compatibility, and ARIA compliance in mind. To achieve this, Pigment UI follows a few key strategies:
+
+* **Powered by React Aria**:
+As mentioned earlier, Pigment UI leverages React Aria for built-in accessibility logic. React Aria is designed to help developers build fully accessible components that conform to ARIA standards. This means Pigment UI components inherit top-tier accessibility features by default.
+For example, the `Accordion` component can be fully navigated via keyboard — arrow keys switch between sections, `Home`/`End` jump to first/last — and all this behavior is handled automatically by React Aria.
+
+* **Semantic HTML markup**:
+Pigment UI uses correct semantic elements in its JSX structure. Buttons use `<button>`, navigation uses `<nav>`, and so on. ARIA attributes like `aria-expanded`, `aria-controls`, or `role="dialog"` are applied automatically by React Aria, ensuring screen readers and other assistive technologies interpret the components correctly.
+
+* **Clear focus visibility and focus management**:
+Focus indicators are never removed or hidden — thanks to Tailwind CSS styling, focused elements remain clearly visible. For example, modals and dialogs trap focus when opened and return it when closed, creating a smooth and predictable user experience. This focus management is also powered by React Aria.
+
+* **Cross-browser and device compatibility**:
+Modern accessibility also means consistent behavior across browsers and platforms. Pigment UI components are tested to ensure they perform reliably in all major environments. ARIA attributes are implemented according to spec, so assistive tools interpret them uniformly.
+
+
+
+### Theming and Styling
+
+Pigment UI is built with customization in mind.
+
+**Light & Dark Mode**
+
+Light and dark themes are supported out of the box. Just toggle the `dark` class on your root element, and everything adapts.
+
+### What’s Next?
+
+Ready to go further? Here are a few ideas:
+
+* **Explore the components**: Browse the full component list and learn how to use each
+
+* **Learn customization**: See how you can adjust themes, tokens, and variants
+
+* **Check out examples**: Try real-world usage and interactive demos
+
+* **Join the community**: Ask questions, open issues, or follow updates on GitHub
+
+Pigment UI makes it easier to build beautiful, accessible UIs — without the headache. We hope you enjoy using it as much as we enjoyed building it!
+

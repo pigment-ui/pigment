@@ -8,14 +8,14 @@ import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function NavLeft({ doc: docProps, allDocs }: { doc: Doc; allDocs: Doc[] }) {
-  const docGroupNames = Array.from(new Set(allDocs.map((doc) => doc.slug.split("/")[0])));
+  const docGroupNames = Array.from(new Set(allDocs.map((doc) => doc.slug.split("/")[0]?.split("-").join(" "))));
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <nav className="border-default/20 max-lg:border-b-default/20 bg-default-50 max-lg:bg-default-0/75 sticky top-[88px] z-10 border max-lg:top-[80px] max-lg:-mx-4 max-lg:-mt-2 max-lg:mb-4 max-lg:border-b max-lg:border-y-transparent max-lg:backdrop-blur-lg lg:col-span-2 lg:h-[calc(100vh-96px)] lg:border-r-transparent">
       <button
-        className="hover:bg-default/10 flex w-full items-center gap-2 p-4 text-start duration-300 outline-hidden lg:hidden [&>svg]:size-4"
+        className="hover:bg-default/10 flex w-full items-center gap-2 p-4 text-start outline-hidden duration-300 lg:hidden [&>svg]:size-4"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {isOpen ? <ChevronDownIcon /> : <ChevronRightIcon />}
@@ -35,7 +35,7 @@ export function NavLeft({ doc: docProps, allDocs }: { doc: Doc; allDocs: Doc[] }
             <h3 className="text-sm font-medium uppercase">{docGroupName}</h3>
             <ul className="mt-2 flex flex-col gap-y-1">
               {allDocs
-                .filter((doc) => doc.slug.split("/")[0] === docGroupName)
+                .filter((doc) => doc.slug.split("/")[0]?.split("-").join(" ") === docGroupName)
                 .map((doc) => (
                   <li key={doc.slug}>
                     <Button
