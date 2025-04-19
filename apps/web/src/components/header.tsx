@@ -17,7 +17,7 @@ export function Header() {
     () => (
       <>
         <Button asChild variant={segment === "docs" ? "soft" : "light"} radius="full" className={twMerge(segment !== "docs" && "text-default-500")}>
-          <NextLink href="/docs/overview/introduction" prefetch onClick={() => setIsOpened(false)}>
+          <NextLink href="/docs/getting-started/introduction" prefetch onClick={() => setIsOpened(false)}>
             Docs
           </NextLink>
         </Button>

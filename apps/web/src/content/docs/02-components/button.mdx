@@ -4,7 +4,7 @@ description: "Buttons allow users to perform an action or to navigate to another
 referenceUrl: "https://react-spectrum.adobe.com/react-aria/useButton.html"
 ---
 
-### Import
+## Import
 
 ```tsx
 import { Button } from "pigment-ui";
@@ -58,6 +58,15 @@ The `isLoading` prop shows a loading indicator and disables the button while an 
 
 <ComponentPreview slug="button/loading" />
 
+The `spinnerPlacement` prop defines where the loading spinner appears when `isLoading` is `true`.
+You can set it to:
+
+- `"start"` - places the spinner before the button content
+- `"end"` - places the spinner after the content
+- `"center"` - replaces the content with a centered spinner
+
+<ComponentPreview slug="button/spinnerPlacement" />
+
 ### Icon only
 
 The `isCompact` prop reduces the button’s padding, making it suitable for icon-only usage.
@@ -70,4 +79,8 @@ The `asChild` prop lets you render the button as a different element or componen
 
 <ComponentPreview slug="button/asChild" />
 
-### API
+## API
+
+### Props
+
+<ApiTable slug="button/demo" api="props" />

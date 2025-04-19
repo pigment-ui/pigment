@@ -3,8 +3,67 @@ title: "Badge"
 description: "Badge generates a small badge of its child(ren)."
 ---
 
-## Usage
+## Import
+
+```tsx
+import { Badge } from "pigment-ui";
+```
+
+## Examples
 
 ### Demo
 
 <ComponentPreview slug="badge/demo" />
+
+### Variant
+
+The `variant` prop defines the visual style of the badge. It can be set to `solid`, `soft`, `light`, `bordered`, or `faded` depending on the desired appearance.
+
+<ComponentPreview slug="badge/variant" />
+
+### Color
+
+The `color` prop sets the badge’s color theme. Available values include `default`, `primary`, `info`, `success`, `warning`, and `error`.
+
+<ComponentPreview slug="badge/color" />
+
+### Size
+
+Control the badge's dimensions using the `size` prop. Supported values are `sm`, `md`, and `lg`.
+
+<ComponentPreview slug="badge/size" />
+
+### Radius
+
+The `radius` prop adjusts the roundness of the badge corners. Available values are `none`, `sm`, `md`, `lg`, and `full`.
+
+<ComponentPreview slug="badge/radius" />
+
+### Placement
+
+Use the `placement` prop to position the badge relative to its wrapper. Options include:
+
+- `"top right"`
+- `"top left"`
+- `"bottom right"`
+- `"bottom left"`
+
+<ComponentPreview slug="badge/placement" />
+
+### Content
+
+Use the `content` prop to define the badge’s content. This can be text, numbers, icons, or any ReactNode.
+
+<ComponentPreview slug="badge/demo" />
+
+### Start and end content
+
+Add additional elements before or after the badge content using the `startContent` and `endContent` props.
+
+<ComponentPreview slug="badge/startEndContent" />
+
+## API
+
+### Props
+
+<ApiTable slug="badge/demo" api="props" />

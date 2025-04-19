@@ -33,8 +33,17 @@ import * as textArea from "./text-area";
 import * as textField from "./text-field";
 import * as timeField from "./time-field";
 import * as tooltip from "./tooltip";
+import { ReactNode } from "react";
 
-const preview: Record<string, Record<string, { code: any; scope?: any }>> = {
+type ApiProp = {
+  prop: string;
+  type: string;
+  defaultValue: ReactNode;
+};
+
+type ApiProps = ApiProp[];
+
+const preview: Record<string, Record<string, { code: any; scope?: any; props?: ApiProps; events?: ApiProps }>> = {
   accordion,
   badge,
   button,

@@ -5,8 +5,32 @@ referenceUrl: "https://react-spectrum.adobe.com/react-aria/Calendar.html"
 hasApiReference: true
 ---
 
-## Usage
+## Import
+
+```tsx
+import { Calendar, CalendarWrapper, useCalendarStyles } from "pigment-ui";
+```
+
+## Examples
 
 ### Demo
 
 <ComponentPreview slug="calendar/demo" />
+
+### Size
+
+The `size` prop adjusts the overall scale of the calendar including grid cells, text, and navigation buttons, and can be set to `sm`, `md`, or `lg`.
+
+<ComponentPreview slug="calendar/size" />
+
+### Visible month count
+
+Use the `visibleMonthCount` prop to show multiple months side-by-side in a single calendar view.
+
+<ComponentPreview slug="calendar/visibleMonthCount" />
+
+## API
+
+### Props
+
+<ApiTable slug="calendar/demo" api="props" />

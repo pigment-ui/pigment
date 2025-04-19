@@ -1,5 +1,6 @@
-import { Colors, ComponentCard, ComponentPreview, LiveComponent } from "./docs";
+import { Colors, ComponentCard, ComponentPreview } from "./docs";
 import { CodeBlock, Heading } from "./shared";
+import { ApiTable } from "./shared/api-table";
 import { useMDXComponent } from "next-contentlayer/hooks";
 import Image from "next/image";
 import NextLink from "next/link";
@@ -44,5 +45,5 @@ const mdxComponents = {
   Colors,
   ComponentPreview,
   ComponentCard,
-  LiveComponent,
+  ApiTable,
 };
