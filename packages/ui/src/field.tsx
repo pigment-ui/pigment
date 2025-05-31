@@ -11,7 +11,6 @@ import { FieldError, Group, Label, Text } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
 
-
 // styles
 
 const useFieldStyles = () =>
@@ -215,9 +214,9 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
           {
             gridTemplateColumns:
               (startButton ? "auto " : "") + (startContent ? "auto " : "") + "1fr " + (endContent ? "auto " : "") + (endButton ? "auto" : "") ||
-              "1fr,
+              "1fr",
           },
-          fieldInputStyles?.bas,
+          fieldInputStyles?.base,
         )}
         onClick={() => {
           selfRef.current?.focus();
@@ -227,7 +226,7 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
         {isLabelInside && globalProps.label && (
           <Label
             className={useFieldStyles()({ size, isHorizontal }).label({
-              className: twMerge("pointer-events-none col-span-full text-xs text-inherit", globalProps.fieldClassNames?.label)
+              className: twMerge("pointer-events-none col-span-full text-xs text-inherit", globalProps.fieldClassNames?.label),
             })}
             style={globalProps.fieldStyles?.label}
           >
@@ -253,7 +252,7 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
             // @ts-ignore
             ref: selfRef,
             className: styleSlots.self({ className: twMerge(children.props?.className, fieldInputClassNames?.self) }),
-            style: mergeProps(children.props?.style, fieldInputStyles?.self)
+            style: mergeProps(children.props?.style, fieldInputStyles?.self),
           })}
 
         {endContent &&
