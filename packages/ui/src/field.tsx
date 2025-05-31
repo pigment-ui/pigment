@@ -11,6 +11,7 @@ import { FieldError, Group, Label, Text } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
 
+
 // styles
 
 const useFieldStyles = () =>
@@ -49,11 +50,10 @@ export const useFieldSegmentStyles = () =>
 const useFieldInputStyles = (extend?: any) =>
   tv({
     extend: useVariantAndColorStyles(extend),
-    base: "cursor-text",
     slots: {
-      wrapper: "flex w-full flex-1 flex-col",
-      self: "flex w-full flex-1 items-center bg-transparent outline-hidden placeholder:text-inherit placeholder:opacity-50 aria-[disabled]:pointer-events-none data-disabled:pointer-events-none",
-      content: "pointer-events-none shrink-0",
+      base: "relative grid w-full cursor-text grid-rows-[auto_auto] items-center !gap-y-0 overflow-hidden border backdrop-blur-lg duration-300 outline-none",
+      self: "flex w-full items-center bg-transparent outline-hidden placeholder:text-inherit placeholder:opacity-50 aria-[disabled]:pointer-events-none data-disabled:pointer-events-none",
+      content: "pointer-events-none",
       button: useHelperButtonStyles()({ className: "px-1.5" }),
     },
     variants: {
@@ -211,12 +211,31 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
             className: fieldInputClassNames?.base,
           })
         }
-        style={fieldInputStyles?.base}
+        style={mergeProps(
+          {
+            gridTemplateColumns:
+              (startButton ? "auto " : "") + (startContent ? "auto " : "") + "1fr " + (endContent ? "auto " : "") + (endButton ? "auto" : "") ||
+              "1fr,
+          },
+          fieldInputStyles?.bas,
+        )}
         onClick={() => {
           selfRef.current?.focus();
           selfRef.current?.click();
         }}
       >
+        {isLabelInside && globalProps.label && (
+          <Label
+            className={useFieldStyles()({ size, isHorizontal }).label({
+              className: twMerge("pointer-events-none col-span-full text-xs text-inherit", globalProps.fieldClassNames?.label)
+            })}
+            style={globalProps.fieldStyles?.label}
+          >
+            {globalProps.label}
+            {globalProps.isRequired && <span> *</span>}
+          </Label>
+        )}
+
         {startButton &&
           cloneElement(startButton, {
             className: styleSlots.button({ className: twMerge(startButton.props?.className, fieldInputClassNames?.button) }),
@@ -229,26 +248,13 @@ function _FieldInput(props: FieldInputProps, ref: ForwardedRef<HTMLDivElement>) 
             style: mergeProps(startContent.props?.style, fieldInputStyles?.content),
           })}
 
-        <div className={styleSlots.wrapper({ className: fieldInputClassNames?.wrapper })} style={fieldInputStyles?.wrapper}>
-          {isLabelInside && globalProps.label && (
-            <Label
-              className={useFieldStyles()({ size, isHorizontal }).label({
-                className: twMerge("pointer-events-none text-inherit", globalProps.fieldClassNames?.label),
-              })}
-              style={globalProps.fieldStyles?.label}
-            >
-              {globalProps.label}
-              {globalProps.isRequired && <span> *</span>}
-            </Label>
-          )}
-          {children &&
-            cloneElement(children, {
-              // @ts-ignore
-              ref: selfRef,
-              className: styleSlots.self({ className: twMerge(children.props?.className, fieldInputClassNames?.self) }),
-              style: mergeProps(children.props?.style, fieldInputStyles?.self),
-            })}
-        </div>
+        {children &&
+          cloneElement(children, {
+            // @ts-ignore
+            ref: selfRef,
+            className: styleSlots.self({ className: twMerge(children.props?.className, fieldInputClassNames?.self) }),
+            style: mergeProps(children.props?.style, fieldInputStyles?.self)
+          })}
 
         {endContent &&
           cloneElement(endContent, {
