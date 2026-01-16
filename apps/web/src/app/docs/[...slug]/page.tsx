@@ -3,6 +3,8 @@ import { allDocs } from "contentlayer/generated";
 import { capitalize } from "inflection";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { slug = [] } = await params;
   const doc = allDocsSorted.find((d) => d.slug === slug.join("/"));
