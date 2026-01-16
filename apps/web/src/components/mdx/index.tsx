@@ -8,11 +8,7 @@ import { twMerge } from "tailwind-merge";
 export function MDXContent({ code }: { code: string }) {
   const Component = useMDXComponent(code);
 
-  return (
-    <div className="space-y-4 [&>h2]:mt-16! [&>h3]:mt-8!">
-      <Component components={mdxComponents} />
-    </div>
-  );
+  return <div className="space-y-4 [&>h2]:mt-16! [&>h3]:mt-8!">{/*<Component components={mdxComponents} />*/}</div>;
 }
 
 const mdxComponents = {

@@ -1,9 +1,10 @@
-import DocsClient from "./_components";
+import { Content, Detail, NavLeft, NavRight } from "#/components";
 import { allDocs } from "contentlayer/generated";
 import { capitalize } from "inflection";
 import { notFound } from "next/navigation";
 
 export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { slug = [] } = await params;
@@ -24,7 +25,16 @@ export default async function Page({ params }: { params: Promise<{ slug?: string
   const doc = allDocsSorted.find((d) => d.slug === slug.join("/"));
   if (!doc) notFound();
 
-  return <DocsClient doc={doc} allDocs={allDocsSorted} />;
+  return (
+    <>
+      <main className="relative container max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-12">
+        <NavLeft doc={doc} allDocs={allDocs} />
+        <Content doc={doc} allDocs={allDocs} />
+        <NavRight doc={doc} />
+      </main>
+      <Detail />
+    </>
+  );
 }
 
 const partFilter = (str: string) =>
