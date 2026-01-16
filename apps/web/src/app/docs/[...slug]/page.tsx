@@ -1,17 +1,16 @@
-import { Content, Detail, NavLeft, NavRight } from "../../../components";
+import DocsClient from "./_components";
 import { allDocs } from "contentlayer/generated";
 import { capitalize } from "inflection";
-import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata(props: { params: Promise<{ slug: string[] }> }): Promise<Metadata> {
-  const params = await props.params;
+export async function generateMetadata({ params }: { params: { slug?: string[] } }) {
+  const slugArray = params.slug ?? [];
+  const doc = allDocsSorted.find((d) => d.slug === slugArray.join("/"));
 
-  const { slug } = params;
-
-  const doc = allDocsSorted.find((doc) => doc.slug === slug.join("/"));
-
-  return { title: slug[1] ? `Pigment UI | Docs - ${capitalize(slug[1])}` : "", description: doc?.description || "" };
+  return {
+    title: slugArray[1] ? `Pigment UI | Docs - ${capitalize(slugArray[1])}` : "",
+    description: doc?.description || "",
+  };
 }
 
 export async function generateStaticParams() {
@@ -20,31 +19,18 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page(props: { params: Promise<{ slug: string[] }> }) {
-  const params = await props.params;
-
-  const { slug } = params;
-
-  const doc = allDocsSorted.find((doc) => doc.slug === slug.join("/"));
+export default function Page({ params }: { params: { slug?: string[] } }) {
+  const slugArray = params.slug ?? [];
+  const doc = allDocsSorted.find((d) => d.slug === slugArray.join("/"));
   if (!doc) notFound();
 
-  return (
-    <>
-      <main className="relative container max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-12">
-        <NavLeft doc={doc} allDocs={allDocsSorted} />
-        <Content doc={doc} allDocs={allDocsSorted} />
-        <NavRight doc={doc} />
-      </main>
-
-      <Detail />
-    </>
-  );
+  return <DocsClient doc={doc} allDocs={allDocsSorted} />;
 }
 
 const partFilter = (str: string) =>
   str
     .split("/")
-    .map((slugPart) => (!isNaN(parseInt(slugPart.slice(0, 2))) ? slugPart.slice(3) : slugPart))
+    .map((p) => (!isNaN(parseInt(p.slice(0, 2))) ? p.slice(3) : p))
     .join("/");
 
 const allDocsSorted = allDocs
