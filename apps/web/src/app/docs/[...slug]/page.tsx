@@ -3,14 +3,11 @@ import { allDocs } from "contentlayer/generated";
 import { capitalize } from "inflection";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }: { params: { slug?: string[] } }) {
-  const slugArray = params.slug ?? [];
-  const doc = allDocsSorted.find((d) => d.slug === slugArray.join("/"));
+export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
+  const { slug = [] } = await params;
+  const doc = allDocsSorted.find((d) => d.slug === slug.join("/"));
 
-  return {
-    title: slugArray[1] ? `Pigment UI | Docs - ${capitalize(slugArray[1])}` : "",
-    description: doc?.description || "",
-  };
+  return { title: slug[1] ? `Pigment UI | Docs - ${capitalize(slug[1])}` : "", description: doc?.description || "" };
 }
 
 export async function generateStaticParams() {
@@ -19,9 +16,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function Page({ params }: { params: { slug?: string[] } }) {
-  const slugArray = params.slug ?? [];
-  const doc = allDocsSorted.find((d) => d.slug === slugArray.join("/"));
+export default async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
+  const { slug = [] } = await params;
+
+  const doc = allDocsSorted.find((d) => d.slug === slug.join("/"));
   if (!doc) notFound();
 
   return <DocsClient doc={doc} allDocs={allDocsSorted} />;
