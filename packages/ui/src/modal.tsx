@@ -9,17 +9,10 @@ import { PlacementAxis } from "@react-types/overlays";
 import { XIcon } from "lucide-react";
 import React, { ForwardedRef, forwardRef, HTMLAttributes } from "react";
 import { mergeProps, useId } from "react-aria";
-import {
-  Button as AriaButton,
-  composeRenderProps,
-  Dialog,
-  DialogTrigger,
-  Modal as AriaModal,
-  ModalOverlay,
-  ModalOverlayProps,
-} from "react-aria-components";
+import { Button as AriaButton, composeRenderProps, Dialog, DialogTrigger, Modal as AriaModal, ModalOverlay, ModalOverlayProps } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
+
 
 // styles
 
@@ -90,7 +83,12 @@ const [ModalSlotsProvider, useModalSlots] = createSlots<Record<"headerId" | "bod
 // component
 
 function _Modal(props: ModalProps, ref: ForwardedRef<HTMLDivElement>) {
-  const globalProps = useGlobalProps("Modal", props, { placement: "center", size: "md", backdrop: "blur-sm", insideScroll: true });
+  const globalProps = useGlobalProps("Modal", props, {
+    placement: "center",
+    size: "md",
+    backdrop: "blur",
+    insideScroll: true,
+  });
 
   const { placement, size, backdrop, insideScroll, hideCloseButton, children, classNames, styles, ...restProps } = globalProps;
 

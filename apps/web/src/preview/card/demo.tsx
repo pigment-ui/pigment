@@ -1,11 +1,11 @@
 const code = `
-import { Button, Card, CardBody, CardButtons, CardFooter, CardHeader, CardHeading } from "pigment-ui";
+import { Button, Card, CardBody, CardButtons, CardFooter, CardHeader, CardTitle } from "pigment-ui";
 
 function CardDemo() {
   return (
     <Card>
       <CardHeader>
-        <CardHeading>Lorem ipsum dolor sit amet.</CardHeading>
+        <CardTitle>Lorem ipsum dolor sit amet.</CardTitle>
       </CardHeader>
       
       <CardBody>

@@ -21,9 +21,9 @@ export function Header() {
           </NextLink>
         </Button>
 
-        <Button variant="card" className="size-12 rounded-full p-0">
-          RH
-        </Button>
+        {/*<Button variant="card" className="size-12 rounded-full p-0">*/}
+        {/*  RH*/}
+        {/*</Button>*/}
       </div>
     </header>
   );

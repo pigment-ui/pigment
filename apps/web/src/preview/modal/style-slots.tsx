@@ -1,13 +1,13 @@
 const code = `
-import { Button, Modal, ModalTrigger, ModalBody, ModalButtons, ModalFooter, ModalHeader, ModalHeading, Separator } from "pigment-ui";
+import { Button, Modal, ModalTrigger, ModalBody, ModalButtons, ModalFooter, ModalHeader, ModalTitle, Separator } from "pigment-ui";
 
 function ModalStyleSlots() {
   return (
     <ModalTrigger>
       <Button>Click me</Button>
-      <Modal classNames={{ base: "bg-info-100", backdrop: "bg-info-500/20", closeButton: "text-error-500 bg-error-500", heading: "underline", buttons: "justify-start" }}>
+      <Modal classNames={{ base: "bg-info/50", backdrop: "bg-info/20", closeButton: "text-error bg-error/20", heading: "underline", buttons: "justify-start" }}>
         <ModalHeader>
-          <ModalHeading>Lorem ipsum dolor sit amet.</ModalHeading>
+          <ModalTitle>Lorem ipsum dolor sit amet.</ModalTitle>
         </ModalHeader>
 
         <Separator />

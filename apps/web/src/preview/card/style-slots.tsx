@@ -1,11 +1,11 @@
 const code = `
-import { Button, Card, CardBody, CardButtons, CardFooter, CardHeader, CardHeading, Separator } from "pigment-ui";
+import { Button, Card, CardBody, CardButtons, CardFooter, CardHeader, CardTitle, Separator } from "pigment-ui";
 
 function CardStyleSlots() {
   return (
     <Card classNames={{ base: "bg-default-300", heading: "underline", buttons: "justify-start" }}>
       <CardHeader>
-        <CardHeading>Lorem ipsum dolor sit amet.</CardHeading>
+        <CardTitle>Lorem ipsum dolor sit amet.</CardTitle>
       </CardHeader>
 
       <Separator />

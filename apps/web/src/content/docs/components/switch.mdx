@@ -10,3 +10,28 @@ hasApiReference: true
 ### Demo
 
 <ComponentPreview slug="switchComponent/demo" />
+
+### Color
+
+<ComponentPreview slug="switchComponent/color" />
+
+### Size
+
+<ComponentPreview slug="switchComponent/size" />
+
+### Disabled
+
+<ComponentPreview slug="switchComponent/disabled" />
+
+### Style slots
+
+```ts
+type SwitchStyleSlots = "base" | "wrapper" | "thumb" | "content";
+
+type SwitchStyleProps = {
+  classNames?: { [slot in SwitchStyleSlots]?: string };
+  styles?: { [slot in SwitchStyleSlots]?: CSSProperties };
+};
+```
+
+<ComponentPreview slug="switchComponent/styleSlots" />

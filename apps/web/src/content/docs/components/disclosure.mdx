@@ -1,0 +1,49 @@
+---
+title: "Disclosure"
+description: "A disclosure is a collapsible section of content. It is composed of a a header with a heading and trigger button, and a panel that contains the content."
+referenceUrl: "https://react-spectrum.adobe.com/react-aria/Disclosure.html"
+hasApiReference: true
+---
+
+## Usage
+
+### Demo
+
+<ComponentPreview slug="disclosure/demo" />
+
+### Variant
+
+<ComponentPreview slug="disclosure/variant" />
+
+### Color
+
+<ComponentPreview slug="disclosure/color" />
+
+### Size
+
+<ComponentPreview slug="disclosure/size" />
+
+### Description
+
+<ComponentPreview slug="disclosure/description" />
+
+### Icon
+
+<ComponentPreview slug="disclosure/icon" />
+
+### Start and end content
+
+<ComponentPreview slug="disclosure/content" />
+
+### Style slots
+
+```ts
+type DisclosureStyleSlots = "base" | "heading" | "trigger" | "textWrapper" | "title" | "description" | "panel" | "icon";
+
+type DisclosureStyleProps = {
+  classNames?: { [slot in DisclosureStyleSlots]?: string };
+  styles?: { [slot in DisclosureStyleSlots]?: CSSProperties };
+};
+```
+
+<ComponentPreview slug="disclosure/styleSlots" />

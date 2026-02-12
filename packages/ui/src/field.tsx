@@ -11,6 +11,7 @@ import { FieldError, Group, Label, Text } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
 
+
 // styles
 
 const useFieldStyles = () =>
@@ -57,9 +58,9 @@ const useFieldInputStyles = (extend?: any) =>
     },
     variants: {
       size: {
-        sm: { base: "gap-2 p-2 text-xs [&_svg]:size-4", button: "h-6 [&_svg]:size-3!" },
-        md: { base: "gap-2.5 p-2.5 text-sm [&_svg]:size-5", button: "h-7 [&_svg]:size-4!" },
-        lg: { base: "gap-3 p-3 text-base [&_svg]:size-6", button: "h-8 [&_svg]:size-5!" },
+        sm: { base: "gap-2 p-2 text-xs [&_svg]:size-4", button: "h-6 [&_svg]:size-3!", self: "h-6" },
+        md: { base: "gap-2.5 p-2.5 text-sm [&_svg]:size-5", button: "h-7 [&_svg]:size-4!", self: "h-7" },
+        lg: { base: "gap-3 p-3 text-base [&_svg]:size-6", button: "h-8 [&_svg]:size-5!", self: "h-8" },
       },
       radius: {
         sm: { base: radiusVariants.sm, button: smallRadiusVariants.sm },

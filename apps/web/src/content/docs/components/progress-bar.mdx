@@ -10,3 +10,40 @@ hasApiReference: true
 ### Demo
 
 <ComponentPreview slug="progressBar/demo" />
+
+### Color
+
+<ComponentPreview slug="progressBar/color" />
+
+### Size
+
+<ComponentPreview slug="progressBar/size" />
+
+### Circular
+
+<ComponentPreview slug="progressBar/circular" />
+
+### Indeterminate
+
+<ComponentPreview slug="progressBar/indeterminate" />
+
+### With label
+
+<ComponentPreview slug="progressBar/withLabel" />
+
+### Hide value text
+
+<ComponentPreview slug="progressBar/hideValueText" />
+
+### Style slots
+
+```ts
+type ProgressBarStyleSlots = "base" | "wrapper" | "labelWrapper" | "label" | "valueText" | "trackWrapper" | "track" | "filler";
+
+type ProgressBarStyleProps = {
+  classNames?: { [slot in ProgressBarStyleSlots]?: string };
+  styles?: { [slot in ProgressBarStyleSlots]?: CSSProperties };
+};
+```
+
+<ComponentPreview slug="progressBar/styleSlots" />

@@ -6,19 +6,10 @@ import { ColorProps, ContentProps, ForwardRefType, RadiusProps, SizeProps, Style
 import { createSlots } from "./utils";
 import React, { ForwardedRef, forwardRef } from "react";
 import { mergeProps } from "react-aria";
-import {
-  composeRenderProps,
-  Tab as AriaTab,
-  TabList as AriaTabList,
-  TabListProps,
-  TabPanel as AriaTabPanel,
-  TabPanelProps,
-  TabProps,
-  Tabs as AriaTabs,
-  TabsProps as AriaTabsProps,
-} from "react-aria-components";
+import { composeRenderProps, Tab as AriaTab, TabList as AriaTabList, TabListProps, TabPanel as AriaTabPanel, TabPanelProps, TabProps, Tabs as AriaTabs, TabsProps as AriaTabsProps } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
+
 
 // styles
 
@@ -66,18 +57,27 @@ const useTabStyles = (extend: any) =>
         lg: "h-12 gap-x-3 px-6 text-base [&_svg]:size-6",
       },
       radius: radiusVariants,
+      isCompact: { true: "" },
     },
+    compoundVariants: [
+      { size: "sm", isCompact: true, className: "px-2" },
+      { size: "md", isCompact: true, className: "px-2.5" },
+      { size: "lg", isCompact: true, className: "px-3" },
+    ],
   });
 
-// props
-
-interface TabsProps extends AriaTabsProps, VariantProps, ColorProps, SizeProps, RadiusProps, StyleSlotsToStyleProps<TabsStylesReturnType> {}
+/ props
+interface TabsProps extends AriaTabsProps, VariantProps, ColorProps, SizeProps, RadiusProps, StyleSlotsToStyleProps<TabsStylesReturnType> {
+  isCompact?: boolean;
+}
 
 // slots
 
 interface TabsSlotsType extends StyleSlotsToSlots<TabsStylesReturnType> {}
 
-const [TabsSlotsProvider, useTabsSlots] = createSlots<Required<Pick<TabsProps, "variant" | "color" | "size" | "radius">> & TabsSlotsType>();
+const [TabsSlotsProvider, useTabsSlots] = createSlots<
+  Required<Pick<TabsProps, "variant" | "color" | "size" | "radius" | "isCompact">> & TabsSlotsType
+>();
 
 // component
 
@@ -90,12 +90,12 @@ function _Tabs(props: TabsProps, ref: ForwardedRef<HTMLDivElement>) {
     radius: props.size || "md",
   });
 
-  const { orientation, variant, color, size, radius, classNames, styles } = globalProps;
+  const { orientation, variant, color, size, radius, isCompact = false, classNames, styles } = globalProps;
 
   const styleSlots = useTabsStyles()({ variant: "light", orientation, color, size, radius });
 
   return (
-    <TabsSlotsProvider value={{ variant, color, size, radius, styleSlots, classNames, styles }}>
+    <TabsSlotsProvider value={{ variant, color, size, radius, isCompact, styleSlots, classNames, styles }}>
       <AriaTabs
         ref={ref}
         {...globalProps}
@@ -108,8 +108,8 @@ function _Tabs(props: TabsProps, ref: ForwardedRef<HTMLDivElement>) {
 
 const Tabs = forwardRef(_Tabs);
 
-function _Tab(props: TabProps & ContentProps, ref: ForwardedRef<HTMLDivElement>) {
-  const { variant, color, size, radius, startContent, endContent } = useTabsSlots(props);
+function _Tab(props: TabProps & ContentProps & { isCompact?: boolean }, ref: ForwardedRef<HTMLDivElement>) {
+  const { variant, color, size, radius, isCompact, startContent, endContent } = useTabsSlots(props);
 
   const globalStyles = useGlobalStyles();
 
@@ -124,6 +124,7 @@ function _Tab(props: TabProps & ContentProps, ref: ForwardedRef<HTMLDivElement>)
           color,
           size,
           radius,
+          isCompact,
           isHovered,
           isPressed,
           isDisabled,

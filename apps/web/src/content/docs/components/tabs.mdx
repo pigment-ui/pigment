@@ -10,3 +10,44 @@ hasApiReference: true
 ### Demo
 
 <ComponentPreview slug="tabs/demo" />
+
+### Variant
+
+<ComponentPreview slug="tabs/variant" />
+
+### Color
+
+<ComponentPreview slug="tabs/color" />
+
+### Size
+
+<ComponentPreview slug="tabs/size" />
+
+### Radius
+
+<ComponentPreview slug="tabs/radius" />
+
+### Orientation
+
+<ComponentPreview slug="tabs/orientation" />
+
+### Compact
+
+<ComponentPreview slug="tabs/compact" />
+
+### Start and end content
+
+<ComponentPreview slug="tabs/content" />
+
+### Style slots
+
+```ts
+type TabsStyleSlots = "base" | "list" | "panel";
+
+type TabsStyleProps = {
+  classNames?: { [slot in TabsStyleSlots]?: string };
+  styles?: { [slot in TabsStyleSlots]?: CSSProperties };
+};
+```
+
+<ComponentPreview slug="tabs/styleSlots" />

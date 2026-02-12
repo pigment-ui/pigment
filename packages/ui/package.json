@@ -25,11 +25,11 @@
     "@radix-ui/react-slot": "^1.1.0",
     "lucide-react": "^0.456.0",
     "react": "^19.0.0",
-    "react-aria": "^3.38.0",
-    "react-aria-components": "^1.7.0",
+    "react-aria": "^3.45.0",
+    "react-aria-components": "^1.14.0",
     "react-dom": "^19.0.0",
-    "tailwind-merge": "^2.5.4",
-    "tailwind-variants": "^0.2.1",
+    "tailwind-merge": "^3.4.0",
+    "tailwind-variants": "^3.2.2",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
@@ -38,7 +38,7 @@
     "@types/node": "^20",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "eslint": "^8",
+    "eslint": "^9.26.0",
     "typescript": "^5"
   }
 }

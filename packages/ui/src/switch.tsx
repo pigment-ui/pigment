@@ -9,13 +9,14 @@ import { composeRenderProps, Switch as AriaSwitch, SwitchProps as AriaSwitchProp
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
 
+
 // styles
 
 const useSwitchStyles = () =>
   tv({
     extend: useVariantAndColorStyles(),
     slots: {
-      base: "relative flex items-center rounded-full outline-hidden transition duration-300",
+      base: "relative flex items-center rounded-full transition duration-300",
       wrapper: "flex cursor-pointer items-center",
       thumb: "absolute left-1 rounded-full bg-current duration-300",
       content: "text-default",

@@ -1,6 +1,7 @@
 ---
 title: "Pagination"
 description: "The Pagination component enables the user to select a specific page from a range of pages."
+hasApiReference: true
 ---
 
 ## Usage
@@ -8,3 +9,44 @@ description: "The Pagination component enables the user to select a specific pag
 ### Demo
 
 <ComponentPreview slug="pagination/demo" />
+
+### Variant
+
+<ComponentPreview slug="pagination/variant" />
+
+### Variant active
+
+<ComponentPreview slug="pagination/variantActive" />
+
+### Color
+
+<ComponentPreview slug="pagination/color" />
+
+### Size
+
+<ComponentPreview slug="pagination/size" />
+
+### Radius
+
+<ComponentPreview slug="pagination/radius" />
+
+### Sibling count
+
+<ComponentPreview slug="pagination/siblingCount" />
+
+### Dots jump
+
+<ComponentPreview slug="pagination/dotsJump" />
+
+### Style slots
+
+```ts
+type PaginationStyleSlots = "base" | "wrapper";
+
+type PaginationStyleProps = {
+  classNames?: { [slot in PaginationStyleSlots]?: string };
+  styles?: { [slot in PaginationStyleSlots]?: CSSProperties };
+};
+```
+
+<ComponentPreview slug="pagination/styleSlots" />

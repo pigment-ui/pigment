@@ -1,5 +1,5 @@
 const code = `
-import { Button, Modal, ModalTrigger, ModalBody, ModalButtons, ModalFooter, ModalHeader, ModalHeading } from "pigment-ui";
+import { Button, Modal, ModalTrigger, ModalBody, ModalButtons, ModalFooter, ModalHeader, ModalTitle } from "pigment-ui";
 
 function ModalDemo() {
   return (
@@ -7,7 +7,7 @@ function ModalDemo() {
       <Button>Click me</Button>
       <Modal>
         <ModalHeader>
-          <ModalHeading>Lorem ipsum dolor sit amet.</ModalHeading>
+          <ModalTitle>Lorem ipsum dolor sit amet.</ModalTitle>
         </ModalHeader>
 
         <ModalBody>

@@ -1,6 +1,8 @@
 ---
 title: "Badge"
 description: "Badge generates a small badge of its child(ren)."
+referenceUrl: "https://react-spectrum.adobe.com/react-aria/Badge.html"
+hasApiReference: true
 ---
 
 ## Usage
@@ -8,3 +10,44 @@ description: "Badge generates a small badge of its child(ren)."
 ### Demo
 
 <ComponentPreview slug="badge/demo" />
+
+### Variant
+
+<ComponentPreview slug="badge/variant" />
+
+### Color
+
+<ComponentPreview slug="badge/color" />
+
+### Size
+
+<ComponentPreview slug="badge/size" />
+
+### Radius
+
+<ComponentPreview slug="badge/radius" />
+
+### Placement
+
+<ComponentPreview slug="badge/placement" />
+
+### Content
+
+<ComponentPreview slug="badge/content" />
+
+### Start and end content
+
+<ComponentPreview slug="badge/contentIcons" />
+
+### Style slots
+
+```ts
+type BadgeStyleSlots = "base" | "wrapper";
+
+type BadgeStyleProps = {
+  classNames?: { [slot in BadgeStyleSlots]?: string };
+  styles?: { [slot in BadgeStyleSlots]?: CSSProperties };
+};
+```
+
+<ComponentPreview slug="badge/styleSlots" />

@@ -6,19 +6,13 @@ import { Popover } from "./popover";
 import { useGlobalProps } from "./provider";
 import { ForwardRefType, StyleSlotsToStyleProps } from "./types";
 import { useObserveElementWidth } from "./utils";
-import { ChevronDownIcon } from "lucide-react";
-import React, { ComponentPropsWithoutRef, ForwardedRef, forwardRef, ReactNode } from "react";
+import { ChevronDownIcon, XIcon } from "lucide-react";
+import React, { ComponentPropsWithoutRef, CSSProperties, ForwardedRef, forwardRef, ReactNode, useContext } from "react";
 import { mergeProps } from "react-aria";
-import {
-  Button,
-  composeRenderProps,
-  Select as AriaSelect,
-  SelectProps as AriaSelectProps,
-  SelectValue,
-  SelectValueRenderProps,
-} from "react-aria-components";
+import { Button, composeRenderProps, Select as AriaSelect, SelectProps as AriaSelectProps, SelectStateContext, SelectValue, SelectValueRenderProps } from "react-aria-components";
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
+
 
 // styles
 
@@ -45,8 +39,9 @@ interface SelectProps<T extends object>
     ListBoxSlotsType<T>,
     FieldInputBaseProps,
     StyleSlotsToStyleProps<SelectStylesReturnType> {
-  renderValue?: (selectValue: Omit<SelectValueRenderProps<T>, "isPlaceholder">) => ReactNode;
+  renderValue?: (selectValue: Omit<SelectValueRenderProps<T>, "isPlaceholder" | "state" | "selectedItem">) => ReactNode;
   topContent?: ReactNode;
+  allowsRemoving?: boolean;
 }
 
 // component
@@ -54,7 +49,7 @@ interface SelectProps<T extends object>
 function _Select<T extends object>(props: SelectProps<T>, ref: ForwardedRef<HTMLButtonElement>) {
   const globalProps = useGlobalProps("Select", props, {});
 
-  const { renderValue, placeholder, topContent, classNames, styles } = globalProps;
+  const { renderValue, placeholder, topContent, classNames, styles, allowsRemoving } = globalProps;
 
   const [width, selectRef] = useObserveElementWidth<HTMLDivElement>();
 
@@ -71,15 +66,22 @@ function _Select<T extends object>(props: SelectProps<T>, ref: ForwardedRef<HTML
       {(renderProps) => (
         <>
           <FieldInput
-            endContent={<ChevronDownIcon />}
+            endContent={<SelectEndContent allowsRemoving={allowsRemoving} />}
             {...renderProps}
             {...globalProps}
-            fieldInputClassNames={{ ...globalProps.fieldInputClassNames, base: twMerge("cursor-pointer", globalProps.fieldInputClassNames?.base) }}
+            fieldInputClassNames={{
+              ...globalProps.fieldInputClassNames,
+              base: twMerge("cursor-pointer", globalProps.fieldInputClassNames?.base),
+              self: twMerge("cursor-pointer", globalProps.fieldInputClassNames?.self)
+            }}
           >
             <Button ref={ref}>
               <SelectValue className={({ isPlaceholder }) => (isPlaceholder ? "opacity-50" : "")}>
-                {({ selectedItem, selectedText }) =>
-                  renderValue ? (selectedItem ? renderValue({ selectedItem: selectedItem as T, selectedText }) : placeholder) : selectedText
+                {({ selectedItems, selectedText }) =>
+                  renderValue ? (selectedItems ? renderValue({
+                    selectedItems: selectedItems as T[],
+                    selectedText
+                  }) : placeholder) : selectedText
                 }
               </SelectValue>
             </Button>
@@ -108,6 +110,15 @@ function _Select<T extends object>(props: SelectProps<T>, ref: ForwardedRef<HTML
       )}
     </AriaSelect>
   );
+}
+
+function SelectEndContent({ allowsRemoving, className, style }: { allowsRemoving?: boolean; className?: string; style?: CSSProperties }) {
+  const state = useContext(SelectStateContext);
+
+  if (!state?.selectedKey || !allowsRemoving)
+    return <ChevronDownIcon className={twMerge("duration-300", state?.isOpen && "rotate-180", className)} style={style} />;
+
+  return <XIcon onClick={() => state?.setSelectedKey?.(null)} className={twMerge("!pointer-events-auto", className)} style={style} />;
 }
 
 const Select = (forwardRef as ForwardRefType)(_Select);

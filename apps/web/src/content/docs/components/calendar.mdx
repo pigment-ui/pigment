@@ -10,3 +10,44 @@ hasApiReference: true
 ### Demo
 
 <ComponentPreview slug="calendar/demo" />
+
+### Color
+
+<ComponentPreview slug="calendar/color" />
+
+### Size
+
+<ComponentPreview slug="calendar/size" />
+
+### Radius
+
+<ComponentPreview slug="calendar/radius" />
+
+### Visible month count
+
+<ComponentPreview slug="calendar/visibleMonthCount" />
+
+### As card
+
+<ComponentPreview slug="calendar/asCard" />
+
+### With label and description
+
+<ComponentPreview slug="calendar/withLabel" />
+
+### Invalid
+
+<ComponentPreview slug="calendar/invalid" />
+
+### Style slots
+
+```ts
+type CalendarStyleSlots = "base" | "wrapper" | "calendarWrapper" | "header" | "heading" | "button" | "gridWrapper" | "grid";
+
+type CalendarStyleProps = {
+  classNames?: { [slot in CalendarStyleSlots]?: string };
+  styles?: { [slot in CalendarStyleSlots]?: CSSProperties };
+};
+```
+
+<ComponentPreview slug="calendar/styleSlots" />

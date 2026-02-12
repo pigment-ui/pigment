@@ -8,7 +8,12 @@ function ButtonVariant() {
       <Button variant="soft">Click me</Button>
       <Button variant="light">Click me</Button>
       <Button variant="bordered">Click me</Button>
+      <Button variant="ghost">Click me</Button>
       <Button variant="faded">Click me</Button>
+      <Button variant="card">Click me</Button>
+      <Button variant="gradient">Click me</Button>
+      <Button variant="animated">Click me</Button>
+      <Button variant="shadow">Click me</Button>
     </div>
   );
 }

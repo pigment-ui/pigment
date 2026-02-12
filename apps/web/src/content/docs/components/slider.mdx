@@ -10,3 +10,60 @@ hasApiReference: true
 ### Demo
 
 <ComponentPreview slug="slider/demo" />
+
+### Color
+
+<ComponentPreview slug="slider/color" />
+
+### Size
+
+<ComponentPreview slug="slider/size" />
+
+### Radius
+
+<ComponentPreview slug="slider/radius" />
+
+### Orientation
+
+<ComponentPreview slug="slider/orientation" />
+
+### Range
+
+<ComponentPreview slug="slider/range" />
+
+### Start and end content
+
+<ComponentPreview slug="slider/content" />
+
+### Hide thumb
+
+<ComponentPreview slug="slider/hideThumb" />
+
+### Show steps
+
+<ComponentPreview slug="slider/showSteps" />
+
+### Marks
+
+<ComponentPreview slug="slider/marks" />
+
+### Invalid
+
+<ComponentPreview slug="slider/invalid" />
+
+### Disabled
+
+<ComponentPreview slug="slider/disabled" />
+
+### Style slots
+
+```ts
+type SliderStyleSlots = "base" | "wrapper" | "output" | "sliderWrapper" | "contentWrapper" | "track" | "thumbWrapper" | "thumb" | "filler" | "stepsWrapper" | "step" | "marksWrapper" | "mark";
+
+type SliderStyleProps = {
+  classNames?: { [slot in SliderStyleSlots]?: string };
+  styles?: { [slot in SliderStyleSlots]?: CSSProperties };
+};
+```
+
+<ComponentPreview slug="slider/styleSlots" />

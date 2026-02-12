@@ -11,7 +11,7 @@ export const smallRadiusVariants = { sm: "rounded-md", md: "rounded-lg", lg: "ro
 export const useVariantAndColorStyles = (extend?: any) => {
   return tv({
     extend: tv(extend || {}),
-    base: "relative z-0 flex items-center justify-center overflow-hidden border outline-hidden duration-300",
+    base: "relative z-0 flex items-center justify-center overflow-hidden border duration-300",
     variants: {
       variant: {
         solid: "",

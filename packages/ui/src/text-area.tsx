@@ -4,6 +4,7 @@ import { FieldInput, FieldInputBaseProps } from "./field";
 import { useGlobalProps } from "./provider";
 import React, { ForwardedRef, forwardRef } from "react";
 import { TextArea as AriaTextArea, TextAreaProps as AriaTextAreaProps, TextField, TextFieldProps } from "react-aria-components";
+import { twMerge } from "tailwind-merge";
 
 // props
 
@@ -22,7 +23,14 @@ function _TextArea(props: TextAreaProps, ref: ForwardedRef<HTMLTextAreaElement>)
   return (
     <TextField {...globalProps}>
       {(renderProps) => (
-        <FieldInput {...renderProps} {...globalProps}>
+        <FieldInput
+          {...renderProps}
+          {...globalProps}
+          fieldInputClassNames={{
+            ...globalProps.fieldInputClassNames,
+            self: twMerge("h-auto", globalProps.fieldInputClassNames?.self),
+          }}
+        >
           <AriaTextArea ref={ref} rows={rows} className={!isResizable ? "[resize:none;]" : undefined} />
         </FieldInput>
       )}

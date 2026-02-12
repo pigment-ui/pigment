@@ -1,11 +1,11 @@
 const code = `
-import { Button, Modal, ModalTrigger, ModalBody, ModalButtons, ModalFooter, ModalHeader, ModalHeading, Separator } from "pigment-ui";
+import { Button, Modal, ModalTrigger, ModalBody, ModalButtons, ModalFooter, ModalHeader, ModalTitle, Separator } from "pigment-ui";
 
 function ModalSize() {
   const renderModalContent = (
     <>
       <ModalHeader>
-        <ModalHeading>Lorem ipsum dolor sit amet.</ModalHeading>
+        <ModalTitle>Lorem ipsum dolor sit amet.</ModalTitle>
       </ModalHeader>
 
       <Separator />

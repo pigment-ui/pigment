@@ -1,12 +1,14 @@
 import { Content, Detail, NavLeft, NavRight } from "#/components";
 import { allDocs } from "contentlayer/generated";
 import { capitalize } from "inflection";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }): Promise<Metadata> {
   const { slug = [] } = await params;
   const doc = allDocsSorted.find((d) => d.slug === slug.join("/"));
 

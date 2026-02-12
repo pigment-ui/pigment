@@ -8,12 +8,13 @@ import { mergeProps } from "react-aria";
 import { twMerge } from "tailwind-merge";
 import { tv } from "tailwind-variants";
 
+
 // styles
 
 const useBadgeStyles = (extend?: any) =>
   tv({
     extend: useVariantAndColorStyles(extend),
-    base: "absolute! min-w-max p-1 whitespace-nowrap",
+    base: "absolute! min-w-max p-1 whitespace-nowrap backdrop-blur-xl",
     slots: {
       wrapper: "relative inline-block",
     },

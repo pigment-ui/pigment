@@ -1,11 +1,11 @@
 const code = `
-import { Button, Card, CardBody, CardButtons, CardFooter, CardHeader, CardHeading, Separator } from "pigment-ui";
+import { Button, Card, CardBody, CardButtons, CardFooter, CardHeader, CardTitle, Separator } from "pigment-ui";
 
 function CardHasShadow() {
   return (
     <Card hasShadow={false}>
       <CardHeader>
-        <CardHeading>Lorem ipsum dolor sit amet.</CardHeading>
+        <CardTitle>Lorem ipsum dolor sit amet.</CardTitle>
       </CardHeader>
 
       <Separator />

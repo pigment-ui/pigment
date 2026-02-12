@@ -10,6 +10,8 @@ function SpinnerColor() {
       <Spinner color="success" />
       <Spinner color="warning" />
       <Spinner color="error" />
+      <Spinner color="inverted" />
+      <Spinner color="secondary" />
     </div>
   );
 }

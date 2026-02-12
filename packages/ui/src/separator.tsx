@@ -6,11 +6,12 @@ import React, { ForwardedRef, forwardRef } from "react";
 import { Separator as AriaSeparator, SeparatorProps as AriaSeparatorProps } from "react-aria-components";
 import { tv } from "tailwind-variants";
 
+
 // styles
 
 const useSeparatorStyles = () =>
   tv({
-    base: "bg-default/20 rounded-full border-none",
+    base: "bg-default-200 rounded-full border-none",
     variants: {
       orientation: { horizontal: "w-full", vertical: "h-full" },
       size: { sm: "", md: "", lg: "" },

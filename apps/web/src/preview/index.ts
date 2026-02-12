@@ -1,4 +1,3 @@
-import * as accordion from "./accordion";
 import * as badge from "./badge";
 import * as button from "./button";
 import * as calendar from "./calendar";
@@ -11,6 +10,7 @@ import * as comboBox from "./combo-box";
 import * as dateField from "./date-field";
 import * as datePicker from "./date-picker";
 import * as dateRangePicker from "./date-range-picker";
+import * as disclosure from "./disclosure";
 import * as listBox from "./list-box";
 import * as menu from "./menu";
 import * as modal from "./modal";
@@ -34,8 +34,8 @@ import * as textField from "./text-field";
 import * as timeField from "./time-field";
 import * as tooltip from "./tooltip";
 
+
 const preview: Record<string, Record<string, { code: any; scope?: any }>> = {
-  accordion,
   badge,
   button,
   calendar,
@@ -48,6 +48,7 @@ const preview: Record<string, Record<string, { code: any; scope?: any }>> = {
   dateField,
   datePicker,
   dateRangePicker,
+  disclosure,
   listBox,
   menu,
   modal,
